@@ -1,14 +1,16 @@
 <?php
 
 function basic_styles() {
-  return array();
+  return array(
+    'assets/css/tailwind.min.css'
+  );
 }
 
 function basic_scripts() {
   return array();
 }
 
-function load_page($view, $page_title, $page_id, $recursos = null) {
+function admin_page($view, $page_title, $page_id, $recursos = null) {
   //obtiene la instancia de Codeigniter
   $CI =& get_instance();
 
@@ -26,6 +28,6 @@ function load_page($view, $page_title, $page_id, $recursos = null) {
       }
   }
 
-  $CI->load->view('layout/index', $resources);
+  $CI->load->view('admin/layout/index', $resources);
 }
 ?>
