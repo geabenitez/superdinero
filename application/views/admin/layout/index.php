@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>Super dinero | <?= $page_title ?></title>
+    <title>SuperDinero | <?= $page_title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
     <script>
@@ -30,9 +30,11 @@
 <body class="h-screen w-screen flex flex-row">
     <?php $this->load->view('/admin/layout/sidebar') ?>
     <div class='w-full bg-gray-200 container mx-auto'>
-        <?php $this->load->view('/admin/layout/topbar') ?>
-        <div class="px-4 pt-4">
-            <?php $this->load->view('/admin/pages/' . $page) ?>
+        <div class="overflow-y-auto h-full">
+            <?php $this->load->view('/admin/layout/topbar') ?>
+            <div class='px-4 pb-4 pt-20'>
+                <?php $this->load->view('/admin/pages/' . $page) ?>
+            </div>
         </div>
     </div>
 <script>window.site_url = '<?= site_url() ?>'</script>

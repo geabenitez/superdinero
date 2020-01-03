@@ -13,7 +13,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function partners() {
-		admin_page('partners', 'Asociados', 'partners');
+		$resourses['scripts'] = ['assets/js/pages/partners.js'];
+		admin_page('partners', 'Asociados', 'partners', $resourses);
 	}
 	public function categories() {
 		admin_page('categories', 'Categorias', 'categories');

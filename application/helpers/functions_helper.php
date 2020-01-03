@@ -2,12 +2,16 @@
 
 function basic_styles() {
   return array(
-    'assets/css/tailwind.min.css'
+    'assets/css/tailwind.min.css',
+    'assets/css/element.min.css',
   );
 }
 
 function basic_scripts() {
-  return array();
+  return array(
+    'assets/js/vue.min.js',
+    'assets/js/element.min.js'
+  );
 }
 
 function admin_page($view, $page_title, $page_id, $recursos = null) {
@@ -24,10 +28,11 @@ function admin_page($view, $page_title, $page_id, $recursos = null) {
   /*si se enviaron estilos y scripts para cargar la pagina se incluyen a los resources*/
   if ($recursos != null) {
       foreach ($recursos as $key => $value) {
-          $resources[$key] = $value;
+        foreach ($value as $k => $resource) {
+          array_push($resources[$key], $resource);  
+        }  
       }
   }
-
   $CI->load->view('admin/layout/index', $resources);
 }
 ?>
