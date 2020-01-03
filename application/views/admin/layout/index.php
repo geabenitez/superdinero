@@ -25,10 +25,16 @@
         };
         $lambda();
     } ?>
-    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="shortcut icon" href="<?= site_url('assets/ico.png') ?>"/>
 </head>
-<body class="h-screen w-screen">
-<?php $this->load->view('/admin/' . $page) ?>
+<body class="h-screen w-screen flex flex-row">
+    <?php $this->load->view('/admin/layout/sidebar') ?>
+    <div class='w-full bg-gray-200 container mx-auto'>
+        <?php $this->load->view('/admin/layout/topbar') ?>
+        <div class="px-4 pt-4">
+            <?php $this->load->view('/admin/pages/' . $page) ?>
+        </div>
+    </div>
 <script>window.site_url = '<?= site_url() ?>'</script>
 <?php if (isset($scripts)) {
     $lambda = function() use ($scripts) {
