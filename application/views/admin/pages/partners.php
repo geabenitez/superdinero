@@ -19,24 +19,24 @@
       <el-table :data="partners" class="w-full" stripe size='mini' empty-text='No hay datos'>
         <el-table-column prop="nameES" label="Nombre ES" min-width="180"></el-table-column>
         <el-table-column prop="nameEN" label="Nombre EN" min-width="180"></el-table-column>
-        <el-table-column label="Estados" min-width='80' align='center'>
+        <el-table-column label="Estados" min-width='60' align='center'>
           <template slot-scope='scope'>
             <span class='underline text-blue-500 cursor-pointer'>{{ scope.row.states.length }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="¿Sólo agente?" min-width='80' align='center'>
+        <el-table-column label="¿Sólo agente?" min-width='70' align='center'>
           <template slot-scope='scope'>
             <span>{{ scope.row.onlyAgent ? 'Si' : 'No' }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="Categorias" min-width='80' align='center'>
+        <el-table-column label="Categorias" min-width='60' align='center'>
           <template slot-scope='scope'>
             <span class='underline text-blue-500 cursor-pointer'>{{ scope.row.categories.length }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop='rate' label="Calificación" min-width='80' align='center'>
+        <el-table-column prop='rate' label="Calificación" min-width='70' align='center'>
         </el-table-column>
-        <el-table-column label="Estado" min-width='80'>
+        <el-table-column label="Estado" min-width='60'>
           <template slot-scope='scope'>
             <span v-if='scope.row.active' class='text-green-500 font-semibold'>Activo</span>
             <span v-else class='text-gray-500 font-semibold'>Inactivo</span>
