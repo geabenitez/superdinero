@@ -1,0 +1,6 @@
+.el-form--label-top .el-form-item__label {
+  padding: 0 0 0 !important;
+}
+.el-form-item__label {
+  line-height: 0 !important;
+}

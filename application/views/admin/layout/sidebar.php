@@ -5,6 +5,7 @@
         </div>
         <?php $menu = [
             ['id' => 'partners', 'title' => 'Asociados'],
+            ['id' => 'states', 'title' => 'Estados'], 
             ['id' => 'categories', 'title' => 'Categorias'], 
             ['id' => 'questions', 'title' => 'Preguntas calificatorias'], 
             ['id' => 'amounts', 'title' => 'Montos'], 

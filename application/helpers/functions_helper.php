@@ -4,13 +4,15 @@ function basic_styles() {
   return array(
     'assets/css/tailwind.min.css',
     'assets/css/element.min.css',
+    'assets/css/custom.css'
   );
 }
 
 function basic_scripts() {
   return array(
     'assets/js/vue.min.js',
-    'assets/js/element.min.js'
+    'assets/js/element.min.js',
+    'assets/js/es.js'
   );
 }
 

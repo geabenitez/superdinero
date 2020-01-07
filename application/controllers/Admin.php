@@ -16,20 +16,29 @@ class Admin extends CI_Controller {
 		$resourses['scripts'] = ['assets/js/pages/partners.js'];
 		admin_page('partners', 'Asociados', 'partners', $resourses);
 	}
+	
 	public function categories() {
 		admin_page('categories', 'Categorias', 'categories');
 	}
+	
 	public function questions() {
 		admin_page('questions', 'Preguntas calificatorias', 'questions');
 	}
+	
 	public function amounts() {
 		admin_page('amounts', 'Montos', 'amounts');
 	}
+	
 	public function credits() {
 		admin_page('credits', 'Tipos de creditos', 'credits');
 	}
+	
 	public function params() {
 		admin_page('params', 'Parametros', 'params');
+	}
+	
+	public function states() {
+		admin_page('states', 'Parametros', 'states');
 	}
 
 }

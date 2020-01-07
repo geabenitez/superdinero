@@ -48,5 +48,6 @@
     };
     $lambda();
 } ?>
+<script>ELEMENT.locale(ELEMENT.lang.es)</script>
 </body>
 </html>
