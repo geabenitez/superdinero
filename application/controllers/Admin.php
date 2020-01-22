@@ -38,7 +38,8 @@ class Admin extends CI_Controller {
 	}
 	
 	public function states() {
-		admin_page('states', 'Parametros', 'states');
+		$resourses['scripts'] = ['assets/js/pages/states.js'];
+		admin_page('states', 'Estados', 'states', $resourses);
 	}
 
 }

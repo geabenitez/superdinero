@@ -43,6 +43,44 @@
             <el-checkbox v-for='n in 8' :label="`Categoria ${n}`" name="categories" size='small' />
           </el-checkbox-group>
         </el-form-item>
+        <el-form-item label="Caracteristicas">
+          <el-row :gutter='15'>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsES[0]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsES[1]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            </el-row>
+            <el-row :gutter='15'>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsES[2]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsES[3]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            </el-row>
+        </el-form-item>
         <el-form-item label='Calificación'>
           <div class="flex flex-row items-center ">
             <div class='w-1/4 mr-5'>
@@ -101,6 +139,44 @@
           <el-checkbox-group v-model="newAsociateForm.categories">
             <el-checkbox v-for='n in 8' :label="`Categoria ${n}`" name="categories" size='small' />
           </el-checkbox-group>
+        </el-form-item>
+        <el-form-item label="Characteristics">
+          <el-row :gutter='15'>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsEN[0]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsEN[1]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            </el-row>
+            <el-row :gutter='15'>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsEN[2]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsEN[3]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            </el-row>
         </el-form-item>
         <el-form-item label='Rate'>
           <div class="flex flex-row items-center ">
