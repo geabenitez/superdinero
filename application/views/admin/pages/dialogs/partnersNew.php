@@ -16,33 +16,6 @@
           show-word-limit
           clearable/>
         </el-form-item>
-        <el-form-item label="Estados">
-          <el-select 
-            class='w-full' 
-            v-model="newAsociateForm.states" 
-            multiple 
-            placeholder="Seleccionar" 
-            size='small'
-            clearable
-            filterable
-            default-first-option >
-            <el-option
-                v-for='n in 52'
-                :key="n"
-                :label="`Estado N ${n}`"
-                :value="n">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="¿Mostrar solo al agente?">
-            <el-radio :label="false" v-model='newAsociateForm.onlyAgent'>No</el-radio>
-            <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Sí</el-radio>
-        </el-form-item>
-        <el-form-item label="Categorias">
-          <el-checkbox-group v-model="newAsociateForm.categories">
-            <el-checkbox v-for='n in 8' :label="`Categoria ${n}`" name="categories" size='small' />
-          </el-checkbox-group>
-        </el-form-item>
         <el-form-item label="Caracteristicas">
           <el-row :gutter='15'>
             <el-col :span='12'>
@@ -81,6 +54,38 @@
               </el-col>
             </el-row>
         </el-form-item>
+        <el-form-item label="Estados">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.states" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='n in 52'
+                :key="n"
+                :label="`Estado N ${n}`"
+                :value="n">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="¿Mostrar solo al agente?">
+            <el-radio :label="false" v-model='newAsociateForm.onlyAgent'>No</el-radio>
+            <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Sí</el-radio>
+        </el-form-item>
+        <el-form-item label="Categorias">
+          <el-checkbox-group v-model="newAsociateForm.categories">
+            <el-checkbox v-for='n in 8' :label="`Categoria ${n}`" name="categories" size='small' />
+          </el-checkbox-group>
+        </el-form-item>
+        <el-form-item label="Cantidades">
+          <el-checkbox-group v-model="newAsociateForm.categories">
+            <el-checkbox v-for='n in 8' label="$1,000.00 ' $10,000.00" name="categories" size='small' />
+          </el-checkbox-group>
+        </el-form-item>
         <el-form-item label='Calificación'>
           <div class="flex flex-row items-center ">
             <div class='w-1/4 mr-5'>
@@ -112,33 +117,6 @@
           maxlength="50"
           show-word-limit
           clearable/>
-        </el-form-item>
-        <el-form-item label="States">
-          <el-select 
-            class='w-full' 
-            v-model="newAsociateForm.states" 
-            multiple 
-            placeholder="Seleccionar" 
-            size='small'
-            clearable
-            filterable 
-            default-first-option >
-            <el-option
-                v-for='n in 52'
-                :key="n"
-                :label="`Estado N ${n}`"
-                :value="n">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Show to agent only?">
-            <el-radio :label="false" v-model='newAsociateForm.onlyAgent'>No</el-radio>
-            <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Sí</el-radio>
-        </el-form-item>
-        <el-form-item label="Categories">
-          <el-checkbox-group v-model="newAsociateForm.categories">
-            <el-checkbox v-for='n in 8' :label="`Categoria ${n}`" name="categories" size='small' />
-          </el-checkbox-group>
         </el-form-item>
         <el-form-item label="Characteristics">
           <el-row :gutter='15'>
@@ -177,6 +155,38 @@
                 clearable/>
               </el-col>
             </el-row>
+        </el-form-item>
+        <el-form-item label="States">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.states" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable 
+            default-first-option >
+            <el-option
+                v-for='n in 52'
+                :key="n"
+                :label="`Estado N ${n}`"
+                :value="n">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Show to agent only?">
+            <el-radio :label="false" v-model='newAsociateForm.onlyAgent'>No</el-radio>
+            <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Sí</el-radio>
+        </el-form-item>
+        <el-form-item label="Categories">
+          <el-checkbox-group v-model="newAsociateForm.categories">
+            <el-checkbox v-for='n in 8' :label="`Categoria ${n}`" name="categories" size='small' />
+          </el-checkbox-group>
+        </el-form-item>
+        <el-form-item label="Amounts">
+          <el-checkbox-group v-model="newAsociateForm.amounts">
+            <el-checkbox v-for='n in 8' label="$1,000.00 - $10,000.00" name="amounts" size='small' />
+          </el-checkbox-group>
         </el-form-item>
         <el-form-item label='Rate'>
           <div class="flex flex-row items-center ">

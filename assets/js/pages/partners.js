@@ -12,7 +12,8 @@ new Vue({
           categories: new Array(4).fill(''),
           rate: '4.25',
           active: true,
-          characteristics: ["", "", "", ""]
+          characteristics: new Array(4).fill(''),
+          amounts: new Array(4).fill(''),
         },
         {
           index: 2,
@@ -23,7 +24,8 @@ new Vue({
           categories: new Array(6).fill(''),
           rate: '3.50',
           active: false,
-          characteristics: ["", "", "", ""]
+          characteristics: new Array(4).fill(''),
+          amounts: new Array(4).fill(''),
         }
       ],
       searchValue: '',
@@ -36,7 +38,8 @@ new Vue({
         states: [],
         onlyAgent: false,
         characteristicsES: ["", "", "", ""],
-        characteristicsEN: ["", "", "", ""]
+        characteristicsEN: ["", "", "", ""],
+        amounts: ["", "", "", ""]
       }
     }
   }

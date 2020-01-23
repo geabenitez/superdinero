@@ -18,7 +18,8 @@ class Admin extends CI_Controller {
 	}
 	
 	public function categories() {
-		admin_page('categories', 'Categorias', 'categories');
+		$resourses['scripts'] = ['assets/js/pages/categories.js'];
+		admin_page('categories', 'Categorias', 'categories', $resourses);
 	}
 	
 	public function questions() {
@@ -26,7 +27,8 @@ class Admin extends CI_Controller {
 	}
 	
 	public function amounts() {
-		admin_page('amounts', 'Montos', 'amounts');
+		$resourses['scripts'] = ['assets/js/pages/amounts.js'];
+		admin_page('amounts', 'Montos', 'amounts', $resourses);
 	}
 	
 	public function credits() {

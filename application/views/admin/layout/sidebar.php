@@ -5,12 +5,12 @@
         </div>
         <?php $menu = [
             ['id' => 'partners', 'title' => 'Asociados'],
-            ['id' => 'states', 'title' => 'Estados'], 
-            ['id' => 'categories', 'title' => 'Categorias'], 
-            ['id' => 'questions', 'title' => 'Preguntas calificatorias'], 
-            ['id' => 'amounts', 'title' => 'Montos'], 
-            ['id' => 'credits', 'title' => 'Tipos de creditos'] ,
-            ['id' => 'params', 'title' => 'Parametros'] 
+            ['id' => 'states', 'title' => 'Estados'],
+            ['id' => 'categories', 'title' => 'Categorias'],
+            ['id' => 'amounts', 'title' => 'Montos'],
+            ['id' => 'credits', 'title' => 'Tipos de creditos'],
+            ['id' => 'questions', 'title' => 'Preguntas calificatorias'],
+            ['id' => 'params', 'title' => 'Parametros']
         ] ?>
         <ul class='mt-6 text-gray-100'>
             <?php foreach ($menu as $key => $value) { ?>
