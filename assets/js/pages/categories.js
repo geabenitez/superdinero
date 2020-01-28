@@ -20,6 +20,13 @@ new Vue({
   },
   methods: {
     saveCategory({ nameES, nameEN }) {
+      if (nameES == '' || nameEN == '') {
+        this.$notify.error({
+          title: 'Error',
+          message: 'All fields are required.'
+        });
+        return false
+      }
       this.$msgbox({
         type: 'warning',
         title: 'Confirmation',
