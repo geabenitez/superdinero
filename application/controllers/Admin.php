@@ -9,7 +9,7 @@ class Admin extends CI_Controller {
 		$resources['page'] = 'login';
 		$resources['page_title'] = 'Inicio de sesión';
 		$resources['page_id'] = 'login';
-		$this->load->view('admin/layout/index', $resources);
+		$this->load->view('admin/pages/login', $resources);
 	}
 
 	public function partners() {
