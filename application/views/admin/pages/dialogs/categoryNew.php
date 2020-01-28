@@ -37,6 +37,6 @@
   </el-form>
   <span slot="footer" class="dialog-footer">
     <el-button @click="showNewCategory = false" size='small'>Cancelar</el-button>
-    <el-button type="success" @click="showNewCategory = false" size='small'>Guardar</el-button>
+    <el-button type="success" @click="saveCategory(newCategoryForm)" size='small'>Guardar</el-button>
   </span>
 </el-dialog>
