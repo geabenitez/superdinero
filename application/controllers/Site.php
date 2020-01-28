@@ -18,8 +18,8 @@ class Site extends CI_Controller {
 	}
 
 	public function login_process() {
-		$correo = strtoupper($this->input->post('correo', true));
-		$pass = strtoupper($this->input->post('password', true));
-		echo "sirve";
+		$email = $this->input->post('email', true);
+		$password = $this->input->post('password', true);
+		echo $this->Users_model->login($email, $password);
 	}
 }

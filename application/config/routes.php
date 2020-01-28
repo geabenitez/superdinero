@@ -56,9 +56,9 @@ $route['translate_uri_dashes'] = FALSE;
 
 // RUTAS PARA ADMIN
 
-$route['login'] = 'Site';
+$route['process_login'] = 'Site/login_process';
 
-$route['admin/login'] = 'Admin/login';
+$route['admin/login'] = 'Site';
 $route['admin/partners'] = 'Admin/partners';
 $route['admin/states'] = 'Admin/states';
 $route['admin/categories'] = 'Admin/categories';
