@@ -63,3 +63,6 @@ $route['admin/questions'] = 'Admin/questions';
 $route['admin/amounts'] = 'Admin/amounts';
 $route['admin/credits'] = 'Admin/credits';
 $route['admin/params'] = 'Admin/params';
+
+// CATEGORIES 
+$route['categories']['get'] = 'Admin/get_categories';

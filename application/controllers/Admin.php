@@ -44,4 +44,8 @@ class Admin extends CI_Controller {
 		admin_page('states', 'Estados', 'states', $resourses);
 	}
 
+	public function get_categories() {
+		var_dump($this->db->get('categories'));
+	}
+
 }
