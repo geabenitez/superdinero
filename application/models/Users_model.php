@@ -6,6 +6,7 @@ class Users_model extends CI_Model {
 		$this->db->from('users');
 		$this->db->where('email', $email);
 		$result = $this->db->get()->result();
+		var_dump($email, $password);
 
 		$return = new stdClass();
 		$return->msj = 'Email or password not valid';

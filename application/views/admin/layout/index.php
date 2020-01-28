@@ -38,6 +38,7 @@
         </div>
     </div>
 <script>window.site_url = '<?= site_url() ?>'</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
 <?php if (isset($scripts)) {
     $lambda = function() use ($scripts) {
         $slash = DIRECTORY_SEPARATOR;

@@ -11,6 +11,7 @@ class Site extends CI_Controller {
 	public function index() {
 		$resources['styles'] = basic_styles();
 		$resources['scripts'] = basic_scripts();
+		array_push($resources['scripts'], 'assets/js/pages/login.js');
 		$resources['page'] = 'login';
 		$resources['page_title'] = 'Inicio de sesión';
 		$resources['page_id'] = 'login';
@@ -18,8 +19,7 @@ class Site extends CI_Controller {
 	}
 
 	public function login_process() {
-		$email = $this->input->post('email', true);
-		$password = $this->input->post('password', true);
-		echo $this->Users_model->login($email, $password);
+		$data = json_decode($this->input->raw_input_stream);
+		echo $this->Users_model->login($data->email, $data->password);
 	}
 }
