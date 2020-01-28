@@ -65,4 +65,5 @@ $route['admin/credits'] = 'Admin/credits';
 $route['admin/params'] = 'Admin/params';
 
 // CATEGORIES 
-$route['categories']['get'] = 'Admin/get_categories';
+$route['categories'] = 'api/Category';
+$route['categories/(:any)'] = 'api/Category/$1';
