@@ -10,7 +10,18 @@ new Vue({
     processLogin(email, password) {
       axios
         .post(`${site_url}process_login`, { email, password })
-        .then(console.log)
+        .then(function(res){
+
+          if (res.data.result.success) {
+            console.log('entre');
+            
+            window.location=`${site_url}admin/partners`;
+          }else{
+            console.log('no entre');
+          }
+          
+          
+        })
     }
   }
 })

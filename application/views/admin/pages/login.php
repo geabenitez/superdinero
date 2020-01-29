@@ -1,3 +1,6 @@
+<?php
+
+ if(isset($_SESSION['logged'])){header('location: '.site_url('admin/partners'));} ?>
 <!DOCTYPE html>
 <html lang="es">
 

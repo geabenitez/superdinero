@@ -22,4 +22,10 @@ class Site extends CI_Controller {
 		$data = json_decode($this->input->raw_input_stream);
 		echo $this->Users_model->login($data->email, $data->password);
 	}
+
+
+	public function process_logout() {
+		$this->session->sess_destroy();
+		redirect(site_url('/'));
+	}
 }
