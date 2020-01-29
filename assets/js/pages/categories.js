@@ -122,5 +122,14 @@ new Vue({
         }
       })
     }
+  },
+  computed: {
+    filteredCategories() {
+      const value = this.searchValue.toLowerCase()
+      return this.categories.filter(c => (
+        c.nameES.toLowerCase().includes(value) ||
+        c.nameEN.toLowerCase().includes(value)
+      ))
+    }
   }
 })
