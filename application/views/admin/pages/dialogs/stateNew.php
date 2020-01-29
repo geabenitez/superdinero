@@ -1,4 +1,4 @@
-<el-dialog title="Nuevo estado" :visible.sync="showNewState" width=600px>
+<el-dialog :title="action" :visible.sync="showNewState" width=600px>
   <el-form label-position="top" label-width="100px" :model="newStateForm">
     <el-row :gutter='15'>
       <el-col :span='12' class='border-r'>
@@ -25,7 +25,7 @@
         </el-row>
         <el-form-item label="Name:">
           <el-input 
-          placeholder="State's name" 
+          placeholder="States's name" 
           size='small' 
           v-model="newStateForm.nameEN"
           maxlength="50"
@@ -37,6 +37,6 @@
   </el-form>
   <span slot="footer" class="dialog-footer">
     <el-button @click="showNewState = false" size='small'>Cancelar</el-button>
-    <el-button type="success" @click="showNewState = false" size='small'>Guardar</el-button>
+    <el-button type="success" @click="saveState(newStateForm)" size='small'>Guardar</el-button>
   </span>
 </el-dialog>

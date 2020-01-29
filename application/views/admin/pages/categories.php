@@ -10,7 +10,7 @@
         type="success" 
         icon="el-icon-plus" 
         size='small'
-        @click='showNewCategory = true'>
+        @click='createCategory'>
         Nueva categoria
       </el-button>
     </el-col>

@@ -73,3 +73,7 @@ $route['admin/params'] = 'Admin/params';
 // CATEGORIES 
 $route['categories'] = 'api/Category';
 $route['categories/(:any)'] = 'api/Category/$1';
+
+// STATES 
+$route['states'] = 'api/State';
+$route['states/(:any)'] = 'api/State/$1';

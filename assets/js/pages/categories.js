@@ -9,7 +9,6 @@ new Vue({
   data: function () {
     return {
       action: 'Nueva categoria',
-      headers: {},
       categories: [],
       searchValue: '',
       showNewCategory: false,
@@ -20,6 +19,14 @@ new Vue({
     }
   },
   methods: {
+    createCategory() {
+      this.action = 'Nueva categoria'
+      this.newCategoryForm = {
+        nameES: '',
+        nameEN: '',
+      }
+      this.showNewCategory = true
+    },
     editCategory(category) {
       this.action = 'Editar categoria'
       this.newCategoryForm = {
