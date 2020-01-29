@@ -77,3 +77,7 @@ $route['categories/(:any)'] = 'api/Category/$1';
 // STATES 
 $route['states'] = 'api/State';
 $route['states/(:any)'] = 'api/State/$1';
+
+// AMOUNTS 
+$route['amounts'] = 'api/Amount';
+$route['amounts/(:any)'] = 'api/Amount/$1';
