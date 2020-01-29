@@ -1,4 +1,4 @@
-<el-dialog title="Nueva categoria" :visible.sync="showNewCategory" width=600px>
+<el-dialog :title="action" :visible.sync="showNewCategory" width=600px>
   <el-form label-position="top" label-width="100px" :model="newCategoryForm">
     <el-row :gutter='15'>
       <el-col :span='12' class='border-r'>

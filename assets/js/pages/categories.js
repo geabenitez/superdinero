@@ -1,14 +1,15 @@
 new Vue({
   el: '#app',
   created() {
-    axios
-      .get(`${site_url}categories`)
+    axios(this.createHeader('GET'))
       .then(res => {
         this.categories = res.data
       })
   },
   data: function () {
     return {
+      action: 'Nueva categoria',
+      headers: {},
       categories: [],
       searchValue: '',
       showNewCategory: false,
@@ -19,7 +20,22 @@ new Vue({
     }
   },
   methods: {
-    saveCategory({ nameES, nameEN }) {
+    editCategory(category) {
+      this.action = 'Editar categoria'
+      this.newCategoryForm = {
+        ...category
+      }
+      this.showNewCategory = true
+    },
+    createHeader(METHOD, data, id = '') {
+      return {
+        method: METHOD,
+        headers: { 'token-crf': cs },
+        url: `${site_url}categories/${id}`,
+        data
+      }
+    },
+    saveCategory({ nameES, nameEN, id }) {
       if (nameES == '' || nameEN == '') {
         this.$notify.error({
           title: 'Error',
@@ -30,7 +46,7 @@ new Vue({
       this.$msgbox({
         type: 'warning',
         title: 'Confirmation',
-        message: 'Are you sure you want to save this new category?',
+        message: `Are you sure you want to ${id != null ? 'update' : 'save'} this category?`,
         showCancelButton: true,
         confirmButtonText: "Yes, please",
         cancelButtonText: 'Cancel',
@@ -38,8 +54,9 @@ new Vue({
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = 'Processing...';
-            axios
-              .post(`${site_url}categories`, { nameES, nameEN, active: 1 })
+            const METHOD = id != null ? 'PUT' : 'POST'
+            const categoryId = id != null ? id : ''
+            axios(this.createHeader(METHOD, { nameES, nameEN, active: 1 }, categoryId))
               .then(res => {
                 this.categories = res.data.categories
                 instance.confirmButtonLoading = false;
@@ -66,8 +83,7 @@ new Vue({
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = 'Processing...';
             const active = status == '1'
-            axios
-              .put(`${site_url}categories/${id}`, { active: !active })
+            axios(this.createHeader('PUT', { active: !active }, id))
               .then(res => {
                 this.categories = res.data.categories
                 instance.confirmButtonLoading = false;
@@ -81,7 +97,6 @@ new Vue({
       })
     },
     deleteCategory(id) {
-      console.log('test')
       this.$msgbox({
         type: 'error',
         title: 'Confirmation',
@@ -94,8 +109,7 @@ new Vue({
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = 'Processing...';
             const active = status == '1'
-            axios
-              .delete(`${site_url}categories/${id}`)
+            axios(this.createHeader('DELETE', {}, id))
               .then(res => {
                 this.categories = res.data.categories
                 instance.confirmButtonLoading = false;

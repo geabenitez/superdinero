@@ -35,7 +35,9 @@
                 <i class="el-icon-more"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item><i class="el-icon-edit-outline"></i> Editar categoria</el-dropdown-item>
+                <el-dropdown-item @click.native="editCategory(scope.row)">
+                  <i class="el-icon-edit-outline"></i> Editar categoria
+                </el-dropdown-item>
                 <el-dropdown-item @click.native="changeStatus(scope.row.id, scope.row.active)">
                   <span v-if="scope.row.active == '1'">
                     <i class="el-icon-close"></i> Desactivar

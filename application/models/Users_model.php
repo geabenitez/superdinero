@@ -19,6 +19,7 @@ class Users_model extends CI_Model {
 				$this->session->set_userdata('names', $result[0]->names);
 				$this->session->set_userdata('lastnames', $result[0]->lastnames);
 				$this->session->set_userdata('code', $result[0]->code);
+				$this->session->set_userdata('token', '$Q5444bbBrRt9Cd8goEObasdlYJbi33dduyfDu92BaviqfWCOw6wlEYBfbkwqpj/K');
 
 				$return->msj = 'Loggin in';
 				$return->success = true;
