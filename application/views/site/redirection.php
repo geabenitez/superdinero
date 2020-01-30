@@ -30,11 +30,13 @@
     <span class='font-semibold text-white text-xl uppercase tracking-wide'>Te estamos transfiriendo...</span>
     <span class='font-semibold text-green-900'>...a través de una conexión segura</span>
     <div class='flex flex-col md:flex-row items-center bg-white rounded-lg p-8 shadow my-4'>
-      <div class='flex flex-row justify-center w-64 p-4'>holis</div>
+      <div class='flex flex-row justify-center md:justify-start w-64 p-4 font-semibold uppercase text-xs tracking-wide text-gray-900'>Nombre del proveedor</div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
         <path class="fill-current text-green-800" d="M9.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z"/>
       </svg>
-      <div class='flex flex-row w-64 p-4 justify-center md:justify-end'>bais</div>
+      <div class='flex flex-row w-64 p-4 justify-center md:justify-end'>
+        <div class='w-32 h-20 bg-gray-300 border border-gray-400 rounded'></div>
+      </div>
     </div>
     <span class='font-semibold text-green-900'>Espera un momento por favor...</span>
 </body>
