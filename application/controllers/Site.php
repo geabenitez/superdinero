@@ -33,7 +33,9 @@ class Site extends CI_Controller {
 	}
 
 	public function offers() {
-		echo 'OFERTAS';
+		$resources['styles'] = basic_styles();
+		$resources['scripts'] = basic_scripts();
+		$this->load->view('site/offers', $resources);
 	}
 
 	public function redirect() {
