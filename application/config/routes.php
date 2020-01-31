@@ -53,6 +53,11 @@ $route['default_controller'] = 'Site';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// RUTAS PARA SITE
+$route['cuestionario/(:any)'] = 'Site/questionnaire/$1';
+$route['ofertas/(:any)'] = 'Site/offers/$1';
+$route['redirect'] = 'Site/redirect';
+
 
 // RUTAS PARA ADMIN
 

@@ -23,9 +23,24 @@ class Site extends CI_Controller {
 		echo $this->Users_model->login($data->email, $data->password);
 	}
 
-
 	public function process_logout() {
 		$this->session->sess_destroy();
 		redirect(site_url('/'));
+	}
+
+	public function questionnaire() {
+		echo 'CUESTIOARIO';
+	}
+
+	public function offers() {
+		$resources['styles'] = basic_styles();
+		$resources['scripts'] = basic_scripts();
+		$this->load->view('site/offers', $resources);
+	}
+
+	public function redirect() {
+		$resources['styles'] = basic_styles();
+		$resources['scripts'] = basic_scripts();
+		$this->load->view('site/redirection', $resources);
 	}
 }
