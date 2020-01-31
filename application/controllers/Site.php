@@ -35,6 +35,7 @@ class Site extends CI_Controller {
 	public function offers() {
 		$resources['styles'] = basic_styles();
 		$resources['scripts'] = basic_scripts();
+		array_push($resources['scripts'], 'assets/js/pages/offers.js');
 		$this->load->view('site/offers', $resources);
 	}
 
