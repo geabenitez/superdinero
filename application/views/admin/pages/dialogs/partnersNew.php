@@ -65,10 +65,10 @@
             filterable
             default-first-option >
             <el-option
-                v-for='n in 52'
-                :key="n"
-                :label="`Estado N ${n}`"
-                :value="n">
+                v-for='state in states'
+                :key="state.id"
+                :label="state.nameES"
+                :value="state.id">
             </el-option>
           </el-select>
         </el-form-item>
@@ -78,12 +78,12 @@
         </el-form-item>
         <el-form-item label="Categorias">
           <el-checkbox-group v-model="newAsociateForm.categories">
-            <el-checkbox v-for='n in 8' :label="`Categoria ${n}`" name="categories" size='small' />
+            <el-checkbox v-for='category in categories' :label="category.nameES" name='categories' size='small' />
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="Cantidades">
-          <el-checkbox-group v-model="newAsociateForm.categories">
-            <el-checkbox v-for='n in 8' label="$1,000.00 ' $10,000.00" name="categories" size='small' />
+          <el-checkbox-group v-model="newAsociateForm.amounts">
+            <el-checkbox v-for='amount in amounts' :label="`${formatMoney(amount.from)} - ${formatMoney(amount.until)}`" size='small' />
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label='Calificación'>
@@ -167,25 +167,25 @@
             filterable 
             default-first-option >
             <el-option
-                v-for='n in 52'
-                :key="n"
-                :label="`Estado N ${n}`"
-                :value="n">
+                v-for='state in states'
+                :key="state.id"
+                :label="state.nameEN"
+                :value="state.id">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="Show to agent only?">
             <el-radio :label="false" v-model='newAsociateForm.onlyAgent'>No</el-radio>
-            <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Sí</el-radio>
+            <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Yes</el-radio>
         </el-form-item>
         <el-form-item label="Categories">
           <el-checkbox-group v-model="newAsociateForm.categories">
-            <el-checkbox v-for='n in 8' :label="`Categoria ${n}`" name="categories" size='small' />
+            <el-checkbox v-for='category in categories' :label="category.nameES" name='categories' size='small' />
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="Amounts">
           <el-checkbox-group v-model="newAsociateForm.amounts">
-            <el-checkbox v-for='n in 8' label="$1,000.00 - $10,000.00" name="amounts" size='small' />
+          <el-checkbox v-for='amount in amounts' :label="`${formatMoney(amount.from)} - ${formatMoney(amount.until)}`" size='small' />
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label='Rate'>

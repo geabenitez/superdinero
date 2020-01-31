@@ -28,7 +28,6 @@ new Vue({
       this.showNewAmount = true
     },
     editAmount(amount) {
-      console.log(amount)
       this.action = 'Editar cantidad'
       this.newAmountForm = {
         ...amount
