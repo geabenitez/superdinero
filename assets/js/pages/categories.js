@@ -8,6 +8,7 @@ new Vue({
   },
   data: function () {
     return {
+      imageUrl: '',
       action: 'Nueva categoria',
       categories: [],
       searchValue: '',
@@ -128,6 +129,21 @@ new Vue({
           }
         }
       })
+    },
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('La imagen debe estar en formato JPG!');
+      }
+      if (!isLt2M) {
+        this.$message.error('La imagen excede los 2MB!');
+      }
+      return isJPG && isLt2M;
     }
   },
   computed: {
