@@ -6,9 +6,8 @@ new Vue({
         this.categories = res.data
       })
   },
-  data: function () {
+  data() {
     return {
-      imageUrl: '',
       action: 'Nueva categoria',
       categories: [],
       searchValue: '',
@@ -16,6 +15,7 @@ new Vue({
       newCategoryForm: {
         nameES: '',
         nameEN: '',
+        image: ''
       }
     }
   },
@@ -130,20 +130,25 @@ new Vue({
         }
       })
     },
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('La imagen debe estar en formato JPG!');
+    beforeUpload() {
+      const files = this.$refs.image.files
+      if (files && files[0]) {
+        if ((files[0].size / 1000) > 200) {
+          this.$notify.error({
+            title: 'Error',
+            message: 'The image needs to be less than 500KB.'
+          });
+          this.$refs.image.value = ''
+          return false
+        }
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          console.log(e)
+          this.newCategoryForm.image = e.target.result
+          this.$refs.imagePreview.src = e.target.result
+        }
+        reader.readAsDataURL(files[0]);
       }
-      if (!isLt2M) {
-        this.$message.error('La imagen excede los 2MB!');
-      }
-      return isJPG && isLt2M;
     }
   },
   computed: {
