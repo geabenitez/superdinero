@@ -35,10 +35,14 @@ new Vue({
       }
       this.showNewCategory = true
     },
-    createHeader(METHOD, data, id = '') {
+    createHeader(METHOD, data, id = '', multipart = false) {
+      const headers = { 'token-crf': cs }
+      if (multipart) {
+        headers['Content-Type'] = 'multipart/form-data'
+      }
       return {
         method: METHOD,
-        headers: { 'token-crf': cs },
+        headers,
         url: `${site_url}categories/${id}`,
         data
       }
@@ -64,7 +68,12 @@ new Vue({
             instance.confirmButtonText = 'Processing...';
             const METHOD = id != null ? 'PUT' : 'POST'
             const categoryId = id != null ? id : ''
-            axios(this.createHeader(METHOD, { nameES, nameEN, active: 1 }, categoryId))
+
+            const formData = new FormData();
+            formData.append("image", this.$refs.image.files[0]);
+            formData.append("nameES", nameES);
+            formData.append("nameEN", nameEN);
+            axios(this.createHeader(METHOD, formData, categoryId, true))
               .then(res => {
                 this.categories = res.data.categories
                 instance.confirmButtonLoading = false;
@@ -143,7 +152,6 @@ new Vue({
         }
         const reader = new FileReader()
         reader.onload = (e) => {
-          console.log(e)
           this.newCategoryForm.image = e.target.result
           this.$refs.imagePreview.src = e.target.result
         }
