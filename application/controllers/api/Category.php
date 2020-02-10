@@ -34,6 +34,27 @@ class Category extends REST_Controller {
 
   public function index_post(){
     $input = json_decode($this->input->raw_input_stream);
+
+    //*************SUBIENDO ARCHIVO**********************
+    $config['upload_path']          = './media/';
+    $config['overwrite']          = true;
+    $config['allowed_types']        = 'gif|jpg|png';
+    $config['file_name']        = md5("nombre");
+    //$config['max_width']            = 1024;
+    //$config['max_height']           = 768;
+    if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
+    $this->load->library('upload', $config);
+    if ( ! $this->upload->do_upload('image'))
+    {
+      //NO SE SUBIO
+    }else{
+      //SI SE SUBIO
+      $info = $this->upload->data();//la informacion del archivo subido
+
+    }
+    //*************FIN SUBIENDO ARCHIVO**********************
+
+
     $this->db->insert('categories',$input);
     $response = new stdClass();
     $response->categories = $this->db->get("categories")->result();
