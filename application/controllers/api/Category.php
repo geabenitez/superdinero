@@ -33,16 +33,16 @@ class Category extends REST_Controller {
   }
 
   public function index_post(){
-    $input = json_decode($this->input->raw_input_stream);
-    var_dump($this->input->post());
-    var_dump($_POST);
-    
+    //$input = json_decode($this->input->raw_input_stream);
+    $input = $this->input->post();
+    $upload_success=false;
 
-    //*************SUBIENDO ARCHIVO**********************
+   //*************SUBIENDO ARCHIVO**********************
     $config['upload_path']          = './media/';
     $config['overwrite']          = true;
     $config['allowed_types']        = 'gif|jpg|png';
-    $config['file_name']        = md5("nombre");
+    $config['file_name']        = md5(date('dmYhisu'));
+    $info=array();
     //$config['max_width']            = 1024;
     //$config['max_height']           = 768;
     if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
@@ -53,13 +53,20 @@ class Category extends REST_Controller {
     }else{
       //SI SE SUBIO
       $info = $this->upload->data();//la informacion del archivo subido
+      $upload_success=true;
 
     }
     //*************FIN SUBIENDO ARCHIVO**********************
 
 
-    $this->db->insert('categories',$input);
+    $data = array(
+      'nameES'=> $input['nameES'],
+      'nameEN'=> $input['nameEN'],
+      'image'=> ((!isset($info['file_name']))?'':$info['file_name']),
+    );
+    $this->db->insert('categories',$data);
     $response = new stdClass();
+    
     $response->categories = $this->db->get("categories")->result();
     $response->msj = 'Category created successfully.';
     $this->response($response, REST_Controller::HTTP_OK);
