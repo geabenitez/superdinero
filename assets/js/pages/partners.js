@@ -2,6 +2,11 @@ new Vue({
   el: '#app',
   created() {
     const headers = { 'token-crf': cs }
+
+    function getPartners() {
+      return axios(this.createHeader('GET'))
+    }
+
     function getCategories() {
       return axios({ headers, method: 'GET', url: `${site_url}categories` })
     }
@@ -15,8 +20,9 @@ new Vue({
     }
 
     axios
-      .all([getCategories(), getAmounts(), getStates()])
-      .then(axios.spread((categories, amounts, states) => {
+      .all([getPartners(), getCategories(), getAmounts(), getStates()])
+      .then(axios.spread((partners, categories, amounts, states) => {
+        this.partners = partners.data
         this.categories = categories.data
         this.amounts = amounts.data
         this.states = states.data
@@ -41,7 +47,8 @@ new Vue({
         characteristicsES: ["", "", "", ""],
         characteristicsEN: ["", "", "", ""],
         amounts: []
-      }
+      },
+      action: 'Nuevo asociado'
     }
   },
   methods: {
@@ -59,6 +66,21 @@ new Vue({
     },
     formatMoney(amount) {
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumSignificantDigits: 2 }).format(amount)
+    },
+    createPartner() {
+      this.action = 'Nuevo asociado'
+      this.newAsociateForm = {
+        nameES: '',
+        nameEN: '',
+        categories: [],
+        rate: 0,
+        states: [],
+        onlyAgent: false,
+        characteristicsES: ["", "", "", ""],
+        characteristicsEN: ["", "", "", ""],
+        amounts: []
+      }
+      this.showNewPartner = true
     },
     savePartner({ id, nameES, nameEN, categories, rate, states, onlyAgent, characteristicsES, characteristicsEN, amounts }) {
       if (
@@ -100,10 +122,10 @@ new Vue({
             formData.append("amounts", amounts);
             axios(this.createHeader(METHOD, formData, categoryId, true))
               .then(res => {
-                this.categories = res.data.categories
+                this.partners = res.data.partners
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Yes, please";
-                this.showNewCategory = false
+                this.showNewPartner = false
                 done()
               })
           } else {

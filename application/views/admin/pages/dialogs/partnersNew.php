@@ -1,4 +1,4 @@
-<el-dialog title="Nuevo asociado" :visible.sync="showNewPartner" width=1200px>
+<el-dialog :title="action" :visible.sync="showNewPartner" width=1200px>
   <el-form label-position="top" label-width="100px" :model="newAsociateForm">
     <el-row :gutter='15'>
       <el-col :span='12' class='border-r'>
