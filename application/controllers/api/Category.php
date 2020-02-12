@@ -34,6 +34,9 @@ class Category extends REST_Controller {
 
   public function index_post(){
     $input = json_decode($this->input->raw_input_stream);
+    var_dump($this->input->post());
+    var_dump($_POST);
+    
 
     //*************SUBIENDO ARCHIVO**********************
     $config['upload_path']          = './media/';

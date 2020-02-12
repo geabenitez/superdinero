@@ -77,9 +77,22 @@
             <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Sí</el-radio>
         </el-form-item>
         <el-form-item label="Categorias">
-          <el-checkbox-group v-model="newAsociateForm.categories">
-            <el-checkbox v-for='category in categories' :label="category.nameES" name='categories' size='small' />
-          </el-checkbox-group>
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.categories" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='category in categories'
+                :key="category.id"
+                :label="category.nameES"
+                :value="category.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="Cantidades">
           <el-checkbox-group v-model="newAsociateForm.amounts">
@@ -179,9 +192,22 @@
             <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Yes</el-radio>
         </el-form-item>
         <el-form-item label="Categories">
-          <el-checkbox-group v-model="newAsociateForm.categories">
-            <el-checkbox v-for='category in categories' :label="category.nameES" name='categories' size='small' />
-          </el-checkbox-group>
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.categories" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='category in categories'
+                :key="category.id"
+                :label="category.nameEN"
+                :value="category.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="Amounts">
           <el-checkbox-group v-model="newAsociateForm.amounts">
@@ -209,6 +235,6 @@
   </el-form>
   <span slot="footer" class="dialog-footer">
     <el-button @click="showNewPartner = false" size='small'>Cancelar</el-button>
-    <el-button type="success" @click="showNewPartner = false" size='small'>Guardar</el-button>
+    <el-button type="success" @click="savePartner(newAsociateForm)" size='small'>Guardar</el-button>
   </span>
 </el-dialog>

@@ -75,6 +75,10 @@ $route['admin/amounts'] = 'Admin/amounts';
 $route['admin/credits'] = 'Admin/credits';
 $route['admin/params'] = 'Admin/params';
 
+// OARTNERS
+$route['partners'] = 'api/Partner';
+$route['partners/(:any)'] = 'api/Partner/$1';
+
 // CATEGORIES 
 $route['categories'] = 'api/Category';
 $route['categories/(:any)'] = 'api/Category/$1';
