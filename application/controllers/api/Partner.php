@@ -37,7 +37,7 @@ class Partner extends REST_Controller {
                             ->select($get)
                             ->from($pc)
                             ->where($pc.'.partnerId', $value->id)
-                            ->join($pc, $pc.'.categoryId = ' . $c . '.id')
+                            ->join($pc, $c.'.id = ' . $pc . '.categoryId')
                             ->get()->result();
     }
     $this->response($partners, REST_Controller::HTTP_OK);
