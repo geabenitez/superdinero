@@ -38,7 +38,7 @@ class Category extends REST_Controller {
     $upload_success=false;
 
    //*************SUBIENDO ARCHIVO**********************
-    $config['upload_path']          = './media/';
+    $config['upload_path']          = './assets/images/categories';
     $config['overwrite']          = true;
     $config['allowed_types']        = 'gif|jpg|png';
     $config['file_name']        = md5(date('dmYhisu'));
@@ -83,7 +83,7 @@ class Category extends REST_Controller {
     $upload_success=false;
 
    //*************SUBIENDO ARCHIVO**********************
-    $config['upload_path']          = './media/';
+    $config['upload_path']          = './assets/images/categories';
     $config['overwrite']          = true;
     $config['allowed_types']        = 'gif|jpg|png';
     $config['file_name']        = md5(date('dmYhisu'));
@@ -104,7 +104,7 @@ class Category extends REST_Controller {
     //*************FIN SUBIENDO ARCHIVO**********************
     $image_name=$data['image'];
     if ($upload_success) {
-       @unlink('./././media/'.$data['image']);
+       @unlink('./././assets/images/categories'.$data['image']);
        $image_name=$info['file_name'];
     }
 
@@ -128,7 +128,7 @@ class Category extends REST_Controller {
     $data = $this->db->get_where("categories", ['id' => $id])->row_array();
     
     
-    if ($data['image']!='') {  @unlink('./././media/'.$data['image']);  }
+    if ($data['image']!='') {  @unlink('./././assets/images/categories/'.$data['image']);  }
     $this->db->delete('categories', array('id'=>$id));
       
     $response = new stdClass();
