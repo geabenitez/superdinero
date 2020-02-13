@@ -3,57 +3,46 @@ new Vue({
   created() {
     axios(this.createHeader('GET'))
       .then(res => {
-        this.categories = res.data
+        this.questions = res.data
       })
   },
-  data() {
+  data: function () {
     return {
-      action: 'Nueva categoria',
-      categories: [],
+      action: 'Nueva pregunta',
+      questions: [],
       searchValue: '',
-      showNewCategory: false,
-      newCategoryForm: {
+      showNewQuestion: false,
+      newQuestionForm: {
         nameES: '',
         nameEN: '',
-        image: ''
       }
     }
   },
   methods: {
-    createCategory() {
-      this.action = 'Nueva categoria'
-      this.newCategoryForm = {
+    createQuestion() {
+      this.action = 'Nueva pregunta'
+      this.newQuestionForm = {
         nameES: '',
         nameEN: '',
       }
-      if (this.$refs.imagePreview) {
-        this.$refs.imagePreview.src = 'https://via.placeholder.com/250'
-      }
-      this.showNewCategory = true
+      this.showNewQuestion = true
     },
-    editCategory(category) {
-      this.action = 'Editar categoria'
-      this.newCategoryForm = {
-        ...category
+    editQuestion(state) {
+      this.action = 'Editar pregunta'
+      this.newQuestionForm = {
+        ...state
       }
-      this.showNewCategory = true
-      setTimeout(() => {
-        this.$refs.imagePreview.src = `${site_url}/assets/images/categories/${category.image}`
-      }, 300);
+      this.showNewQuestion = true
     },
-    createHeader(METHOD, data, id = '', multipart = false) {
-      const headers = { 'token-crf': cs }
-      if (multipart) {
-        headers['Content-Type'] = `multipart/form-data; boundary=${data._boundary}`
-      }
+    createHeader(METHOD, data, id = '') {
       return {
         method: METHOD,
-        headers,
-        url: `${site_url}categories/${id}`,
+        headers: { 'token-crf': cs },
+        url: `${site_url}questions/${id}`,
         data
       }
     },
-    saveCategory({ nameES, nameEN, id }) {
+    saveQuestion({ nameES, nameEN, id }) {
       if (nameES == '' || nameEN == '') {
         this.$notify.error({
           title: 'Error',
@@ -64,7 +53,7 @@ new Vue({
       this.$msgbox({
         type: 'warning',
         title: 'Confirmation',
-        message: `Are you sure you want to ${id != null ? 'update' : 'save'} this category?`,
+        message: `Are you sure you want to ${id != null ? 'update' : 'save'} this question?`,
         showCancelButton: true,
         confirmButtonText: "Yes, please",
         cancelButtonText: 'Cancel',
@@ -73,18 +62,13 @@ new Vue({
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = 'Processing...';
             const METHOD = id != null ? 'PUT' : 'POST'
-            const categoryId = id != null ? id : ''
-
-            const formData = new FormData();
-            formData.append("image", this.$refs.image.files[0]);
-            formData.append("nameES", nameES);
-            formData.append("nameEN", nameEN);
-            axios(this.createHeader(METHOD, formData, categoryId, true))
+            const stateId = id != null ? id : ''
+            axios(this.createHeader(METHOD, { nameES, nameEN, active: 1 }, stateId))
               .then(res => {
-                this.categories = res.data.categories
+                this.questions = res.data.questions
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Yes, please";
-                this.showNewCategory = false
+                this.showNewQuestion = false
                 done()
               })
           } else {
@@ -108,7 +92,7 @@ new Vue({
             const active = status == '1'
             axios(this.createHeader('PUT', { active: !active }, id))
               .then(res => {
-                this.categories = res.data.categories
+                this.questions = res.data.questions
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Let's go";
                 done()
@@ -119,11 +103,11 @@ new Vue({
         }
       })
     },
-    deleteCategory(id) {
+    deleteQuestion(id) {
       this.$msgbox({
         type: 'error',
         title: 'Confirmation',
-        message: 'Are you sure you want to delete this category?',
+        message: 'Are you sure you want to delete this state?',
         showCancelButton: true,
         confirmButtonText: "DELETE",
         cancelButtonText: 'Cancel',
@@ -134,7 +118,7 @@ new Vue({
             const active = status == '1'
             axios(this.createHeader('DELETE', {}, id))
               .then(res => {
-                this.categories = res.data.categories
+                this.questions = res.data.questions
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "DELETE";
                 done()
@@ -144,31 +128,12 @@ new Vue({
           }
         }
       })
-    },
-    beforeUpload() {
-      const files = this.$refs.image.files
-      if (files && files[0]) {
-        if ((files[0].size / 1000) > 200) {
-          this.$notify.error({
-            title: 'Error',
-            message: 'The image needs to be less than 500KB.'
-          });
-          this.$refs.image.value = ''
-          return false
-        }
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          this.newCategoryForm.image = e.target.result
-          this.$refs.imagePreview.src = e.target.result
-        }
-        reader.readAsDataURL(files[0]);
-      }
     }
   },
   computed: {
-    filteredCategories() {
+    filteredQuestion() {
       const value = this.searchValue.toLowerCase()
-      return this.categories.filter(c => (
+      return this.questions.filter(c => (
         c.nameES.toLowerCase().includes(value) ||
         c.nameEN.toLowerCase().includes(value)
       ))
