@@ -50,6 +50,7 @@ class Category extends REST_Controller {
     if ( ! $this->upload->do_upload('image'))
     {
       //NO SE SUBIO
+      $this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
     }else{
       //SI SE SUBIO
       $info = $this->upload->data();//la informacion del archivo subido
@@ -96,6 +97,7 @@ class Category extends REST_Controller {
     if ( ! $this->upload->do_upload('image'))
     {
       //NO SE SUBIO
+      $this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
     }else{
       //SI SE SUBIO
       $info = $this->upload->data();//la informacion del archivo subido
