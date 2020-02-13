@@ -10,7 +10,7 @@
         type="success" 
         icon="el-icon-plus" 
         size='small'
-        @click='showNewPartner = true'>
+        @click='createPartner()'>
         Nuevo asociado
       </el-button>
     </el-col>
