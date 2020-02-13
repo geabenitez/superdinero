@@ -21,11 +21,26 @@ class Partner extends REST_Controller {
 
 	public function index_get($id = 0){
     if (!empty($id)) {
-      $data = $this->db->get_where("partners", ['id' => $id])->row_array();
+      $partners = $this->db->get_where("partners", ['id' => $id])->row_array();
     } else {
-      $data = $this->db->get("partners")->result();
+      $partners = $this->db->get("partners")->result();
     }
-    $this->response($data, REST_Controller::HTTP_OK);
+    foreach ($partners as $key => $value) {
+      $c = "categories";
+      $pc = "_partners_categories";
+      $get = array(
+        $c.'.nameES',
+        $c.'.nameEN',
+        $c.'.image',
+      );
+      $value->categories = $this->db
+                            ->select($get)
+                            ->from($pc)
+                            ->where($pc.'.partnerId', $value->id)
+                            ->join($pc, $pc.'.categoryId = ' . $c . '.id')
+                            ->get()->result();
+    }
+    $this->response($partners, REST_Controller::HTTP_OK);
   }
 
   public function index_post(){

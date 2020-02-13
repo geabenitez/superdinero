@@ -3,19 +3,19 @@ new Vue({
   created() {
     const headers = { 'token-crf': cs }
 
-    function getPartners() {
+    const getPartners = () => {
       return axios(this.createHeader('GET'))
     }
 
-    function getCategories() {
+    const getCategories = () => {
       return axios({ headers, method: 'GET', url: `${site_url}categories` })
     }
 
-    function getAmounts() {
+    const getAmounts = () => {
       return axios({ headers, method: 'GET', url: `${site_url}amounts` })
     }
 
-    function getStates() {
+    const getStates = () => {
       return axios({ headers, method: 'GET', url: `${site_url}states` })
     }
 
@@ -26,7 +26,6 @@ new Vue({
         this.categories = categories.data
         this.amounts = amounts.data
         this.states = states.data
-        console.log(this.categories)
       }))
   },
   data: function () {
