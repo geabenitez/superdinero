@@ -131,7 +131,7 @@ new Vue({
     }
   },
   computed: {
-    filteredCredit() {
+    filteredCredits() {
       const value = this.searchValue.toLowerCase()
       return this.credits.filter(c => (
         c.nameES.toLowerCase().includes(value) ||

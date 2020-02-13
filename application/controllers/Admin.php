@@ -24,7 +24,8 @@ class Admin extends Secure_Controller {
 	}
 	
 	public function questions() {
-		admin_page('questions', 'Preguntas calificatorias', 'questions');
+		$resourses['scripts'] = ['assets/js/pages/questions.js'];
+		admin_page('questions', 'Preguntas calificatorias', 'questions', $resourses);
 	}
 	
 	public function amounts() {
@@ -33,7 +34,8 @@ class Admin extends Secure_Controller {
 	}
 	
 	public function credits() {
-		admin_page('credits', 'Tipos de creditos', 'credits');
+		$resourses['scripts'] = ['assets/js/pages/credits.js'];
+		admin_page('credits', 'Tipos de creditos', 'credits', $resourses);
 	}
 	
 	public function params() {

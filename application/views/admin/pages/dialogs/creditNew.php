@@ -9,7 +9,7 @@
         </el-row>
         <el-form-item label="Nombre:">
           <el-input 
-          placeholder="Nombre de estado" 
+          placeholder="Nombre del tipo de credito" 
           size='small' 
           v-model="newCreditForm.nameES"
           maxlength="50"
@@ -25,7 +25,7 @@
         </el-row>
         <el-form-item label="Name:">
           <el-input 
-          placeholder="Credits's name" 
+          placeholder="Credit type name" 
           size='small' 
           v-model="newCreditForm.nameEN"
           maxlength="50"
