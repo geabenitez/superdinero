@@ -90,3 +90,11 @@ $route['states/(:any)'] = 'api/State/$1';
 // AMOUNTS 
 $route['amounts'] = 'api/Amount';
 $route['amounts/(:any)'] = 'api/Amount/$1';
+
+// CREDICTS 
+$route['credits'] = 'api/Credit';
+$route['credits/(:any)'] = 'api/Credit/$1';
+
+// QUESTIONS 
+$route['questions'] = 'api/Question';
+$route['questions/(:any)'] = 'api/Question/$1';
