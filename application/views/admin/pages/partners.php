@@ -40,7 +40,7 @@
         </el-table-column>
         <el-table-column label="Estado" min-width='60'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.active' class='text-green-500 font-semibold'>Activo</span>
+            <span v-if='scope.row.active == 1' class='text-green-500 font-semibold'>Activo</span>
             <span v-else class='text-gray-500 font-semibold'>Inactivo</span>
           </template>
         </el-table-column>

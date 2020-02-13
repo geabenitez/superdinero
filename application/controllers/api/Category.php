@@ -76,8 +76,9 @@ class Category extends REST_Controller {
     
     $data = $this->db->get_where("categories", ['id' => $id])->row_array();
 
-    //$input = $this->put();
-    $input = $this->input->post();
+    $input = $this->put();
+    // var_dump($input);
+    // $input = $this->input->post();
 
 
     $upload_success=false;
@@ -107,7 +108,6 @@ class Category extends REST_Controller {
        @unlink('./././assets/images/categories'.$data['image']);
        $image_name=$info['file_name'];
     }
-
 
 
     $data['updated_at'] = date("Y-m-d h:i:s");

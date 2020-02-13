@@ -25,21 +25,33 @@ class Partner extends REST_Controller {
     } else {
       $partners = $this->db->get("partners")->result();
     }
-    // foreach ($partners as $key => $value) {
-    //   $c = "categories";
-    //   $pc = "_partners_categories";
-    //   $get = array(
-    //     $c.'.nameES',
-    //     $c.'.nameEN',
-    //     $c.'.image',
-    //   );
-    //   $value->categories = $this->db
-    //                         ->select($get)
-    //                         ->from($pc)
-    //                         ->where($pc.'.partnerId', $value->id)
-    //                         ->join($pc, $c.'.id = ' . $pc . '.categoryId')
-    //                         ->get()->result();
-    // }
+    foreach ($partners as $key => $value) {
+      $c = "categories";
+      $pc = "partners_categories";
+      $s = "states";
+      $ps = "partners_states";
+      $getCategories = array(
+        $c.'.nameES',
+        $c.'.nameEN',
+        $c.'.image'
+      );
+      $getStates = array(
+        $s.'.nameES',
+        $s.'.nameEN',
+      );
+      $value->categories = $this->db
+        ->select($getCategories)
+        ->from($pc)
+        ->where($pc.'.partnerId', $value->id)
+        ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
+        ->get()->result();
+      $value->states = $this->db
+        ->select($getStates)
+        ->from($ps)
+        ->where($ps.'.partnerId', $value->id)
+        ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
+        ->get()->result();
+    }
     $this->response($partners, REST_Controller::HTTP_OK);
   }
 

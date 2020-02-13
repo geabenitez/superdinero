@@ -32,17 +32,19 @@ new Vue({
       this.showNewCategory = true
     },
     editCategory(category) {
-      console.log(category)
       this.action = 'Editar categoria'
       this.newCategoryForm = {
         ...category
       }
       this.showNewCategory = true
+      setTimeout(() => {
+        this.$refs.imagePreview.src = `${site_url}/assets/images/categories/${category.image}`
+      }, 300);
     },
     createHeader(METHOD, data, id = '', multipart = false) {
       const headers = { 'token-crf': cs }
       if (multipart) {
-        headers['Content-Type'] = 'multipart/form-data'
+        headers['Content-Type'] = `multipart/form-data; boundary=${data._boundary}`
       }
       return {
         method: METHOD,
