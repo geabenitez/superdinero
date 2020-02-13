@@ -19,7 +19,7 @@ new Vue({
     }
   },
   methods: {
-    createState() {
+    createQuestion() {
       this.action = 'Nueva pregunta'
       this.newQuestionForm = {
         nameES: '',
@@ -27,7 +27,7 @@ new Vue({
       }
       this.showNewQuestion = true
     },
-    editState(state) {
+    editQuestion(state) {
       this.action = 'Editar pregunta'
       this.newQuestionForm = {
         ...state
@@ -42,7 +42,7 @@ new Vue({
         data
       }
     },
-    saveState({ nameES, nameEN, id }) {
+    saveQuestion({ nameES, nameEN, id }) {
       if (nameES == '' || nameEN == '') {
         this.$notify.error({
           title: 'Error',
@@ -53,7 +53,7 @@ new Vue({
       this.$msgbox({
         type: 'warning',
         title: 'Confirmation',
-        message: `Are you sure you want to ${id != null ? 'update' : 'save'} this state?`,
+        message: `Are you sure you want to ${id != null ? 'update' : 'save'} this question?`,
         showCancelButton: true,
         confirmButtonText: "Yes, please",
         cancelButtonText: 'Cancel',
@@ -103,7 +103,7 @@ new Vue({
         }
       })
     },
-    deleteState(id) {
+    deleteQuestion(id) {
       this.$msgbox({
         type: 'error',
         title: 'Confirmation',
@@ -131,7 +131,7 @@ new Vue({
     }
   },
   computed: {
-    filteredStates() {
+    filteredQuestion() {
       const value = this.searchValue.toLowerCase()
       return this.questions.filter(c => (
         c.nameES.toLowerCase().includes(value) ||
