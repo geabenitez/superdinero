@@ -73,9 +73,50 @@ class Category extends REST_Controller {
   } 
 
   public function index_put($id) {
-    $input = $this->put();
-    $input['updated_at'] = date("Y-m-d h:i:s");
-    $this->db->update('categories', $input, array('id'=>$id));
+    
+    $data = $this->db->get_where("categories", ['id' => $id])->row_array();
+
+    //$input = $this->put();
+    $input = $this->input->post();
+
+
+    $upload_success=false;
+
+   //*************SUBIENDO ARCHIVO**********************
+    $config['upload_path']          = './media/';
+    $config['overwrite']          = true;
+    $config['allowed_types']        = 'gif|jpg|png';
+    $config['file_name']        = md5(date('dmYhisu'));
+    $info=array();
+    //$config['max_width']            = 1024;
+    //$config['max_height']           = 768;
+    if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
+    $this->load->library('upload', $config);
+    if ( ! $this->upload->do_upload('image'))
+    {
+      //NO SE SUBIO
+    }else{
+      //SI SE SUBIO
+      $info = $this->upload->data();//la informacion del archivo subido
+      $upload_success=true;
+
+    }
+    //*************FIN SUBIENDO ARCHIVO**********************
+    $image_name=$data['image'];
+    if ($upload_success) {
+       @unlink('./././media/'.$data['image']);
+       $image_name=$info['file_name'];
+    }
+
+
+
+    $data['updated_at'] = date("Y-m-d h:i:s");
+    $data['image'] = $image_name;
+    $data['nameES'] = $input['nameES'];
+    $data['nameEN'] = $input['nameEN'];
+
+
+    $this->db->update('categories', $data, array('id'=>$id));
   
     $response = new stdClass();
     $response->categories = $this->db->get("categories")->result();
@@ -84,6 +125,10 @@ class Category extends REST_Controller {
   }
 
   public function index_delete($id) {
+    $data = $this->db->get_where("categories", ['id' => $id])->row_array();
+    
+    
+    if ($data['image']!='') {  @unlink('./././media/'.$data['image']);  }
     $this->db->delete('categories', array('id'=>$id));
       
     $response = new stdClass();
