@@ -25,21 +25,21 @@ class Partner extends REST_Controller {
     } else {
       $partners = $this->db->get("partners")->result();
     }
-    foreach ($partners as $key => $value) {
-      $c = "categories";
-      $pc = "_partners_categories";
-      $get = array(
-        $c.'.nameES',
-        $c.'.nameEN',
-        $c.'.image',
-      );
-      $value->categories = $this->db
-                            ->select($get)
-                            ->from($pc)
-                            ->where($pc.'.partnerId', $value->id)
-                            ->join($pc, $pc.'.categoryId = ' . $c . '.id')
-                            ->get()->result();
-    }
+    // foreach ($partners as $key => $value) {
+    //   $c = "categories";
+    //   $pc = "_partners_categories";
+    //   $get = array(
+    //     $c.'.nameES',
+    //     $c.'.nameEN',
+    //     $c.'.image',
+    //   );
+    //   $value->categories = $this->db
+    //                         ->select($get)
+    //                         ->from($pc)
+    //                         ->where($pc.'.partnerId', $value->id)
+    //                         ->join($pc, $c.'.id = ' . $pc . '.categoryId')
+    //                         ->get()->result();
+    // }
     $this->response($partners, REST_Controller::HTTP_OK);
   }
 

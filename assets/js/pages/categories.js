@@ -26,9 +26,13 @@ new Vue({
         nameES: '',
         nameEN: '',
       }
+      if (this.$refs.imagePreview) {
+        this.$refs.imagePreview.src = 'https://via.placeholder.com/250'
+      }
       this.showNewCategory = true
     },
     editCategory(category) {
+      console.log(category)
       this.action = 'Editar categoria'
       this.newCategoryForm = {
         ...category
