@@ -16,6 +16,24 @@
           show-word-limit
           clearable/>
         </el-form-item>
+        <el-form-item label="Categorias">
+          <el-select 
+            class='w-full' 
+            v-model="newCreditForm.categories" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='category in categories'
+                :key="category.id"
+                :label="category.nameES"
+                :value="category.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
       </el-col>
       <el-col :span='12'>
         <el-row :gutter='15' class='mb-4'>
@@ -31,6 +49,24 @@
           maxlength="50"
           show-word-limit
           clearable/>
+        </el-form-item>
+        <el-form-item label="Categories">
+          <el-select 
+            class='w-full' 
+            v-model="newCreditForm.categories" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='category in categories'
+                :key="category.id"
+                :label="category.nameEN"
+                :value="category.id">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-col>
     </el-row>

@@ -1,10 +1,22 @@
 new Vue({
   el: '#app',
   created() {
-    axios(this.createHeader('GET'))
-      .then(res => {
-        this.credits = res.data
-      })
+    const headers = { 'token-crf': cs }
+
+    const getCredits = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}credits` })
+    }
+
+    const getCategories = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}categories` })
+    }
+
+    axios
+      .all([getCredits(), getCategories()])
+      .then(axios.spread((credits, categories) => {
+        this.credits = credits.data
+        this.categories = categories.data
+      }))
   },
   data: function () {
     return {
@@ -12,9 +24,11 @@ new Vue({
       credits: [],
       searchValue: '',
       showNewCredit: false,
+      categories: [],
       newCreditForm: {
         nameES: '',
         nameEN: '',
+        categories: []
       }
     }
   },
@@ -42,7 +56,7 @@ new Vue({
         data
       }
     },
-    saveCredit({ nameES, nameEN, id }) {
+    saveCredit({ nameES, nameEN, categories, id }) {
       if (nameES == '' || nameEN == '') {
         this.$notify.error({
           title: 'Error',
@@ -63,7 +77,7 @@ new Vue({
             instance.confirmButtonText = 'Processing...';
             const METHOD = id != null ? 'PUT' : 'POST'
             const stateId = id != null ? id : ''
-            axios(this.createHeader(METHOD, { nameES, nameEN, active: 1 }, stateId))
+            axios(this.createHeader(METHOD, { nameES, nameEN, categories, active: 1 }, stateId))
               .then(res => {
                 this.credits = res.data.credits
                 instance.confirmButtonLoading = false;
