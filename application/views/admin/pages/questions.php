@@ -19,8 +19,8 @@
     <el-col :span='24'>
       <el-table :data="filteredQuestions" class="w-full" stripe size='mini' empty-text='No hay datos'>
         <el-table-column prop="index" min-width="25"></el-table-column>
-        <el-table-column prop="nameES" label="Nombre ES" min-width="180"></el-table-column>
-        <el-table-column prop="nameEN" label="Nombre EN" min-width="180"></el-table-column>
+        <el-table-column prop="nameES" label="Pregunta" min-width="180"></el-table-column>
+        <el-table-column prop="nameEN" label="Question" min-width="180"></el-table-column>
         <el-table-column min-width="260"></el-table-column>
         <el-table-column label="Pregunta" min-width='60'>
           <template slot-scope='scope'>

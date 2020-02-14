@@ -131,7 +131,7 @@ new Vue({
     }
   },
   computed: {
-    filteredQuestion() {
+    filteredQuestions() {
       const value = this.searchValue.toLowerCase()
       return this.questions.filter(c => (
         c.nameES.toLowerCase().includes(value) ||
