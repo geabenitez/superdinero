@@ -29,7 +29,10 @@ class Site extends CI_Controller {
 	}
 
 	public function questionnaire() {
-		echo 'CUESTIOARIO';
+		$resources['styles'] = basic_styles();
+		$resources['scripts'] = basic_scripts();
+		array_push($resources['scripts'], 'assets/js/pages/questionnaire.js');
+		$this->load->view('site/questionnaire', $resources);
 	}
 
 	public function offers() {
