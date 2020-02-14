@@ -22,11 +22,7 @@ class Admin extends Secure_Controller {
 		$resourses['scripts'] = ['assets/js/pages/categories.js'];
 		admin_page('categories', 'Categorias', 'categories', $resourses);
 	}
-	
-	public function questions() {
-		$resourses['scripts'] = ['assets/js/pages/questions.js'];
-		admin_page('questions', 'Preguntas calificatorias', 'questions', $resourses);
-	}
+
 	
 	public function amounts() {
 		$resourses['scripts'] = ['assets/js/pages/amounts.js'];

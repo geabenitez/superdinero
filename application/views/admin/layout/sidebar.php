@@ -9,7 +9,7 @@
             ['id' => 'categories', 'title' => 'Categorias'],
             ['id' => 'amounts', 'title' => 'Montos'],
             ['id' => 'credits', 'title' => 'Tipos de creditos'],
-            ['id' => 'questions', 'title' => 'Preguntas calificatorias'],
+
             ['id' => 'params', 'title' => 'Parametros']
         ] ?>
         <ul class='mt-6 text-gray-100'>

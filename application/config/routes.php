@@ -70,7 +70,7 @@ $route['admin/login'] = 'Site';
 $route['admin/partners'] = 'Admin/partners';
 $route['admin/states'] = 'Admin/states';
 $route['admin/categories'] = 'Admin/categories';
-$route['admin/questions'] = 'Admin/questions';
+
 $route['admin/amounts'] = 'Admin/amounts';
 $route['admin/credits'] = 'Admin/credits';
 $route['admin/params'] = 'Admin/params';
@@ -94,7 +94,3 @@ $route['amounts/(:any)'] = 'api/Amount/$1';
 // CREDICTS 
 $route['credits'] = 'api/Credit';
 $route['credits/(:any)'] = 'api/Credit/$1';
-
-// QUESTIONS 
-$route['questions'] = 'api/Question';
-$route['questions/(:any)'] = 'api/Question/$1';
