@@ -32,29 +32,20 @@
         <div class='flex flex-row items-center justify-center'>
           <img src="https://superdinero.org/wp-content/uploads/2017/12/SUPERDINERO-3.png" alt="">
         </div>
-        <div class='flex flex-col lg:flex-row items-center justify-center -mt-4 text-xs text-white uppercase tracking-wide'>
-          <div class='flex flex-row items-center lg:mr-4'>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class='h-4 w-4 mr-1'><path class="fill-current" d="M13.04 14.69l1.07-2.14a1 1 0 0 1 1.2-.5l6 2A1 1 0 0 1 22 15v5a2 2 0 0 1-2 2h-2A16 16 0 0 1 2 6V4c0-1.1.9-2 2-2h5a1 1 0 0 1 .95.68l2 6a1 1 0 0 1-.5 1.21L9.3 10.96a10.05 10.05 0 0 0 3.73 3.73zM8.28 4H4v2a14 14 0 0 0 14 14h2v-4.28l-4.5-1.5-1.12 2.26a1 1 0 0 1-1.3.46 12.04 12.04 0 0 1-6.02-6.01 1 1 0 0 1 .46-1.3l2.26-1.14L8.28 4zm12.01-1.7a1 1 0 0 1 1.42 1.4L17.4 8H20a1 1 0 0 1 0 2h-5a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0v2.59l4.3-4.3z"/></svg>
-            <span>(888) 839-7029</span>
-          </div>
-          <div class='flex flex-row items-center lg:mr-4'>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class='h-4 w-4 mr-1'><path class="fill-current" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2zm16 3.38V6H4v1.38l8 4 8-4zm0 2.24l-7.55 3.77a1 1 0 0 1-.9 0L4 9.62V18h16V9.62z"/></svg>
-            <span>hola@superdinero.org</span>
-          </div>
-          <div class='flex flex-row items-center lg:mr-4 hidden md:flex'>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class='h-4 w-4 mr-1'><path class="fill-current" d="M5.64 16.36a9 9 0 1 1 12.72 0l-5.65 5.66a1 1 0 0 1-1.42 0l-5.65-5.66zm11.31-1.41a7 7 0 1 0-9.9 0L12 19.9l4.95-4.95zM12 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-            <span>4530 S. Orange Blossom Trail Orlando, FL 32839</span>
-          </div>
-          <div class='flex flex-row items-center lg:mr-4'>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class='h-4 w-4 mr-1'><path class="fill-current" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-8.41l2.54 2.53a1 1 0 0 1-1.42 1.42L11.3 12.7A1 1 0 0 1 11 12V8a1 1 0 0 1 2 0v3.59z"/></svg>
-            <span>Lunes a Domingo 8am-8pm</span>
+        <div class='flex flex-col lg:flex-row items-center justify-center -mt-6 text-white tracking-wide'>
+          <div class='flex flex-col items-center justify-center'>
+            <span class='text-xl uppercase'>Mejores Soluciones Financieras Del 2020</span>
+            <p class='text-sm text-center px-64'>Compara gratuitamente soluciones financieras para latinos en USA de préstamos personales, préstamos automotrices, tarjetas de crédito, préstamos para negocios, programas de manejo de deudas, hipotecas y más.</p>
           </div>
         </div>
       </div>
     </div>
-    <div class='flex flex-row w-full my-6 items-cener justify-end container mx-auto font-semibold text-xs uppercase tracking-wide px-4 lg:px-0'>
+    <div class='flex flex-row w-full my-6 items-center justify-end container mx-auto font-semibold text-xs uppercase tracking-wide px-4 lg:px-0'>
       <span @click='spanishLang = true' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-l text-white text-center' :class='{"bg-green-500": spanishLang, "text-green-500 border border-green-500": !spanishLang}'>Español</span>
       <span @click='spanishLang = false' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-r text-white text-center' :class='{"bg-green-500": !spanishLang, "text-green-500 border border-green-500": spanishLang}'>English</span>
+    </div>
+    <div class='flex flex-row bg-green-500 hover:bg-green-600 cursor-pointer rounded h-32 w-full my-6 items-center justify-center container mx-auto px-4 lg:px-0'>
+      <span class='font-semibold text-xl uppercase tracking-wide text-white'>CHECK MY RATE</span>
     </div>
     <div class="flex flex-col lg:flex-row container mx-auto px-4 lg:px-0">
       <div class='lg:hidden w-full'>
@@ -64,7 +55,48 @@
         <div class='border-b pb-2'>
           <span class='font-semibold text-xs text-gray-900 uppercase tracking-wide'>Ajustar resultados</span>
         </div>
-        <div class='my-2'></div>  
+        <div class='my-2'>
+          <el-form label-position="top" label-width="100px" :model="form">
+            <el-row :gutter='15'>
+              <el-col :span='24'>
+                <el-form-item label="Estados">
+                  <el-select 
+                    class='w-full' 
+                    v-model="form.state" 
+                    placeholder="Seleccionar" 
+                    size='small'
+                    clearable
+                    no-data-text='No hay valores'
+                    filterable >
+                    <el-option
+                        v-for='state in states'
+                        :key="state.id"
+                        :label="state.nameES"
+                        :value="state.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="Categorias">
+                  <el-select 
+                    class='w-full' 
+                    v-model="form.category" 
+                    placeholder="Seleccionar" 
+                    size='small'
+                    clearable
+                    no-data-text='No hay valores'
+                    filterable >
+                    <el-option
+                        v-for='category in categories'
+                        :key="category.id"
+                        :label="category.nameES"
+                        :value="category.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </el-form>
+        </div>  
         <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide text-right cursor-pointer hover:underline'>Reiniciar filtros</span>
       </div>
       <div class='flex flex-col md:flex-row bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
@@ -78,14 +110,16 @@
             </div>
           </div>
           <div class='flex flex-row items-center justify-center bg-gray-200 w-full h-24 my-2 rounded border text-gray-500'>LOGO</div>
-          <el-rate
-            class='w-full'
-            v-model="rating"
-            disabled
-            show-score
-            text-color="#ff9900"
-            score-template="{value} puntos">
-          </el-rate>
+          <div class='flex flex-row w-full items-center justify-center'>
+            <el-rate
+              class='w-full'
+              v-model="rating"
+              disabled
+              show-score
+              text-color="#ff9900"
+              score-template="{value} puntos">
+            </el-rate>
+          </div>
         </div>
         <div class='flex flex-col w-full lg:w-5/12 p-4'>
           <span class='font-semibold uppercase text-sm tracking-wide text-gray-900 mb-4'>Nombre del proveedor</span>
@@ -100,6 +134,20 @@
         </div>
         <div class='flex flex-row items-center justify-center w-full lg:w-3/12 p-4'>
           <span class='w-full py-2 bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm uppercase font-semibold rounded text-center'>GET MY RATE</span>
+        </div>
+      </div>
+    </div>
+    <div class='bg-green-500 pb-4 mt-6'>
+      <div class="flex flex-col container mx-auto">
+        <div class='flex flex-row items-center justify-center text-white'>
+          <img class='h-24' src="https://superdinero.org/wp-content/uploads/2017/12/SUPERDINERO-3.png" alt="">
+          <a href='javascript:;' class='mr-3 font-semibold text-sm tracking-wider hover:underline'>TERMINOS DE USO</a>
+          <a href='javascript:;' class='mr-3 font-semibold text-sm tracking-wider hover:underline'>POLITICA DE PRIVACIDAD</a>
+          <a href='javascript:;' class='mr-3 font-semibold text-sm tracking-wider hover:underline'>DIVULGACION PUBLICITARIA</a>
+          <span class='text-xs'>4530 S. Orange Blossom Trail Orlando, FL 32839</span>
+        </div>
+        <div class='flex flex-col lg:flex-row items-center justify-center -mt-6 text-white tracking-wide'>
+          <p class='px-32 text-xs text-center'><span class='font-semibold'>Loans Rate and Terms Disclosure</span>: Rates for loans provided by lenders directly on the SuperDinero platform range between 3.84-35.99% APR with terms from 24 to 84 months. Rates presented include lender discounted rates for joining in autopay and loyalty programs, where applicable. Actual rates may be different from the rates advertised and/or shown and will be based on the lender’s eligibility criteria, which include factors such as credit score, loan amount, loan term, credit usage and history, and vary based on loan purpose. The lowest rates available typically require excellent credit, and for some lenders, may be reserved for specific loan purposes and/or shorter loan terms. The origination fee charged by the lenders on our platform varies so please check the terms of your offer. Each lender has their own qualification criteria with respect to their autopay and loyalty discounts (e.g., some lenders require the borrower to elect autopay prior to loan funding in order to qualify for the autopay discount). All rates are determined by the lender and must be agreed upon between the borrower and the borrower’s chosen lender. SuperDinero is not a bank nor a lender, does not broker loans to lenders and does not make credit or loan decisions. This web page does not constitute an offer nor a solicitation to lend. For full details on any service or product you must see the terms on the financial institution’s website that is making you an offer. If you have further customer service questions, please feel free to call (888) 839-7029. An example of total amount paid on a personal loan of $20,000 for a term of 60 months at a rate of 15% would be equivalent to $28,547.92 over the 60 month life of the loan. SuperDinero may receive compensation from its partners, at no cost to you, when you click or are referred to services offered or ads located on SuperDinero’s website.</p>
         </div>
       </div>
     </div>

@@ -5,6 +5,12 @@ new Vue({
       showSettings: false,
       rating: 4.8,
       spanishLang: false,
+      form: {
+        state: "",
+        category: ""
+      },
+      states: [],
+      categories: []
     }
   },
 })
