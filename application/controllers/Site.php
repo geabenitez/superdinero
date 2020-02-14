@@ -36,6 +36,12 @@ class Site extends CI_Controller {
 	}
 
 	public function offers() {
+		// $categories = $this->db->get("categories")->result();
+		// $categories = array_map(function ($var) {
+		// 	# code...
+		// }, $categories)
+		
+
 		$resources['styles'] = basic_styles();
 		$resources['scripts'] = basic_scripts();
 		array_push($resources['scripts'], 'assets/js/pages/offers.js');
