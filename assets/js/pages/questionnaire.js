@@ -4,5 +4,5 @@ new Vue({
     return {
       spanishLang: false,
     }
-  },
+  }
 })

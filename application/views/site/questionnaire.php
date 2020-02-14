@@ -32,9 +32,10 @@
       <span @click='spanishLang = true' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-l text-white text-center' :class='{"bg-green-500": spanishLang, "text-green-500 border border-green-500": !spanishLang}'>Español</span>
       <span @click='spanishLang = false' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-r text-white text-center' :class='{"bg-green-500": !spanishLang, "text-green-500 border border-green-500": spanishLang}'>English</span>
     </div>
-    <div class="flex row justify-center container mx-auto px-4 lg:px-0">
-      <div class='flex flex-col justify-center md:flex-row bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
-        CUATIONARIO
+    <div class="flex justify-center container mx-auto px-4 lg:px-0">
+      <div class='flex flex-col justify-center items-center bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
+        <el-progress class='w-full' :percentage="50"></el-progress>
+        <span>CUESTIONARIO</span>
       </div>
     </div>
     <?php $this->load->view('/site/_footer') ?>
