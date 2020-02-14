@@ -16,6 +16,17 @@
           show-word-limit
           clearable/>
         </el-form-item>
+        <el-form-item label="Cantidad máxima:">
+          <el-input 
+          type='number'
+          placeholder="Cantidad máxima" 
+          size='small' 
+          v-model="newCreditForm.maxAmount"
+          min="0.01"
+          step='0.01'
+          show-word-limit
+          clearable/>
+        </el-form-item>
         <el-form-item label="Categorias">
           <el-select 
             class='w-full' 
@@ -47,6 +58,17 @@
           size='small' 
           v-model="newCreditForm.nameEN"
           maxlength="50"
+          show-word-limit
+          clearable/>
+        </el-form-item>
+        <el-form-item label="Max amount:">
+          <el-input 
+          type='number'
+          placeholder="Max amount" 
+          size='small' 
+          v-model="newCreditForm.maxAmount"
+          min="0.01"
+          step='0.01'
           show-word-limit
           clearable/>
         </el-form-item>

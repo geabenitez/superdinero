@@ -28,6 +28,7 @@ new Vue({
       newCreditForm: {
         nameES: '',
         nameEN: '',
+        maxAmount: '',
         categories: []
       }
     }
@@ -38,6 +39,8 @@ new Vue({
       this.newCreditForm = {
         nameES: '',
         nameEN: '',
+        maxAmount: '',
+        categories: []
       }
       this.showNewCredit = true
     },
@@ -56,8 +59,8 @@ new Vue({
         data
       }
     },
-    saveCredit({ nameES, nameEN, categories, id }) {
-      if (nameES == '' || nameEN == '') {
+    saveCredit({ nameES, nameEN, categories, maxAmount, id }) {
+      if (nameES == '' || nameEN == '' || categories.length == 0 || parseFloat(maxAmount) <= 0) {
         this.$notify.error({
           title: 'Error',
           message: 'All fields are required.'
@@ -77,7 +80,7 @@ new Vue({
             instance.confirmButtonText = 'Processing...';
             const METHOD = id != null ? 'PUT' : 'POST'
             const stateId = id != null ? id : ''
-            axios(this.createHeader(METHOD, { nameES, nameEN, categories, active: 1 }, stateId))
+            axios(this.createHeader(METHOD, { nameES, nameEN, categories, maxAmount, active: 1 }, stateId))
               .then(res => {
                 this.credits = res.data.credits
                 instance.confirmButtonLoading = false;
