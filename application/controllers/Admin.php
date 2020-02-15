@@ -43,9 +43,14 @@ class Admin extends Secure_Controller {
 		admin_page('states', 'Estados', 'states', $resourses);
 	}
 	
+	public function records() {
+		$resourses['scripts'] = ['assets/js/pages/records.js'];
+		admin_page('records', 'Records crediticios', 'records', $resourses);
+	}
+	
 	public function documents() {
 		$resourses['scripts'] = ['assets/js/pages/documents.js'];
-		admin_page('documents', 'Estados', 'documents', $resourses);
+		admin_page('documents', 'Documentos', 'documents', $resourses);
 	}
 
 }
