@@ -29,7 +29,32 @@ class Credit extends REST_Controller {
     } else {
       $data = $this->db->get("credits")->result();
     }
-    $this->response($data, REST_Controller::HTTP_OK);
+
+    $result=array();
+
+    if (!empty($data)) {
+      foreach ($data as $v) {
+        $tmp = array();
+        $tmp['id']=$v->id;
+        $tmp['nameES']=$v->nameES;
+        $tmp['nameEN']=$v->nameEN;
+        $tmp['active']=$v->active;
+        $tmp['maxAmount']=$v->maxAmount;
+        $tmp['created_at']=$v->created_at;
+        $tmp['updated_at']=$v->updated_at;
+        
+        $tmp['categories']=array();
+        $categories = $this->db->get_where("credits_categories", ['creditId' => $v->id])->result();
+         if (!empty($categories))
+          foreach ($categories as $c) {
+            
+            array_push($tmp['categories'],$c->categoryId);
+          }
+      $result[]=$tmp;
+      }
+    }
+
+    $this->response($result, REST_Controller::HTTP_OK);
   }
 
   public function index_post(){
