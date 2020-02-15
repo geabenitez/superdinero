@@ -7,11 +7,15 @@ new Vue({
       return axios(this.createHeader('GET'))
     }
 
+    const getDocuments = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}documents` })
+    }
+
     const getCategories = () => {
       return axios({ headers, method: 'GET', url: `${site_url}categories` })
     }
 
-    const getCreditsCheve = () => {
+    const getCredits = () => {
       return axios({ headers, method: 'GET', url: `${site_url}credits` })
     }
 
@@ -24,9 +28,10 @@ new Vue({
     }
 
     axios
-      .all([getPartners(), getCategories(), getCredits(), getAmounts(), getStates()])
-      .then(axios.spread((partners, categories, credits, amounts, states) => {
+      .all([getPartners(), getDocuments(), getCategories(), getCredits(), getAmounts(), getStates()])
+      .then(axios.spread((partners, documents, categories, credits, amounts, states) => {
         this.partners = partners.data
+        this.documents = documents.data
         this.categories = categories.data
         this.credits = credits.data
         this.amounts = amounts.data
@@ -41,10 +46,13 @@ new Vue({
       categories: [],
       credits: [],
       amounts: [],
+      documents: [],
       states: [],
       newAsociateForm: {
         nameES: '',
         nameEN: '',
+        documents: [],
+        credits: [],
         categories: [],
         rate: 0,
         states: [],

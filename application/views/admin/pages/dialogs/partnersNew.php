@@ -54,6 +54,24 @@
               </el-col>
             </el-row>
         </el-form-item>
+        <el-form-item label="Documentos requeridos">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.documents" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='document in documents'
+                :key="document.id"
+                :label="document.nameES"
+                :value="document.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="Estados">
           <el-select 
             class='w-full' 
@@ -202,6 +220,24 @@
                 clearable/>
               </el-col>
             </el-row>
+        </el-form-item>
+        <el-form-item label="Required documents">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.documents" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable 
+            default-first-option >
+            <el-option
+                v-for='document in documents'
+                :key="document.id"
+                :label="document.nameEN"
+                :value="document.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="States">
           <el-select 
