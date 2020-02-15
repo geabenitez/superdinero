@@ -72,9 +72,43 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="¿Mostrar solo al agente?">
-            <el-radio :label="false" v-model='newAsociateForm.onlyAgent'>No</el-radio>
-            <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Sí</el-radio>
+        <el-row :gutter='15'>
+          <el-col :span="8">
+            <el-form-item label="¿Mostrar solo al agente?">
+              <el-radio :label="false" v-model='newAsociateForm.onlyAgent'>No</el-radio>
+              <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Sí</el-radio>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="¿Requiere carro?">
+              <el-radio :label="false" v-model='newAsociateForm.requiresCar'>No</el-radio>
+              <el-radio :label="true" v-model='newAsociateForm.requiresCar'>Sí</el-radio>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="¿Requiere casa?">
+              <el-radio :label="false" v-model='newAsociateForm.requiresHouse'>No</el-radio>
+              <el-radio :label="true" v-model='newAsociateForm.requiresHouse'>Sí</el-radio>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item label="Creditos">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.credits" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='credit in credits'
+                :key="credit.id"
+                :label="credit.nameES"
+                :value="credit.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="Categorias">
           <el-select 
@@ -187,9 +221,43 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="Show to agent only?">
-            <el-radio :label="false" v-model='newAsociateForm.onlyAgent'>No</el-radio>
-            <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Yes</el-radio>
+        <el-row :gutter='15'>
+          <el-col :span="8">
+            <el-form-item label="Show to agent only?">
+              <el-radio :label="false" v-model='newAsociateForm.onlyAgent'>No</el-radio>
+              <el-radio :label="true" v-model='newAsociateForm.onlyAgent'>Yes</el-radio>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="Requires car?">
+              <el-radio :label="false" v-model='newAsociateForm.requiresCar'>No</el-radio>
+              <el-radio :label="true" v-model='newAsociateForm.requiresCar'>Yes</el-radio>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="Requires house?">
+              <el-radio :label="false" v-model='newAsociateForm.requiresHouse'>No</el-radio>
+              <el-radio :label="true" v-model='newAsociateForm.requiresHouse'>Yes</el-radio>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item label="Credits">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.credits" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='credit in credits'
+                :key="credit.id"
+                :label="credit.nameEN"
+                :value="credit.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="Categories">
           <el-select 
