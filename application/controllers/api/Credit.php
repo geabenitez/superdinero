@@ -34,7 +34,23 @@ class Credit extends REST_Controller {
 
   public function index_post(){
     $input = json_decode($this->input->raw_input_stream);
-    $this->db->insert('credits',$input);
+    
+    //prepare array for credits
+    $credit = array('nameES'=>$input->nameES, 'nameEN'=>$input->nameEN, 'maxAmount'=>$input->maxAmount, 'active'=>1 );
+    
+    $this->db->insert('credits',$credit);
+
+    //get the last id inserted
+    $insert_id = $this->db->insert_id();
+
+    //prepared the insert for categories_credits
+    $categories = array();
+    foreach ($input->categories as $value) {
+      array_push($categories, array('creditId'=>$insert_id, 'categoryId'=>$value));
+    }
+
+    $this->db->insert_batch('categories_credits',$categories);
+    
     $response = new stdClass();
     $response->credits = $this->db->get("credits")->result();
     $response->msj = 'State created successfully.';
@@ -53,6 +69,8 @@ class Credit extends REST_Controller {
   }
 
   public function index_delete($id) {
+
+    
     $this->db->delete('credits', array('id'=>$id));
       
     $response = new stdClass();
