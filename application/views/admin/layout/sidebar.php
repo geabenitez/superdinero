@@ -9,6 +9,7 @@
             ['id' => 'categories', 'title' => 'Categorias'],
             ['id' => 'states', 'title' => 'Estados'],
             ['id' => 'amounts', 'title' => 'Montos'],
+            ['id' => 'documents', 'title' => 'Documentos'],
             ['id' => 'params', 'title' => 'Parametros']
         ] ?>
         <ul class='mt-6 text-gray-100'>

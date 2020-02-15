@@ -42,5 +42,10 @@ class Admin extends Secure_Controller {
 		$resourses['scripts'] = ['assets/js/pages/states.js'];
 		admin_page('states', 'Estados', 'states', $resourses);
 	}
+	
+	public function documents() {
+		$resourses['scripts'] = ['assets/js/pages/documents.js'];
+		admin_page('documents', 'Estados', 'documents', $resourses);
+	}
 
 }
