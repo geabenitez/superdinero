@@ -43,13 +43,13 @@ class Credit extends REST_Controller {
     //get the last id inserted
     $insert_id = $this->db->insert_id();
 
-    //prepared the insert for categories_credits
+    //prepared the insert for credits_categories
     $categories = array();
     foreach ($input->categories as $value) {
       array_push($categories, array('creditId'=>$insert_id, 'categoryId'=>$value));
     }
 
-    $this->db->insert_batch('categories_credits',$categories);
+    $this->db->insert_batch('credits_categories',$categories);
     
     $response = new stdClass();
     $response->credits = $this->db->get("credits")->result();
