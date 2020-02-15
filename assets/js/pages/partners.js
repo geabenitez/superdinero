@@ -27,15 +27,20 @@ new Vue({
       return axios({ headers, method: 'GET', url: `${site_url}states` })
     }
 
+    const getRecords = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}records` })
+    }
+
     axios
-      .all([getPartners(), getDocuments(), getCategories(), getCredits(), getAmounts(), getStates()])
-      .then(axios.spread((partners, documents, categories, credits, amounts, states) => {
+      .all([getPartners(), getDocuments(), getCategories(), getCredits(), getAmounts(), getStates(), getRecords()])
+      .then(axios.spread((partners, documents, categories, credits, amounts, states, records) => {
         this.partners = partners.data
         this.documents = documents.data
         this.categories = categories.data
         this.credits = credits.data
         this.amounts = amounts.data
         this.states = states.data
+        this.records = records.data
       }))
   },
   data: function () {
@@ -48,12 +53,14 @@ new Vue({
       amounts: [],
       documents: [],
       states: [],
+      records: [],
       newAsociateForm: {
         nameES: '',
         nameEN: '',
         documents: [],
         credits: [],
         categories: [],
+        records: [],
         rate: 0,
         states: [],
         onlyAgent: false,
@@ -87,10 +94,15 @@ new Vue({
       this.newAsociateForm = {
         nameES: '',
         nameEN: '',
+        documents: [],
+        credits: [],
         categories: [],
+        records: [],
         rate: 0,
         states: [],
         onlyAgent: false,
+        requiresCar: false,
+        requiresHouse: false,
         characteristicsES: ["", "", "", ""],
         characteristicsEN: ["", "", "", ""],
         amounts: []

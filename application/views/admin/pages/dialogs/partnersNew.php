@@ -146,6 +146,24 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="Records crediticios aceptados">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.records" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='record in records'
+                :key="record.id"
+                :label="record.nameES"
+                :value="record.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="Cantidades">
           <el-checkbox-group v-model="newAsociateForm.amounts">
             <el-checkbox v-for='amount in amounts' :label="`${formatMoney(amount.from)} - ${formatMoney(amount.until)}`" size='small' />
@@ -310,6 +328,24 @@
                 :key="category.id"
                 :label="category.nameEN"
                 :value="category.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Required credit records">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.records" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='record in records'
+                :key="record.id"
+                :label="record.nameEN"
+                :value="record.id">
             </el-option>
           </el-select>
         </el-form-item>
