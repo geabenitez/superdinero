@@ -140,14 +140,20 @@ class Credit extends REST_Controller {
 
 
 
-      
+
       $response->msj = 'State updated successfully.';
       $this->response($response, REST_Controller::HTTP_OK);
     }
 
     public function index_delete($id) {
       $this->db->delete('credits_categories', array('creditId'=>$id));
-      $this->db->delete('credits', array('id'=>$id));
+      
+      try {
+        $this->db->delete('credits', array('id'=>$id));
+      } catch (Exception $e) {
+        
+      }
+      
 
 
       $response = new stdClass();
