@@ -15,7 +15,6 @@ new Vue({
       newCategoryForm: {
         nameES: '',
         nameEN: '',
-        image: ''
       }
     }
   },
@@ -26,9 +25,6 @@ new Vue({
         nameES: '',
         nameEN: '',
       }
-      if (this.$refs.imagePreview) {
-        this.$refs.imagePreview.src = 'https://via.placeholder.com/250'
-      }
       this.showNewCategory = true
     },
     editCategory(category) {
@@ -37,18 +33,11 @@ new Vue({
         ...category
       }
       this.showNewCategory = true
-      setTimeout(() => {
-        this.$refs.imagePreview.src = `${site_url}/assets/images/categories/${category.image}`
-      }, 300);
     },
-    createHeader(METHOD, data, id = '', multipart = false) {
-      const headers = { 'token-crf': cs }
-      if (multipart) {
-        headers['Content-Type'] = `multipart/form-data; boundary=${data._boundary}`
-      }
+    createHeader(METHOD, data, id = '') {
       return {
         method: METHOD,
-        headers,
+        headers: { 'token-crf': cs },
         url: `${site_url}categories/${id}`,
         data
       }
@@ -75,11 +64,7 @@ new Vue({
             const METHOD = id != null ? 'PUT' : 'POST'
             const categoryId = id != null ? id : ''
 
-            const formData = new FormData();
-            formData.append("image", this.$refs.image.files[0]);
-            formData.append("nameES", nameES);
-            formData.append("nameEN", nameEN);
-            axios(this.createHeader(METHOD, formData, categoryId, true))
+            axios(this.createHeader(METHOD, { nameES, nameEN }, categoryId))
               .then(res => {
                 this.categories = res.data.categories
                 instance.confirmButtonLoading = false;

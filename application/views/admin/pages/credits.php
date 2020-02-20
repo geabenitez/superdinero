@@ -21,7 +21,11 @@
         <el-table-column prop="index" min-width="25"></el-table-column>
         <el-table-column prop="nameES" label="Nombre ES" min-width="180"></el-table-column>
         <el-table-column prop="nameEN" label="Nombre EN" min-width="180"></el-table-column>
-        <el-table-column prop="nameEN" label="Categorias" min-width="180"></el-table-column>
+        <el-table-column prop="nameEN" label="Categorias" min-width="180">
+          <template slot-scope='scope'>
+            <span>{{scope.row.categories.length}}</span>
+          </template>
+        </el-table-column>
         <el-table-column min-width="260"></el-table-column>
         <el-table-column label="Estado" min-width='60'>
           <template slot-scope='scope'>

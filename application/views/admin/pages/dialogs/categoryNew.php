@@ -34,13 +34,6 @@
         </el-form-item>
       </el-col>
     </el-row>
-    <el-row :gutter='15'>
-      <el-col :span='24' class='flex flex-col items-center justify-center'>
-        <el-alert title="Formato PNG, menores a 200KB, de preferencia cuadrado" size='small' type="info" :closable='false' show-icon></el-alert>
-        <input type='file' name='image' class='my-2' ref='image' @change='beforeUpload'/>
-        <img src="https://via.placeholder.com/250" class='w-64 h-64 rounded border bg-gray-100' ref='imagePreview'>
-      </el-col>
-    </el-row>
   </el-form>
   <span slot="footer" class="dialog-footer">
     <el-button @click="showNewCategory = false" size='small'>Cancelar</el-button>

@@ -33,104 +33,83 @@ class Category extends REST_Controller {
   }
 
   public function index_post(){
-    //$input = json_decode($this->input->raw_input_stream);
-    $input = $this->input->post();
-    $upload_success=false;
-
-   //*************SUBIENDO ARCHIVO**********************
-    $config['upload_path']          = './assets/images/categories';
-    $config['overwrite']          = true;
-    $config['allowed_types']        = 'gif|jpg|png';
-    $config['file_name']        = md5(date('dmYhisu'));
-    $info=array();
-    //$config['max_width']            = 1024;
-    //$config['max_height']           = 768;
-    if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
-    $this->load->library('upload', $config);
-    if ( ! $this->upload->do_upload('image'))
-    {
-      //NO SE SUBIO
-      $this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
-    }else{
-      //SI SE SUBIO
-      $info = $this->upload->data();//la informacion del archivo subido
-      $upload_success=true;
-
-    }
-    //*************FIN SUBIENDO ARCHIVO**********************
-
-
-    $data = array(
-      'nameES'=> $input['nameES'],
-      'nameEN'=> $input['nameEN'],
-      'image'=> ((!isset($info['file_name']))?'':$info['file_name']),
-    );
-    $this->db->insert('categories',$data);
-    $response = new stdClass();
+    $input = json_decode($this->input->raw_input_stream);
+    $this->db->insert('categories',$input);
     
+    $response = new stdClass();
     $response->categories = $this->db->get("categories")->result();
-    $response->msj = 'Category created successfully.';
+    $response->msj = 'Document created successfully.';
     $this->response($response, REST_Controller::HTTP_OK);
   } 
 
   public function index_put($id) {
-    
-    $data = $this->db->get_where("categories", ['id' => $id])->row_array();
-
     $input = $this->put();
-    // var_dump($input);
-    // $input = $this->input->post();
-
-
-    $upload_success=false;
-
-   //*************SUBIENDO ARCHIVO**********************
-    $config['upload_path']          = './assets/images/categories';
-    $config['overwrite']          = true;
-    $config['allowed_types']        = 'gif|jpg|png';
-    $config['file_name']        = md5(date('dmYhisu'));
-    $info=array();
-    //$config['max_width']            = 1024;
-    //$config['max_height']           = 768;
-    if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
-    $this->load->library('upload', $config);
-    if ( ! $this->upload->do_upload('image'))
-    {
-      //NO SE SUBIO
-      $this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
-    }else{
-      //SI SE SUBIO
-      $info = $this->upload->data();//la informacion del archivo subido
-      $upload_success=true;
-
-    }
-    //*************FIN SUBIENDO ARCHIVO**********************
-    $image_name=$data['image'];
-    if ($upload_success) {
-       @unlink('./././assets/images/categories'.$data['image']);
-       $image_name=$info['file_name'];
-    }
-
-
-    $data['updated_at'] = date("Y-m-d h:i:s");
-    $data['image'] = $image_name;
-    $data['nameES'] = $input['nameES'];
-    $data['nameEN'] = $input['nameEN'];
-
-
-    $this->db->update('categories', $data, array('id'=>$id));
+    $input['updated_at'] = date("Y-m-d h:i:s");
+    $this->db->update('categories', $input, array('id'=>$id));
   
     $response = new stdClass();
     $response->categories = $this->db->get("categories")->result();
-    $response->msj = 'Category updated successfully.';
+    $response->msj = 'Document updated successfully.';
     $this->response($response, REST_Controller::HTTP_OK);
   }
 
+  // public function index_post(){
+  //   //$input = json_decode($this->input->raw_input_stream);
+  //   $input = $this->input->post();
+  //   $upload_success=false;
+
+  //  //*************SUBIENDO ARCHIVO**********************
+  //   $config['upload_path']          = './assets/images/categories';
+  //   $config['overwrite']          = true;
+  //   $config['allowed_types']        = 'gif|jpg|png';
+  //   $config['file_name']        = md5(date('dmYhisu'));
+  //   $info=array();
+  //   //$config['max_width']            = 1024;
+  //   //$config['max_height']           = 768;
+  //   if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
+  //   $this->load->library('upload', $config);
+  //   if ( ! $this->upload->do_upload('image'))
+  //   {
+  //     //NO SE SUBIO
+  //     $this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
+  //   }else{
+  //     //SI SE SUBIO
+  //     $info = $this->upload->data();//la informacion del archivo subido
+  //     $upload_success=true;
+
+  //   }
+  //   //*************FIN SUBIENDO ARCHIVO**********************
+
+
+  //   $data = array(
+  //     'nameES'=> $input['nameES'],
+  //     'nameEN'=> $input['nameEN'],
+  //     'image'=> ((!isset($info['file_name']))?'':$info['file_name']),
+  //   );
+  //   $this->db->insert('categories',$data);
+  //   $response = new stdClass();
+    
+  //   $response->categories = $this->db->get("categories")->result();
+  //   $response->msj = 'Category created successfully.';
+  //   $this->response($response, REST_Controller::HTTP_OK);
+  // } 
+
+  // public function index_put($id) {
+  //   $data = $this->db->get_where("categories", ['id' => $id])->row_array();
+  //   $input = $this->put();
+
+  //   die(var_dump($input))
+
+  //   $this->db->update('categories', $data, array('id'=>$id));
+  
+  //   $response = new stdClass();
+  //   $response->categories = $this->db->get("categories")->result();
+  //   $response->msj = 'Category updated successfully.';
+  //   $this->response($response, REST_Controller::HTTP_OK);
+  // }
+
   public function index_delete($id) {
     $data = $this->db->get_where("categories", ['id' => $id])->row_array();
-    
-    
-    if ($data['image']!='') {  @unlink('./././assets/images/categories/'.$data['image']);  }
     $this->db->delete('categories', array('id'=>$id));
       
     $response = new stdClass();
