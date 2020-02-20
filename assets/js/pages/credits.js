@@ -16,6 +16,7 @@ new Vue({
       .then(axios.spread((credits, categories) => {
         this.credits = credits.data
         this.categories = categories.data
+        this.loading = false
       }))
   },
   data: function () {
@@ -30,7 +31,8 @@ new Vue({
         nameEN: '',
         maxAmount: '',
         categories: []
-      }
+      },
+      loading: true
     }
   },
   methods: {
