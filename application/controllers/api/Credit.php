@@ -94,7 +94,9 @@ class Credit extends REST_Controller {
   }
 
   public function index_delete($id) {
+    $this->db->delete('credits_categories', array('creditId'=>$id));
     $this->db->delete('credits', array('id'=>$id));
+    
 
     $response = new stdClass();
     $response->credits = $this->db->get("credits")->result();
