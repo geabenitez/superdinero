@@ -77,6 +77,7 @@ class Credit extends REST_Controller {
       $this->db->insert_batch('credits_categories',$categories);
 
       $response = new stdClass();
+      $response->success = true;
       $result=array();
       $data = $this->db->get("credits")->result();
       if (!empty($data)) {
@@ -112,6 +113,7 @@ class Credit extends REST_Controller {
       $this->db->update('credits', $input, array('id'=>$id));
 
       $response = new stdClass();
+      $response->success = true;
       $result=array();
       $data = $this->db->get("credits")->result();
       if (!empty($data)) {
@@ -136,19 +138,19 @@ class Credit extends REST_Controller {
           }
         }
 
-        $response->credits = $result;
-
-
-
-
+      $response->credits = $result;
       $response->msj = 'State updated successfully.';
       $this->response($response, REST_Controller::HTTP_OK);
     }
 
     public function index_delete($id) {
-      $this->db->delete('credits_categories', array('creditId'=>$id));
+      if($this->db->get_where("credits_categories", ['creditId' => $id])->result()){
+        $this->db->delete('credits_categories', array('creditId'=>$id));
+      }
+      $this->db->delete('credits', array('id'=>$id));
 
       $response = new stdClass();
+      $response->success = true;
       $response->credits = $this->db->get("credits")->result();
 
       $result=array();
@@ -176,7 +178,7 @@ class Credit extends REST_Controller {
         }
 
         $response->credits = $result;
-        $response->msj = 'State deleted successfully.';
+        $response->msj = 'Credit deleted successfully.';
         $this->response($response, REST_Controller::HTTP_OK);
       }  	
     }

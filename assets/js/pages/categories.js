@@ -121,7 +121,6 @@ new Vue({
             const active = status == '1'
             axios(this.createHeader('DELETE', {}, id))
               .then(res => {
-                console.log(typeof res.data.success)
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',
                   message: res.data.msj,
