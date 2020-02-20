@@ -38,6 +38,7 @@ class Document extends REST_Controller {
     $response = new stdClass();
     $response->documents = $this->db->get("documents")->result();
     $response->msj = 'Document created successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   } 
 
@@ -49,6 +50,7 @@ class Document extends REST_Controller {
     $response = new stdClass();
     $response->documents = $this->db->get("documents")->result();
     $response->msj = 'Document updated successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   }
 
@@ -58,6 +60,7 @@ class Document extends REST_Controller {
     $response = new stdClass();
     $response->documents = $this->db->get("documents")->result();
     $response->msj = 'Document deleted successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   }  	
 }

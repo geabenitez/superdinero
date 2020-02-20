@@ -38,6 +38,7 @@ class Amount extends REST_Controller {
     $response = new stdClass();
     $response->amounts = $this->db->get("amounts")->result();
     $response->msj = 'Amount created successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   } 
 
@@ -49,6 +50,7 @@ class Amount extends REST_Controller {
     $response = new stdClass();
     $response->amounts = $this->db->get("amounts")->result();
     $response->msj = 'Amount updated successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   }
 
@@ -58,6 +60,7 @@ class Amount extends REST_Controller {
     $response = new stdClass();
     $response->amounts = $this->db->get("amounts")->result();
     $response->msj = 'Amount deleted successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   }  	
 }

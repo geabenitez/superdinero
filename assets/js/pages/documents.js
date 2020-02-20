@@ -65,6 +65,11 @@ new Vue({
             const documentId = id != null ? id : ''
             axios(this.createHeader(METHOD, { nameES, nameEN, active: 1 }, documentId))
               .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
                 this.documents = res.data.documents
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Yes, please";
@@ -92,6 +97,11 @@ new Vue({
             const active = status == '1'
             axios(this.createHeader('PUT', { active: !active }, id))
               .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
                 this.documents = res.data.documents
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Let's go";
@@ -118,6 +128,11 @@ new Vue({
             const active = status == '1'
             axios(this.createHeader('DELETE', {}, id))
               .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
                 this.documents = res.data.documents
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "DELETE";

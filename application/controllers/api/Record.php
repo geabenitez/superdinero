@@ -38,6 +38,7 @@ class Record extends REST_Controller {
     $response = new stdClass();
     $response->records = $this->db->get("records")->result();
     $response->msj = 'Record created successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   } 
 
@@ -49,6 +50,7 @@ class Record extends REST_Controller {
     $response = new stdClass();
     $response->records = $this->db->get("records")->result();
     $response->msj = 'Record updated successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   }
 
@@ -58,6 +60,7 @@ class Record extends REST_Controller {
     $response = new stdClass();
     $response->records = $this->db->get("records")->result();
     $response->msj = 'Record deleted successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   }  	
 }

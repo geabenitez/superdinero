@@ -38,6 +38,7 @@ class State extends REST_Controller {
     $response = new stdClass();
     $response->states = $this->db->get("states")->result();
     $response->msj = 'State created successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   } 
 
@@ -49,6 +50,7 @@ class State extends REST_Controller {
     $response = new stdClass();
     $response->states = $this->db->get("states")->result();
     $response->msj = 'State updated successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   }
 
@@ -58,6 +60,7 @@ class State extends REST_Controller {
     $response = new stdClass();
     $response->states = $this->db->get("states")->result();
     $response->msj = 'State deleted successfully.';
+    $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
   }  	
 }
