@@ -77,7 +77,31 @@ class Credit extends REST_Controller {
       $this->db->insert_batch('credits_categories',$categories);
 
       $response = new stdClass();
-      $response->credits = $this->db->get("credits")->result();
+      $result=array();
+      $data = $this->db->get("credits")->result();
+      if (!empty($data)) {
+        foreach ($data as $v) {
+          $tmp = array();
+          $tmp['id']=$v->id;
+          $tmp['nameES']=$v->nameES;
+          $tmp['nameEN']=$v->nameEN;
+          $tmp['active']=$v->active;
+          $tmp['maxAmount']=$v->maxAmount;
+          $tmp['created_at']=$v->created_at;
+          $tmp['updated_at']=$v->updated_at;
+
+          $tmp['categories']=array();
+          $categories = $this->db->get_where("credits_categories", ['creditId' => $v->id])->result();
+          if (!empty($categories))
+            foreach ($categories as $c) {
+
+              array_push($tmp['categories'],$c->categoryId);
+            }
+            $result[]=$tmp;
+          }
+        }
+
+        $response->credits = $result;
       $response->msj = 'State created successfully.';
       $this->response($response, REST_Controller::HTTP_OK);
     } 
@@ -88,7 +112,35 @@ class Credit extends REST_Controller {
       $this->db->update('credits', $input, array('id'=>$id));
 
       $response = new stdClass();
-      $response->credits = $this->db->get("credits")->result();
+      $result=array();
+      $data = $this->db->get("credits")->result();
+      if (!empty($data)) {
+        foreach ($data as $v) {
+          $tmp = array();
+          $tmp['id']=$v->id;
+          $tmp['nameES']=$v->nameES;
+          $tmp['nameEN']=$v->nameEN;
+          $tmp['active']=$v->active;
+          $tmp['maxAmount']=$v->maxAmount;
+          $tmp['created_at']=$v->created_at;
+          $tmp['updated_at']=$v->updated_at;
+
+          $tmp['categories']=array();
+          $categories = $this->db->get_where("credits_categories", ['creditId' => $v->id])->result();
+          if (!empty($categories))
+            foreach ($categories as $c) {
+
+              array_push($tmp['categories'],$c->categoryId);
+            }
+            $result[]=$tmp;
+          }
+        }
+
+        $response->credits = $result;
+
+
+
+      
       $response->msj = 'State updated successfully.';
       $this->response($response, REST_Controller::HTTP_OK);
     }
@@ -126,7 +178,7 @@ class Credit extends REST_Controller {
             $result[]=$tmp;
           }
         }
-        
+
         $response->credits = $result;
 
 
