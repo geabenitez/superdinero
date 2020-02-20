@@ -115,7 +115,7 @@ class Category extends REST_Controller {
       $response->msj = "Unable to delete, it's being used";
     }else{
       $this->db->delete('categories', array('id'=>$id));
-      $response->success = false;
+      $response->success = true;
       $response->msj = 'Category deleted successfully.';
     }
     $response->categories = $this->db->get("categories")->result();

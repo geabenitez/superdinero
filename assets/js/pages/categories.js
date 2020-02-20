@@ -119,6 +119,12 @@ new Vue({
             const active = status == '1'
             axios(this.createHeader('DELETE', {}, id))
               .then(res => {
+                console.log(typeof res.data.success)
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
                 this.categories = res.data.categories
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "DELETE";
