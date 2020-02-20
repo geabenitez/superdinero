@@ -37,6 +37,7 @@ class Category extends REST_Controller {
     $this->db->insert('categories',$input);
     
     $response = new stdClass();
+    $response->success = true;
     $response->categories = $this->db->get("categories")->result();
     $response->msj = 'Document created successfully.';
     $this->response($response, REST_Controller::HTTP_OK);
@@ -48,6 +49,7 @@ class Category extends REST_Controller {
     $this->db->update('categories', $input, array('id'=>$id));
   
     $response = new stdClass();
+    $response->success = true;
     $response->categories = $this->db->get("categories")->result();
     $response->msj = 'Document updated successfully.';
     $this->response($response, REST_Controller::HTTP_OK);

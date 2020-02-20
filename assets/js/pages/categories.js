@@ -68,6 +68,11 @@ new Vue({
 
             axios(this.createHeader(METHOD, { nameES, nameEN }, categoryId))
               .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
                 this.categories = res.data.categories
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Yes, please";
@@ -95,6 +100,11 @@ new Vue({
             const active = status == '1'
             axios(this.createHeader('PUT', { active: !active }, id))
               .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
                 this.categories = res.data.categories
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Let's go";
