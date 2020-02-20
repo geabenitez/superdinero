@@ -110,7 +110,12 @@ class Category extends REST_Controller {
 
   public function index_delete($id) {
     $data = $this->db->get_where("categories", ['id' => $id])->row_array();
-    $this->db->delete('categories', array('id'=>$id));
+    try {
+      $this->db->delete('categories', array('id'=>$id));
+    } catch (Exception $e) {
+      $this->response(["Unable to delete, it\'s beign used"], REST_Controller::HTTP_BAD_REQUEST);
+      die();
+    }
       
     $response = new stdClass();
     $response->categories = $this->db->get("categories")->result();
