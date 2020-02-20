@@ -110,7 +110,23 @@ class Credit extends REST_Controller {
     public function index_put($id) {
       $input = $this->put();
       $input['updated_at'] = date("Y-m-d h:i:s");
+
+      $categories = $input['categories'];
+      
+      unset($input['categories']);
+      
       $this->db->update('credits', $input, array('id'=>$id));
+
+      if($this->db->get_where("credits_categories", ['creditId' => $id])->result()){
+        $this->db->delete('credits_categories', array('creditId'=>$id));
+      }
+
+      $_categories = array();
+      foreach ($categories as $v) {
+        array_push($_categories, array('creditId'=>$id, 'categoryId' => $v ));
+      }
+      $this->db->insert_batch('credits_categories', $_categories);
+
 
       $response = new stdClass();
       $response->success = true;
