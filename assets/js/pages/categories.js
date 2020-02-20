@@ -4,6 +4,7 @@ new Vue({
     axios(this.createHeader('GET'))
       .then(res => {
         this.categories = res.data
+        this.loading = false
       })
   },
   data() {
@@ -12,6 +13,7 @@ new Vue({
       categories: [],
       searchValue: '',
       showNewCategory: false,
+      loading: true,
       newCategoryForm: {
         nameES: '',
         nameEN: '',
