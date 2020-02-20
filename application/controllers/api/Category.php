@@ -109,17 +109,16 @@ class Category extends REST_Controller {
   // }
 
   public function index_delete($id) {
-    $data = $this->db->get_where("categories", ['id' => $id])->row_array();
-    try {
-      $this->db->delete('categories', array('id'=>$id));
-    } catch (Exception $e) {
-      $this->response(["Unable to delete, it\'s beign used"], REST_Controller::HTTP_BAD_REQUEST);
-      die();
-    }
-      
     $response = new stdClass();
+    if(!empty($this->db->get_where("credits_categories", ['categoryId' => $id])->row_array())){
+      $response->success = false;
+      $response->msj = "Unable to delete, it's being used";
+    }else{
+      $this->db->delete('categories', array('id'=>$id));
+      $response->success = false;
+      $response->msj = 'Category deleted successfully.';
+    }
     $response->categories = $this->db->get("categories")->result();
-    $response->msj = 'Category deleted successfully.';
     $this->response($response, REST_Controller::HTTP_OK);
   }  	
 }

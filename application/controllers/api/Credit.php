@@ -60,15 +60,15 @@ class Credit extends REST_Controller {
     public function index_post(){
       $input = json_decode($this->input->raw_input_stream);
 
-    //prepare array for credits
+      //prepare array for credits
       $credit = array('nameES'=>$input->nameES, 'nameEN'=>$input->nameEN, 'maxAmount'=>$input->maxAmount, 'active'=>1 );
 
       $this->db->insert('credits',$credit);
 
-    //get the last id inserted
+      //get the last id inserted
       $insert_id = $this->db->insert_id();
 
-    //prepared the insert for credits_categories
+      //prepared the insert for credits_categories
       $categories = array();
       foreach ($input->categories as $value) {
         array_push($categories, array('creditId'=>$insert_id, 'categoryId'=>$value));
@@ -147,19 +147,9 @@ class Credit extends REST_Controller {
 
     public function index_delete($id) {
       $this->db->delete('credits_categories', array('creditId'=>$id));
-      
-      try {
-        $this->db->delete('credits', array('id'=>$id));
-      } catch (Exception $e) {
-        
-      }
-      
-
 
       $response = new stdClass();
       $response->credits = $this->db->get("credits")->result();
-
-
 
       $result=array();
       $data = $this->db->get("credits")->result();
@@ -186,9 +176,6 @@ class Credit extends REST_Controller {
         }
 
         $response->credits = $result;
-
-
-
         $response->msj = 'State deleted successfully.';
         $this->response($response, REST_Controller::HTTP_OK);
       }  	
