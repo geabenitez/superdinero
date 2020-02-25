@@ -103,98 +103,103 @@ class Credit extends REST_Controller {
         }
 
         $response->credits = $result;
-      $response->msj = 'State created successfully.';
-      $this->response($response, REST_Controller::HTTP_OK);
-    } 
-
-    public function index_put($id) {
-      $input = $this->put();
-      $input['updated_at'] = date("Y-m-d h:i:s");
-
-      $categories = $input['categories'];
-      
-      unset($input['categories']);
-      
-      $this->db->update('credits', $input, array('id'=>$id));
-
-      if($this->db->get_where("credits_categories", ['creditId' => $id])->result()){
-        $this->db->delete('credits_categories', array('creditId'=>$id));
-      }
-
-      $_categories = array();
-      foreach ($categories as $v) {
-        array_push($_categories, array('creditId'=>$id, 'categoryId' => $v ));
-      }
-      $this->db->insert_batch('credits_categories', $_categories);
-
-
-      $response = new stdClass();
-      $response->success = true;
-      $result=array();
-      $data = $this->db->get("credits")->result();
-      if (!empty($data)) {
-        foreach ($data as $v) {
-          $tmp = array();
-          $tmp['id']=$v->id;
-          $tmp['nameES']=$v->nameES;
-          $tmp['nameEN']=$v->nameEN;
-          $tmp['active']=$v->active;
-          $tmp['maxAmount']=$v->maxAmount;
-          $tmp['created_at']=$v->created_at;
-          $tmp['updated_at']=$v->updated_at;
-
-          $tmp['categories']=array();
-          $categories = $this->db->get_where("credits_categories", ['creditId' => $v->id])->result();
-          if (!empty($categories))
-            foreach ($categories as $c) {
-
-              array_push($tmp['categories'],$c->categoryId);
-            }
-            $result[]=$tmp;
-          }
-        }
-
-      $response->credits = $result;
-      $response->msj = 'State updated successfully.';
-      $this->response($response, REST_Controller::HTTP_OK);
-    }
-
-    public function index_delete($id) {
-      if($this->db->get_where("credits_categories", ['creditId' => $id])->result()){
-        $this->db->delete('credits_categories', array('creditId'=>$id));
-      }
-      $this->db->delete('credits', array('id'=>$id));
-
-      $response = new stdClass();
-      $response->success = true;
-      $response->credits = $this->db->get("credits")->result();
-
-      $result=array();
-      $data = $this->db->get("credits")->result();
-      if (!empty($data)) {
-        foreach ($data as $v) {
-          $tmp = array();
-          $tmp['id']=$v->id;
-          $tmp['nameES']=$v->nameES;
-          $tmp['nameEN']=$v->nameEN;
-          $tmp['active']=$v->active;
-          $tmp['maxAmount']=$v->maxAmount;
-          $tmp['created_at']=$v->created_at;
-          $tmp['updated_at']=$v->updated_at;
-
-          $tmp['categories']=array();
-          $categories = $this->db->get_where("credits_categories", ['creditId' => $v->id])->result();
-          if (!empty($categories))
-            foreach ($categories as $c) {
-
-              array_push($tmp['categories'],$c->categoryId);
-            }
-            $result[]=$tmp;
-          }
-        }
-
-        $response->credits = $result;
-        $response->msj = 'Credit deleted successfully.';
+        $response->msj = 'State created successfully.';
         $this->response($response, REST_Controller::HTTP_OK);
-      }  	
-    }
+      } 
+
+      public function index_put($id) {
+        $input = $this->put();
+        $input['updated_at'] = date("Y-m-d h:i:s");
+
+        if(isset($input['categories'])) {$categories = $input['categories'];}else{$categories=null;}
+
+        unset($input['categories']);
+
+        $this->db->update('credits', $input, array('id'=>$id));
+
+
+
+        $_categories = array();
+        if (!is_null($categories)){
+
+          if($this->db->get_where("credits_categories", ['creditId' => $id])->result()){
+            $this->db->delete('credits_categories', array('creditId'=>$id));
+          }
+          
+          foreach ($categories as $v) {
+            array_push($_categories, array('creditId'=>$id, 'categoryId' => $v ));
+          }
+
+          $this->db->insert_batch('credits_categories', $_categories);
+        }
+
+        $response = new stdClass();
+        $response->success = true;
+        $result=array();
+        $data = $this->db->get("credits")->result();
+        if (!empty($data)) {
+          foreach ($data as $v) {
+            $tmp = array();
+            $tmp['id']=$v->id;
+            $tmp['nameES']=$v->nameES;
+            $tmp['nameEN']=$v->nameEN;
+            $tmp['active']=$v->active;
+            $tmp['maxAmount']=$v->maxAmount;
+            $tmp['created_at']=$v->created_at;
+            $tmp['updated_at']=$v->updated_at;
+
+            $tmp['categories']=array();
+            $categories = $this->db->get_where("credits_categories", ['creditId' => $v->id])->result();
+            if (!empty($categories))
+              foreach ($categories as $c) {
+
+                array_push($tmp['categories'],$c->categoryId);
+              }
+              $result[]=$tmp;
+            }
+          }
+
+          $response->credits = $result;
+          $response->msj = 'State updated successfully.';
+          $this->response($response, REST_Controller::HTTP_OK);
+        }
+
+        public function index_delete($id) {
+          if($this->db->get_where("credits_categories", ['creditId' => $id])->result()){
+            $this->db->delete('credits_categories', array('creditId'=>$id));
+          }
+          $this->db->delete('credits', array('id'=>$id));
+
+          $response = new stdClass();
+          $response->success = true;
+          $response->credits = $this->db->get("credits")->result();
+
+          $result=array();
+          $data = $this->db->get("credits")->result();
+          if (!empty($data)) {
+            foreach ($data as $v) {
+              $tmp = array();
+              $tmp['id']=$v->id;
+              $tmp['nameES']=$v->nameES;
+              $tmp['nameEN']=$v->nameEN;
+              $tmp['active']=$v->active;
+              $tmp['maxAmount']=$v->maxAmount;
+              $tmp['created_at']=$v->created_at;
+              $tmp['updated_at']=$v->updated_at;
+
+              $tmp['categories']=array();
+              $categories = $this->db->get_where("credits_categories", ['creditId' => $v->id])->result();
+              if (!empty($categories))
+                foreach ($categories as $c) {
+
+                  array_push($tmp['categories'],$c->categoryId);
+                }
+                $result[]=$tmp;
+              }
+            }
+
+            $response->credits = $result;
+            $response->msj = 'Credit deleted successfully.';
+            $this->response($response, REST_Controller::HTTP_OK);
+          }  	
+        }
