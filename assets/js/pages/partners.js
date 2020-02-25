@@ -161,5 +161,17 @@ new Vue({
         }
       })
     },
+  },
+  computed: {
+    selectedCredits() {
+      const selected = this.newAsociateForm.credits.map(c => {
+        const credit = this.credits.find(cr => cr.id === c)
+        return {
+          nameES: credit.nameES,
+          nameEN: credit.nameEN
+        }
+      })
+      return selected
+    }
   }
 })
