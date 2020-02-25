@@ -34,8 +34,12 @@
     </div>
     <div class="flex justify-center container mx-auto px-4 lg:px-0">
       <div class='flex flex-col justify-center items-center bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
-        <el-progress class='w-full' :percentage="50"></el-progress>
-        <span>CUESTIONARIO</span>
+        <el-progress class='w-full mb-4' :percentage="questionNumber * 10"></el-progress>
+        <div class='flex items-cetner justify-center w-2/3'>
+          <div class='flex flex-col' v-if="questionNumber == 1">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black'>{{questions[1].nameES}}</span>
+          </div>
+        </div>
       </div>
     </div>
     <?php $this->load->view('/site/_footer') ?>

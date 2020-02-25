@@ -75,7 +75,7 @@ $route['admin/amounts'] = 'Admin/amounts';
 $route['admin/credits'] = 'Admin/credits';
 $route['admin/params'] = 'Admin/params';
 
-// OARTNERS
+// PARTNERS
 $route['partners'] = 'api/Partner';
 $route['partners/(:any)'] = 'api/Partner/$1';
 
