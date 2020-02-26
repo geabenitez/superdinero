@@ -163,15 +163,18 @@ new Vue({
     },
   },
   computed: {
-    selectedCredits() {
-      const selected = this.newAsociateForm.credits.map(c => {
-        const credit = this.credits.find(cr => cr.id === c)
-        return {
-          nameES: credit.nameES,
-          nameEN: credit.nameEN
-        }
-      })
-      return selected
+    filteredCategories() {
+      const filtered = this.newAsociateForm.credits
+        .map(id => this.credits.find(credit => credit.id === id))
+        .map(credit => {
+          const categories = credit.categories.map(id => this.categories.find(category => (category.id === id && category.active === '1')))
+          return {
+            ...credit,
+            categories
+          }
+        })
+      console.log(filtered)
+      return filtered
     }
   }
 })
