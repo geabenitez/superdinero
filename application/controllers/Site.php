@@ -28,7 +28,12 @@ class Site extends CI_Controller {
 		redirect(site_url('/'));
 	}
 
-	public function questionnaire() {
+	public function questionnaire($slug) {
+		$resources['slug'] = $this->db->get_where("credits", ['slug' => $slug])->result();			
+		if(!$resources['slug']){
+			header('location:'.site_url('/').'404');
+		}
+
 		$resources['styles'] = basic_styles();
 		$resources['scripts'] = basic_scripts();
 		array_push($resources['scripts'], 'assets/js/pages/questionnaire.js');
