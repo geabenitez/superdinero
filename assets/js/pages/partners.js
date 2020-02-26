@@ -161,17 +161,50 @@ new Vue({
         }
       })
     },
-  },
-  computed: {
-    selectedCredits() {
-      const selected = this.newAsociateForm.credits.map(c => {
-        const credit = this.credits.find(cr => cr.id === c)
-        return {
-          nameES: credit.nameES,
-          nameEN: credit.nameEN
+    deletePartner(id) {
+      this.$msgbox({
+        type: 'error',
+        title: 'Confirmation',
+        message: 'Are you sure you want to delete this partner?',
+        showCancelButton: true,
+        confirmButtonText: "DELETE",
+        cancelButtonText: 'Cancel',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = 'Processing...';
+            axios(this.createHeader('DELETE', {}, id))
+              .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
+                this.partners = res.data.partners
+                instance.confirmButtonLoading = false;
+                instance.confirmButtonText = "DELETE";
+                done()
+              })
+          } else {
+            done();
+          }
         }
       })
-      return selected
+    }
+  },
+  computed: {
+    filteredCategories() {
+      const filtered = this.newAsociateForm.credits
+        .map(id => this.credits.find(credit => credit.id === id))
+        .map(credit => {
+          const categories = credit.categories.map(id => this.categories.find(category => (category.id === id && category.active === '1')))
+          return {
+            ...credit,
+            categories
+          }
+        })
+      console.log(filtered)
+      return filtered
     }
   }
 })

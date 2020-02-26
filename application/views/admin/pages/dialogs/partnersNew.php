@@ -138,12 +138,17 @@
             clearable
             filterable
             default-first-option >
-            <el-option
-                v-for='category in categories'
+            <el-option-group
+              v-for="credit in filteredCategories"
+              :key="credit.nameES"
+              :label="credit.nameES">
+              <el-option
+                v-for="category in credit.categories"
                 :key="category.id"
                 :label="category.nameES"
                 :value="category.id">
-            </el-option>
+              </el-option>
+            </el-option-group>
           </el-select>
         </el-form-item>
         <el-form-item label="Records crediticios aceptados">

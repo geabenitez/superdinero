@@ -62,7 +62,7 @@
                   </span>
                   asociado
                 </el-dropdown-item>
-                <el-dropdown-item divided class='font-semibold'>
+                <el-dropdown-item divided class='font-semibold' @click.native="deletePartner(scope.row.id)">
                   <span class='text-red-500 tracking-wide'>
                     <i class="el-icon-delete"></i> Eliminar asociado
                   </span>
