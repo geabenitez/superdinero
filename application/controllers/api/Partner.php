@@ -32,8 +32,7 @@ class Partner extends REST_Controller {
       $ps = "partners_states";
       $getCategories = array(
         $c.'.nameES',
-        $c.'.nameEN',
-        $c.'.image'
+        $c.'.nameEN'
       );
       $getStates = array(
         $s.'.nameES',
