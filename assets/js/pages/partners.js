@@ -161,6 +161,36 @@ new Vue({
         }
       })
     },
+    deletePartner(id) {
+      this.$msgbox({
+        type: 'error',
+        title: 'Confirmation',
+        message: 'Are you sure you want to delete this partner?',
+        showCancelButton: true,
+        confirmButtonText: "DELETE",
+        cancelButtonText: 'Cancel',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = 'Processing...';
+            axios(this.createHeader('DELETE', {}, id))
+              .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
+                this.partners = res.data.partners
+                instance.confirmButtonLoading = false;
+                instance.confirmButtonText = "DELETE";
+                done()
+              })
+          } else {
+            done();
+          }
+        }
+      })
+    }
   },
   computed: {
     filteredCategories() {
