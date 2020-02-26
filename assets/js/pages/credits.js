@@ -163,6 +163,9 @@ new Vue({
           }
         }
       })
+    },
+    formatMoney(amount) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumSignificantDigits: 2 }).format(amount)
     }
   },
   computed: {

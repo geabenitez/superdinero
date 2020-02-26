@@ -19,14 +19,20 @@
     <el-col :span='24'>
       <el-table :data="filteredCredits" class="w-full" stripe size='mini' empty-text='No hay datos' v-loading="loading">
         <el-table-column prop="index" min-width="25"></el-table-column>
-        <el-table-column prop="nameES" label="Nombre ES" min-width="180"></el-table-column>
-        <el-table-column prop="nameEN" label="Nombre EN" min-width="180"></el-table-column>
-        <el-table-column prop="nameEN" label="Categorias" min-width="180">
+        <el-table-column prop="nameES" label="Nombre ES" min-width="128"></el-table-column>
+        <el-table-column prop="nameEN" label="Nombre EN" min-width="128"></el-table-column>
+        <el-table-column label="Categorias" min-width="128">
           <template slot-scope='scope'>
             <span>{{scope.row.categories.length}}</span>
           </template>
         </el-table-column>
-        <el-table-column min-width="260"></el-table-column>
+        <el-table-column prop="slug" label="Slug" min-width="128"></el-table-column>
+        <el-table-column label="Cantidad Maxima" min-width="128">
+          <template slot-scope='scope'>
+            <span>{{formatMoney(scope.row.maxAmount)}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="160"></el-table-column>
         <el-table-column label="Estado" min-width='60'>
           <template slot-scope='scope'>
             <span v-if="scope.row.active == '1'" class='text-green-500 font-semibold'>Activo</span>
