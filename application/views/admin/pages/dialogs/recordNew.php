@@ -12,7 +12,7 @@
           placeholder="Nombre de record" 
           size='small' 
           v-model="newRecordForm.nameES"
-          maxlength="50"
+          maxlength="80"
           show-word-limit
           clearable/>
         </el-form-item>
@@ -28,7 +28,7 @@
           placeholder="Records's name" 
           size='small' 
           v-model="newRecordForm.nameEN"
-          maxlength="50"
+          maxlength="80"
           show-word-limit
           clearable/>
         </el-form-item>

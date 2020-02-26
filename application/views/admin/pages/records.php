@@ -19,9 +19,9 @@
     <el-col :span='24'>
       <el-table :data="filteredRecords" class="w-full" stripe size='mini' empty-text='No hay datos'>
         <el-table-column prop="index" min-width="25"></el-table-column>
-        <el-table-column prop="nameES" label="Nombre ES" min-width="180"></el-table-column>
-        <el-table-column prop="nameEN" label="Nombre EN" min-width="180"></el-table-column>
-        <el-table-column min-width="260"></el-table-column>
+        <el-table-column prop="nameES" label="Nombre ES" min-width="220"></el-table-column>
+        <el-table-column prop="nameEN" label="Nombre EN" min-width="220"></el-table-column>
+        <el-table-column min-width="200"></el-table-column>
         <el-table-column label="Estado" min-width='60'>
           <template slot-scope='scope'>
             <span v-if="scope.row.active == '1'" class='text-green-500 font-semibold'>Activo</span>
