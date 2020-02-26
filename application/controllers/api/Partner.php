@@ -19,7 +19,7 @@ class Partner extends REST_Controller {
     }
   }
 
-	public function index_get($id = 0){
+  public function index_get($id = 0){
     if (!empty($id)) {
       $partners = $this->db->get_where("partners", ['id' => $id])->row_array();
     } else {
@@ -39,17 +39,17 @@ class Partner extends REST_Controller {
         $s.'.nameEN',
       );
       $value->categories = $this->db
-        ->select($getCategories)
-        ->from($pc)
-        ->where($pc.'.partnerId', $value->id)
-        ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
-        ->get()->result();
+      ->select($getCategories)
+      ->from($pc)
+      ->where($pc.'.partnerId', $value->id)
+      ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
+      ->get()->result();
       $value->states = $this->db
-        ->select($getStates)
-        ->from($ps)
-        ->where($ps.'.partnerId', $value->id)
-        ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
-        ->get()->result();
+      ->select($getStates)
+      ->from($ps)
+      ->where($ps.'.partnerId', $value->id)
+      ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
+      ->get()->result();
     }
     $this->response($partners, REST_Controller::HTTP_OK);
   }
@@ -101,7 +101,7 @@ class Partner extends REST_Controller {
     $input = $this->put();
     $input['updated_at'] = date("Y-m-d h:i:s");
     $this->db->update('partners', $input, array('id'=>$id));
-  
+    
     $response = new stdClass();
     $response->partners = $this->db->get("partners")->result();
     $response->msj = 'Category updated successfully.';
@@ -109,11 +109,56 @@ class Partner extends REST_Controller {
   }
 
   public function index_delete($id) {
+
+    if($this->db->get_where("partners_categories", ['partnerId' => $id])->result()){
+      $this->db->delete('partners_categories', array('partnerId'=>$id));
+    }
+
+    if($this->db->get_where("partners_states", ['partnerId' => $id])->result()){
+      $this->db->delete('partners_states', array('partnerId'=>$id));
+    }
+
+    if($this->db->get_where("partners_amounts", ['partnerId' => $id])->result()){
+      $this->db->delete('partners_amounts', array('partnerId'=>$id));
+    }
+
     $this->db->delete('partners', array('id'=>$id));
-      
+
+    
+    
     $response = new stdClass();
     $response->partners = $this->db->get("partners")->result();
+
+
+    $partners = $this->db->get("partners")->result();
+    foreach ($partners as $key => $value) {
+      $c = "categories";
+      $pc = "partners_categories";
+      $s = "states";
+      $ps = "partners_states";
+      $getCategories = array(
+        $c.'.nameES',
+        $c.'.nameEN'
+      );
+      $getStates = array(
+        $s.'.nameES',
+        $s.'.nameEN',
+      );
+      $value->categories = $this->db
+      ->select($getCategories)
+      ->from($pc)
+      ->where($pc.'.partnerId', $value->id)
+      ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
+      ->get()->result();
+      $value->states = $this->db
+      ->select($getStates)
+      ->from($ps)
+      ->where($ps.'.partnerId', $value->id)
+      ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
+      ->get()->result();
+    }
     $response->msj = 'Category deleted successfully.';
-    $this->response($response, REST_Controller::HTTP_OK);
+    $this->response($partners, REST_Controller::HTTP_OK);
+
   }  	
 }
