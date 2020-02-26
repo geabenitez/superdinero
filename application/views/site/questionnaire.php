@@ -71,6 +71,17 @@
               </el-option>
             </el-select>
           </div>
+          <div class='flex flex-col w-full' v-if="questionNumber == 4">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[4].nameES: questions[4].nameEN}}</span>
+            <el-select v-model="responses.record" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+              <el-option
+                v-for="record in records"
+                :key="record.id"
+                :label="spanishLang ? record.nameES : record.nameEN"
+                :value="document.id">
+              </el-option>
+            </el-select>
+          </div>
         </div>
         <div class="w-full flex flex-row justify-between border-t pt-4">
           <button 

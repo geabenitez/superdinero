@@ -16,9 +16,13 @@ new Vue({
       return axios({ headers, method: 'GET', url: `${site_url}documents` })
     }
 
+    const getRecords = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}records` })
+    }
+
     axios
-      .all([getCategories(), getCredits(), getDocuments()])
-      .then(axios.spread((categories, credits, documents) => {
+      .all([getCategories(), getCredits(), getDocuments(), getRecords()])
+      .then(axios.spread((categories, credits, documents, records) => {
         this.credit = credits.data.find(d => d.slug == slug)
         this.categories = this.credit.categories.map(id => {
           const nameEN = categories.data.find(c => c.id === id).nameEN
@@ -30,6 +34,7 @@ new Vue({
           }
         })
         this.documents = documents.data
+        this.records = records.data
         this.marks = {
           '0': this.formatMoney(this.credit.minAmount),
           100: this.formatMoney(this.credit.maxAmount)
@@ -43,6 +48,7 @@ new Vue({
       credit: {},
       categories: [],
       documents: [],
+      records: [],
       value: 1,
       marks: {},
       questions: {
@@ -57,12 +63,17 @@ new Vue({
         3: {
           nameES: '¿Qué tipo de documento tiene?',
           nameEN: 'What type of document do you have?'
+        },
+        4: {
+          nameES: 'Aproximado puntaje de crédito',
+          nameEN: 'Approximate credit score'
         }
       },
       responses: {
         amount: 0,
         category: '',
-        document: ''
+        document: '',
+        record: ''
       }
     }
   },
