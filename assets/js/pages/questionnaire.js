@@ -12,9 +12,13 @@ new Vue({
       return axios({ headers, method: 'GET', url: `${site_url}credits` })
     }
 
+    const getDocuments = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}documents` })
+    }
+
     axios
-      .all([getCategories(), getCredits()])
-      .then(axios.spread((categories, credits) => {
+      .all([getCategories(), getCredits(), getDocuments()])
+      .then(axios.spread((categories, credits, documents) => {
         this.credit = credits.data.find(d => d.slug == slug)
         this.categories = this.credit.categories.map(id => {
           const nameEN = categories.data.find(c => c.id === id).nameEN
@@ -25,6 +29,7 @@ new Vue({
             nameES
           }
         })
+        this.documents = documents.data
         this.marks = {
           '0': this.formatMoney(this.credit.minAmount),
           100: this.formatMoney(this.credit.maxAmount)
@@ -36,6 +41,8 @@ new Vue({
       questionNumber: 1,
       spanishLang: true,
       credit: {},
+      categories: [],
+      documents: [],
       value: 1,
       marks: {},
       questions: {
@@ -46,11 +53,16 @@ new Vue({
         2: {
           nameES: '¿Para qué lo necesita?',
           nameEN: 'What do you need it for?'
+        },
+        3: {
+          nameES: '¿Qué tipo de documento tiene?',
+          nameEN: 'What type of document do you have?'
         }
       },
       responses: {
         amount: 0,
-        category: ''
+        category: '',
+        document: ''
       }
     }
   },
