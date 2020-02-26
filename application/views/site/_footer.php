@@ -2,9 +2,18 @@
   <div class="flex flex-col container mx-auto">
     <div class='flex flex-col lg:flex-row items-center justify-center text-white'>
       <img class='h-24 -mb-6 lg:mb-0' src="https://superdinero.org/wp-content/uploads/2017/12/SUPERDINERO-3.png" alt="">
-      <a href='javascript:;' class='mr-3 font-semibold text-sm tracking-wider hover:underline'>TERMINOS DE USO</a>
-      <a href='javascript:;' class='mr-3 font-semibold text-sm tracking-wider hover:underline'>POLITICA DE PRIVACIDAD</a>
-      <a href='javascript:;' class='mr-3 font-semibold text-sm tracking-wider hover:underline'>DIVULGACION PUBLICITARIA</a>
+      <a href='javascript:;' class='mr-3 font-semibold text-sm tracking-wider hover:underline'>
+        <span v-if='spanishLang'>TERMINOS DE USO</span>
+        <span v-else>TERMINOS DE USO</span>
+      </a>
+      <a href='javascript:;' class='mr-3 font-semibold text-sm tracking-wider hover:underline'>
+        <span v-if='spanishLang'>POLITICA DE PRIVACIDAD</span>
+        <span v-else>POLITICA DE PRIVACIDAD</span>
+      </a>
+      <a href='javascript:;' class='mr-3 font-semibold text-sm tracking-wider hover:underline'>
+        <span v-if='spanishLang'>DIVULGACION PUBLICITARIA</span>
+        <span v-else>DIVULGACION PUBLICITARIA</span>
+      </a>
       <span class='text-xs mt-4 lg:mt-0'>4530 S. Orange Blossom Trail Orlando, FL 32839</span>
     </div>
     <div class='flex flex-col lg:flex-row items-center justify-center mt-6 lg:-mt-6 text-white tracking-wide'>

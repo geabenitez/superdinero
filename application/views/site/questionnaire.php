@@ -78,8 +78,33 @@
                 v-for="record in records"
                 :key="record.id"
                 :label="spanishLang ? record.nameES : record.nameEN"
-                :value="document.id">
+                :value="record.id">
               </el-option>
+            </el-select>
+          </div>
+          <div class='flex flex-col w-full' v-if="questionNumber == 5">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[5].nameES: questions[5].nameEN}}</span>
+            <el-select v-model="responses.state" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+              <el-option
+                v-for="state in states"
+                :key="state.id"
+                :label="spanishLang ? state.nameES : state.nameEN"
+                :value="state.id">
+              </el-option>
+            </el-select>
+          </div>
+          <div class='flex flex-col w-full' v-if="questionNumber == 6">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[6].nameES: questions[6].nameEN}}</span>
+            <el-select v-model="responses.has_car" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+              <el-option :label="spanishLang ? 'SI' : 'YES'" :value="true"></el-option>
+              <el-option label="NO" :value="false"></el-option>
+            </el-select>
+          </div>
+          <div class='flex flex-col w-full' v-if="questionNumber == 7">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[7].nameES: questions[7].nameEN}}</span>
+            <el-select v-model="responses.has_house" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+              <el-option :label="spanishLang ? 'SI' : 'YES'" :value="true"></el-option>
+              <el-option label="NO" :value="false"></el-option>
             </el-select>
           </div>
         </div>

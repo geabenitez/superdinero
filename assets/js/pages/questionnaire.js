@@ -20,9 +20,13 @@ new Vue({
       return axios({ headers, method: 'GET', url: `${site_url}records` })
     }
 
+    const getStates = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}states` })
+    }
+
     axios
-      .all([getCategories(), getCredits(), getDocuments(), getRecords()])
-      .then(axios.spread((categories, credits, documents, records) => {
+      .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates()])
+      .then(axios.spread((categories, credits, documents, records, states) => {
         this.credit = credits.data.find(d => d.slug == slug)
         this.categories = this.credit.categories.map(id => {
           const nameEN = categories.data.find(c => c.id === id).nameEN
@@ -35,8 +39,9 @@ new Vue({
         })
         this.documents = documents.data
         this.records = records.data
+        this.states = states.data
         this.marks = {
-          '0': this.formatMoney(this.credit.minAmount),
+          1: this.formatMoney(this.credit.minAmount),
           100: this.formatMoney(this.credit.maxAmount)
         }
       }))
@@ -49,6 +54,7 @@ new Vue({
       categories: [],
       documents: [],
       records: [],
+      states: [],
       value: 1,
       marks: {},
       questions: {
@@ -67,13 +73,28 @@ new Vue({
         4: {
           nameES: 'Aproximado puntaje de crédito',
           nameEN: 'Approximate credit score'
+        },
+        5: {
+          nameES: '¿En qué estado se encuentra?',
+          nameEN: 'What state are you in?'
+        },
+        6: {
+          nameES: '¿Posee auto propio o arrendado?',
+          nameEN: 'Do you own or lease your car?'
+        },
+        7: {
+          nameES: '¿Posee casa propia o arrendada?',
+          nameEN: 'Do you own or lease a house?'
         }
       },
       responses: {
         amount: 0,
         category: '',
         document: '',
-        record: ''
+        record: '',
+        state: '',
+        has_car: '',
+        has_house: ''
       }
     }
   },
