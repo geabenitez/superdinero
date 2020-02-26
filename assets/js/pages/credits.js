@@ -29,6 +29,7 @@ new Vue({
       newCreditForm: {
         nameES: '',
         nameEN: '',
+        slug: '',
         maxAmount: '',
         categories: []
       },
@@ -61,7 +62,7 @@ new Vue({
         data
       }
     },
-    saveCredit({ nameES, nameEN, categories, maxAmount, id }) {
+    saveCredit({ nameES, nameEN, categories, maxAmount, slug, id }) {
       if (nameES == '' || nameEN == '' || categories.length == 0 || parseFloat(maxAmount) <= 0) {
         this.$notify.error({
           title: 'Error',
@@ -82,7 +83,7 @@ new Vue({
             instance.confirmButtonText = 'Processing...';
             const METHOD = id != null ? 'PUT' : 'POST'
             const stateId = id != null ? id : ''
-            axios(this.createHeader(METHOD, { nameES, nameEN, categories, maxAmount, active: 1 }, stateId))
+            axios(this.createHeader(METHOD, { nameES, nameEN, categories, maxAmount, slug, active: 1 }, stateId))
               .then(res => {
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',

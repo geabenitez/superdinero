@@ -16,6 +16,15 @@
           show-word-limit
           clearable/>
         </el-form-item>
+        <el-form-item label="Slug:">
+          <el-input 
+          placeholder="Nombre de slug (para URL)" 
+          size='small' 
+          v-model="newCreditForm.slug"
+          maxlength="100"
+          show-word-limit
+          clearable/>
+        </el-form-item>
         <el-form-item label="Cantidad máxima:">
           <el-input 
           type='number'
@@ -58,6 +67,15 @@
           size='small' 
           v-model="newCreditForm.nameEN"
           maxlength="50"
+          show-word-limit
+          clearable/>
+        </el-form-item>
+        <el-form-item label="Slug:">
+          <el-input 
+          placeholder="Slug's name (for URL)" 
+          size='small' 
+          v-model="newCreditForm.slug"
+          maxlength="100"
           show-word-limit
           clearable/>
         </el-form-item>

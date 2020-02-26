@@ -37,7 +37,7 @@
         <el-progress class='w-full mb-4' :percentage="questionNumber * 10"></el-progress>
         <div class='flex items-cetner justify-center w-2/3'>
           <div class='flex flex-col' v-if="questionNumber == 1">
-            <span class='uppercase font-semibold text-lg tracking-wider text-black'>{{questions[1].nameES}}</span>
+            <span class='uppercase font-semibold text-lg tracking-wider text-black'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
           </div>
         </div>
       </div>
