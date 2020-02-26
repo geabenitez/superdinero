@@ -40,6 +40,7 @@ class Credit extends REST_Controller {
         $tmp['nameEN']=$v->nameEN;
         $tmp['active']=$v->active;
         $tmp['maxAmount']=$v->maxAmount;
+        $tmp['minAmount']=$v->minAmount;
         $tmp['slug']=$v->slug;
         $tmp['created_at']=$v->created_at;
         $tmp['updated_at']=$v->updated_at;
@@ -62,7 +63,14 @@ class Credit extends REST_Controller {
     $input = json_decode($this->input->raw_input_stream);
 
     //prepare array for credits
-    $credit = array('nameES'=>$input->nameES, 'nameEN'=>$input->nameEN, 'maxAmount'=>$input->maxAmount, 'slug'=>$input->slug, 'active'=>1 );
+    $credit = array(
+      'nameES'=>$input->nameES, 
+      'nameEN'=>$input->nameEN, 
+      'maxAmount'=>$input->maxAmount, 
+      'minAmount'=>$input->minAmount, 
+      'slug'=>$input->slug, 
+      'active'=>1 
+    );
 
     $this->db->insert('credits',$credit);
 
@@ -89,6 +97,7 @@ class Credit extends REST_Controller {
         $tmp['nameEN']=$v->nameEN;
         $tmp['active']=$v->active;
         $tmp['maxAmount']=$v->maxAmount;
+        $tmp['minAmount']=$v->minAmount;
         $tmp['created_at']=$v->created_at;
         $tmp['updated_at']=$v->updated_at;
 
@@ -146,6 +155,7 @@ class Credit extends REST_Controller {
             $tmp['nameEN']=$v->nameEN;
             $tmp['active']=$v->active;
             $tmp['maxAmount']=$v->maxAmount;
+            $tmp['minAmount']=$v->minAmount;
             $tmp['slug']=$v->slug;
             $tmp['created_at']=$v->created_at;
             $tmp['updated_at']=$v->updated_at;
@@ -186,6 +196,7 @@ class Credit extends REST_Controller {
               $tmp['nameEN']=$v->nameEN;
               $tmp['active']=$v->active;
               $tmp['maxAmount']=$v->maxAmount;
+              $tmp['minAmount']=$v->minAmount;
               $tmp['slug']=$v->slug;
               $tmp['created_at']=$v->created_at;
               $tmp['updated_at']=$v->updated_at;

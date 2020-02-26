@@ -31,6 +31,7 @@ new Vue({
         nameEN: '',
         slug: '',
         maxAmount: '',
+        minAmount: '',
         categories: []
       },
       loading: true
@@ -62,7 +63,7 @@ new Vue({
         data
       }
     },
-    saveCredit({ nameES, nameEN, categories, maxAmount, slug, id }) {
+    saveCredit({ nameES, nameEN, categories, maxAmount, minAmount, slug, id }) {
       if (nameES == '' || nameEN == '' || categories.length == 0 || parseFloat(maxAmount) <= 0) {
         this.$notify.error({
           title: 'Error',
@@ -83,7 +84,7 @@ new Vue({
             instance.confirmButtonText = 'Processing...';
             const METHOD = id != null ? 'PUT' : 'POST'
             const stateId = id != null ? id : ''
-            axios(this.createHeader(METHOD, { nameES, nameEN, categories, maxAmount, slug, active: 1 }, stateId))
+            axios(this.createHeader(METHOD, { nameES, nameEN, categories, maxAmount, minAmount, slug, active: 1 }, stateId))
               .then(res => {
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',
@@ -165,7 +166,7 @@ new Vue({
       })
     },
     formatMoney(amount) {
-      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumSignificantDigits: 2 }).format(amount)
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
     }
   },
   computed: {

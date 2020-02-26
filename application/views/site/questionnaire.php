@@ -34,16 +34,53 @@
     </div>
     <div class="flex justify-center container mx-auto px-4 lg:px-0">
       <div class='flex flex-col justify-center items-center bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
-        <el-progress class='w-full mb-4' :percentage="questionNumber * 10"></el-progress>
-        <div class='flex items-cetner justify-center w-2/3'>
-          <div class='flex flex-col' v-if="questionNumber == 1">
-            <span class='uppercase font-semibold text-lg tracking-wider text-black'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
+        <el-progress class='w-full pb-4 border-b' :percentage="questionNumber * 10"></el-progress>
+        <div class='flex items-center justify-center w-2/3 my-5'>
+          <div class='flex flex-col w-full' v-if="questionNumber == 1">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
+            <el-slider v-model="responses.amount" :min='1' :format-tooltip="formatTooltip" :marks="marks"></el-slider>
+            <div class='flex flex-row items-center justify-center w-full mt-6'>
+              <div class="w-64">
+                <input 
+                  type="text" 
+                  :value="formatMoney(calcValue(responses.amount))" 
+                  class='border text-center text-black font-semibold text-xl rounded py-1 bg-green-200' 
+                  readonly>
+              </div>
+            </div>
           </div>
+          <div class='flex flex-col w-full' v-if="questionNumber == 2">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[2].nameES: questions[2].nameEN}}</span>
+            <el-select v-model="responses.category" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+              <el-option
+                v-for="category in categories"
+                :key="category.id"
+                :label="spanishLang ? category.nameES : category.nameEN"
+                :value="category.id">
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="w-full flex flex-row justify-between border-t pt-4">
+          <button 
+            class='rounded bg-gray-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
+            v-if="questionNumber > 1"
+            @click="prev(questionNumber)">Atrás</button>
+          <button 
+            class='rounded bg-green-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
+            v-if="questionNumber < 10"
+            @click="next(questionNumber)">Continuar</button>
         </div>
       </div>
     </div>
     <?php $this->load->view('/site/_footer') ?>
   </div>
+  <script>
+    window.site_url = '<?= site_url() ?>'
+    window.cs = '<?= $this->session->token ?>'
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+
   <?php if (isset($scripts)) {
     $lambda = function() use ($scripts) {
         $slash = DIRECTORY_SEPARATOR;
@@ -53,7 +90,6 @@
         }
     };
     $lambda();
-  } ?>
-  <script>ELEMENT.locale(ELEMENT.lang.es)</script>
+  } ?>  
 </body>
 </html>

@@ -19,15 +19,20 @@
     <el-col :span='24'>
       <el-table :data="filteredCredits" class="w-full" stripe size='mini' empty-text='No hay datos' v-loading="loading">
         <el-table-column prop="index" min-width="25"></el-table-column>
-        <el-table-column prop="nameES" label="Nombre ES" min-width="128"></el-table-column>
-        <el-table-column prop="nameEN" label="Nombre EN" min-width="128"></el-table-column>
-        <el-table-column label="Categorias" min-width="128">
+        <el-table-column prop="nameES" label="Nombre ES" min-width="100"></el-table-column>
+        <el-table-column prop="nameEN" label="Nombre EN" min-width="100"></el-table-column>
+        <el-table-column label="Categorias" min-width="100">
           <template slot-scope='scope'>
             <span>{{scope.row.categories.length}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="slug" label="Slug" min-width="128"></el-table-column>
-        <el-table-column label="Cantidad Maxima" min-width="128">
+        <el-table-column prop="slug" label="Slug" min-width="100"></el-table-column>
+        <el-table-column label="Cantidad Mínima" min-width="100">
+          <template slot-scope='scope'>
+            <span>{{formatMoney(scope.row.minAmount)}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="Cantidad Máxima" min-width="100">
           <template slot-scope='scope'>
             <span>{{formatMoney(scope.row.maxAmount)}}</span>
           </template>

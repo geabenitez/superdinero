@@ -25,6 +25,17 @@
           show-word-limit
           clearable/>
         </el-form-item>
+        <el-form-item label="Cantidad mínima:">
+          <el-input 
+          type='number'
+          placeholder="Cantidad mínima" 
+          size='small' 
+          v-model="newCreditForm.minAmount"
+          min="0.01"
+          step='0.01'
+          show-word-limit
+          clearable/>
+        </el-form-item>
         <el-form-item label="Cantidad máxima:">
           <el-input 
           type='number'
@@ -76,6 +87,17 @@
           size='small' 
           v-model="newCreditForm.slug"
           maxlength="100"
+          show-word-limit
+          clearable/>
+        </el-form-item>
+        <el-form-item label="Min amount:">
+          <el-input 
+          type='number'
+          placeholder="Min amount" 
+          size='small' 
+          v-model="newCreditForm.minAmount"
+          min="0.01"
+          step='0.01'
           show-word-limit
           clearable/>
         </el-form-item>
