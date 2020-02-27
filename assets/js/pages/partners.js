@@ -41,10 +41,12 @@ new Vue({
         this.amounts = amounts.data
         this.states = states.data
         this.records = records.data
+        this.loading = false
       }))
   },
   data: function () {
     return {
+      loading: true,
       partners: [],
       searchValue: '',
       showNewPartner: false,

@@ -17,7 +17,7 @@
   </el-row>
   <el-row :gutter='15'>
     <el-col :span='24'>
-      <el-table :data="partners" class="w-full" stripe size='mini' empty-text='No hay datos'>
+      <el-table :data="partners" class="w-full" stripe size='mini' empty-text='No hay datos' v-loading="loading">
         <el-table-column prop="index" min-width="25"></el-table-column>
         <el-table-column prop="nameES" label="Nombre ES" min-width="180"></el-table-column>
         <el-table-column prop="nameEN" label="Nombre EN" min-width="180"></el-table-column>
@@ -54,7 +54,7 @@
                 <el-dropdown-item><i class="el-icon-view"></i> Vista previa</el-dropdown-item>
                 <el-dropdown-item><i class="el-icon-edit-outline"></i> Editar asociado</el-dropdown-item>
                 <el-dropdown-item @click.native="changeStatus(scope.row.id, scope.row.active)">
-                  <span v-if="scope.row.active">
+                  <span v-if="scope.row.active == '1'">
                     <i class="el-icon-close"></i> Desactivar
                   </span>
                   <span v-else>
