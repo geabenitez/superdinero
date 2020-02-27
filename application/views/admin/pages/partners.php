@@ -53,7 +53,7 @@
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item><i class="el-icon-view"></i> Vista previa</el-dropdown-item>
                 <el-dropdown-item><i class="el-icon-edit-outline"></i> Editar asociado</el-dropdown-item>
-                <el-dropdown-item>
+                <el-dropdown-item @click.native="changeStatus(scope.row.id, scope.row.active)">
                   <span v-if="scope.row.active">
                     <i class="el-icon-close"></i> Desactivar
                   </span>

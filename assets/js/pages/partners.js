@@ -161,6 +161,37 @@ new Vue({
         }
       })
     },
+    changeStatus(id, status) {
+      this.$msgbox({
+        type: 'warning',
+        title: 'Confirmation',
+        message: 'Are you sure you want to change the status?',
+        showCancelButton: true,
+        confirmButtonText: "Let's go",
+        cancelButtonText: 'Cancel',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = 'Processing...';
+            const active = status == '1'
+            axios(this.createHeader('PUT', { active: !active }, id))
+              .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
+                this.partners = res.data.partners
+                instance.confirmButtonLoading = false;
+                instance.confirmButtonText = "Let's go";
+                done()
+              })
+          } else {
+            done();
+          }
+        }
+      })
+    },
     deletePartner(id) {
       this.$msgbox({
         type: 'error',
