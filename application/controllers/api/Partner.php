@@ -103,12 +103,40 @@ class Partner extends REST_Controller {
     if (isset($input['active'])) {
       $data = array('active' => $input['active'] );
       $this->db->update('partners', $data, array('id'=>$id));
-      
+
       $response = new stdClass();
       $response->partners = $this->db->get("partners")->result();
-      $response->msj = 'Category updated successfully.';
+      foreach ($response->partners as $key => $value) {
+      $c = "categories";
+      $pc = "partners_categories";
+      $s = "states";
+      $ps = "partners_states";
+      $getCategories = array(
+        $c.'.nameES',
+        $c.'.nameEN'
+      );
+      $getStates = array(
+        $s.'.nameES',
+        $s.'.nameEN',
+      );
+      $value->categories = $this->db
+      ->select($getCategories)
+      ->from($pc)
+      ->where($pc.'.partnerId', $value->id)
+      ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
+      ->get()->result();
+      $value->states = $this->db
+      ->select($getStates)
+      ->from($ps)
+      ->where($ps.'.partnerId', $value->id)
+      ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
+      ->get()->result();
+    }
+      $response->msj = 'Partner updated successfully.';
+      $response->success = true;
+     
       $this->response($response, REST_Controller::HTTP_OK);
-      die();
+      return;
     }
 
     $input['updated_at'] = date("Y-m-d h:i:s");
@@ -116,7 +144,9 @@ class Partner extends REST_Controller {
 
     $response = new stdClass();
     $response->partners = $this->db->get("partners")->result();
-    $response->msj = 'Category updated successfully.';
+    $response->msj = 'Partner updated successfully.';
+    $response->success = true;
+
     $this->response($response, REST_Controller::HTTP_OK);
   }
 
@@ -169,8 +199,10 @@ class Partner extends REST_Controller {
       ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
       ->get()->result();
     }
-    $response->msj = 'Category deleted successfully.';
-    $this->response($partners, REST_Controller::HTTP_OK);
+    $response->success = true;
+    $response->partners = $partners;
+    $response->msj = 'Partners deleted successfully.';
+    $this->response($response, REST_Controller::HTTP_OK);
 
   }  	
 }
