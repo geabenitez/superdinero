@@ -99,9 +99,21 @@ class Partner extends REST_Controller {
 
   public function index_put($id) {
     $input = $this->put();
+
+    if (isset($input['active'])) {
+      $data = array('active' => $input['active'] );
+      $this->db->update('partners', $data, array('id'=>$id));
+      
+      $response = new stdClass();
+      $response->partners = $this->db->get("partners")->result();
+      $response->msj = 'Category updated successfully.';
+      $this->response($response, REST_Controller::HTTP_OK);
+      die();
+    }
+
     $input['updated_at'] = date("Y-m-d h:i:s");
     $this->db->update('partners', $input, array('id'=>$id));
-    
+
     $response = new stdClass();
     $response->partners = $this->db->get("partners")->result();
     $response->msj = 'Category updated successfully.';
@@ -124,8 +136,8 @@ class Partner extends REST_Controller {
 
     $this->db->delete('partners', array('id'=>$id));
 
-    
-    
+
+
     $response = new stdClass();
     $response->partners = $this->db->get("partners")->result();
 
