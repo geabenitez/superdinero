@@ -142,8 +142,6 @@ class Partner extends REST_Controller {
     $this->db->insert_batch('partners_amounts', $partner_amounts);
 
 
-
-
     $partners = $this->db->get("partners")->result();
 
     foreach ($partners as $key => $value) {
@@ -173,17 +171,11 @@ class Partner extends REST_Controller {
       ->get()->result();
     }
   
-
-
-
     $response = new stdClass();
     $response->partners = $partners;
     $response->msj = 'Partner created successfully.';
     $response->success = true;
     $this->response($response, REST_Controller::HTTP_OK);
-
-
-
 
 
   } 
