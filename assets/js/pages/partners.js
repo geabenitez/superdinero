@@ -111,7 +111,23 @@ new Vue({
       }
       this.showNewPartner = true
     },
-    savePartner({ id, nameES, nameEN, categories, rate, states, onlyAgent, characteristicsES, characteristicsEN, amounts }) {
+    savePartner({
+      id,
+      nameES,
+      nameEN,
+      documents,
+      credits,
+      categories,
+      records,
+      rate,
+      states,
+      onlyAgent,
+      requiresCar,
+      requiresHouse,
+      characteristicsES,
+      characteristicsEN,
+      amounts
+    }) {
       if (
         nameES == '' ||
         nameEN == '' ||
@@ -139,18 +155,30 @@ new Vue({
             const METHOD = id != null ? 'PUT' : 'POST'
             const categoryId = id != null ? id : ''
 
-            const formData = new FormData();
-            formData.append("nameES", nameES);
-            formData.append("nameEN", nameEN);
-            formData.append("categories", categories);
-            formData.append("rate", rate);
-            formData.append("states", states);
-            formData.append("onlyAgent", onlyAgent);
-            formData.append("characteristicsES", characteristicsES);
-            formData.append("characteristicsEN", characteristicsEN);
-            formData.append("amounts", amounts);
+            const formData = {
+              nameES,
+              nameEN,
+              documents,
+              credits,
+              categories,
+              records,
+              rate,
+              states,
+              onlyAgent,
+              requiresCar,
+              requiresHouse,
+              characteristicsES,
+              characteristicsEN,
+              amounts,
+              active: 1
+            }
             axios(this.createHeader(METHOD, formData, categoryId, true))
               .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
                 this.partners = res.data.partners
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Yes, please";
