@@ -170,9 +170,22 @@
           </el-select>
         </el-form-item>
         <el-form-item label="Cantidades">
-          <el-checkbox-group v-model="newAsociateForm.amounts">
-            <el-checkbox v-for='amount in amounts' :label="`${formatMoney(amount.from)} - ${formatMoney(amount.until)}`" size='small' />
-          </el-checkbox-group>
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.amounts" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='amount in amounts'
+                :key="amount.id"
+                :label="`${formatMoney(amount.from)} - ${formatMoney(amount.until)}`"
+                :value="amount.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label='Calificación'>
           <div class="flex flex-row items-center ">
@@ -355,9 +368,22 @@
           </el-select>
         </el-form-item>
         <el-form-item label="Amounts">
-          <el-checkbox-group v-model="newAsociateForm.amounts">
-          <el-checkbox v-for='amount in amounts' :label="`${formatMoney(amount.from)} - ${formatMoney(amount.until)}`" size='small' />
-          </el-checkbox-group>
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.amounts" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='amount in amounts'
+                :key="amount.id"
+                :label="`${formatMoney(amount.from)} - ${formatMoney(amount.until)}`"
+                :value="amount.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label='Rate'>
           <div class="flex flex-row items-center ">
