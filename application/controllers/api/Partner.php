@@ -255,6 +255,18 @@ class Partner extends REST_Controller {
       $this->db->delete('partners_amounts', array('partnerId'=>$id));
     }
 
+    if($this->db->get_where("partners_records", ['partnerId' => $id])->result()){
+      $this->db->delete('partners_records', array('partnerId'=>$id));
+    }
+
+    if($this->db->get_where("partners_credits", ['partnerId' => $id])->result()){
+      $this->db->delete('partners_credits', array('partnerId'=>$id));
+    }
+
+    if($this->db->get_where("partners_documents", ['partnerId' => $id])->result()){
+      $this->db->delete('partners_documents', array('partnerId'=>$id));
+    }
+
     $this->db->delete('partners', array('id'=>$id));
 
 
@@ -296,4 +308,7 @@ class Partner extends REST_Controller {
     $this->response($response, REST_Controller::HTTP_OK);
 
   }  	
+
+
+
 }
