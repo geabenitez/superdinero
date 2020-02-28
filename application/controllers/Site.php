@@ -58,4 +58,5 @@ class Site extends CI_Controller {
 		$resources['scripts'] = basic_scripts();
 		$this->load->view('site/redirection', $resources);
 	}
+
 }

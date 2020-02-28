@@ -175,6 +175,7 @@ class Credit extends REST_Controller {
           $response->msj = 'State updated successfully.';
           $this->response($response, REST_Controller::HTTP_OK);
         }
+        
 
         public function index_delete($id) {
           if($this->db->get_where("credits_categories", ['creditId' => $id])->result()){
