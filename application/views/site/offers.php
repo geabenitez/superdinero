@@ -32,12 +32,7 @@
       <span @click='spanishLang = true' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-l text-white text-center' :class='{"bg-green-500": spanishLang, "text-green-500 border border-green-500": !spanishLang}'>Español</span>
       <span @click='spanishLang = false' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-r text-white text-center' :class='{"bg-green-500": !spanishLang, "text-green-500 border border-green-500": spanishLang}'>English</span>
     </div>
-    <div class='my-6 container mx-auto px-4 lg:px-0'>
-      <div class='flex flex-row items-center justify-center bg-green-500 hover:bg-green-600 cursor-pointer rounded h-24 lg:h-32 w-full'>
-        <span class='font-semibold text-xl uppercase tracking-wide text-white'>CHECK MY RATE</span>
-      </div>
-    </div>
-    <div class="flex flex-col lg:flex-row container mx-auto px-4 lg:px-0">
+    <div class="flex flex-col lg:flex-row container mx-auto px-4 lg:px-0"  v-loading='loading'>
       <div class='lg:hidden w-full'>
         <el-button class='uppercase text-xs tracking-wide w-full' @click='showSettings = !showSettings'>{{showSettings ? 'Ocultar' : 'Mostrar'}} ajustes</el-button>
       </div>
@@ -46,13 +41,13 @@
           <span class='font-semibold text-xs text-gray-900 uppercase tracking-wide'>Ajustar resultados</span>
         </div>
         <div class='my-2'>
-          <el-form label-position="top" label-width="100px" :model="form">
+          <el-form label-position="top" label-width="100px" :model="query">
             <el-row :gutter='15'>
               <el-col :span='24'>
                 <el-form-item label="Estados">
                   <el-select 
                     class='w-full' 
-                    v-model="form.state" 
+                    v-model="query.state" 
                     placeholder="Seleccionar" 
                     size='small'
                     clearable
@@ -69,7 +64,7 @@
                 <el-form-item label="Categorias">
                   <el-select 
                     class='w-full' 
-                    v-model="form.category" 
+                    v-model="query.category" 
                     placeholder="Seleccionar" 
                     size='small'
                     clearable
@@ -89,46 +84,54 @@
         </div>  
         <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide text-right cursor-pointer hover:underline'>Reiniciar filtros</span>
       </div>
-      <div class='flex flex-col md:flex-row bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
-        <div class='flex flex-col w-full lg:w-4/12 py-4'>
-          <div class='flex flex-row items-center justify-start'>
-            <div class='flex flex-row items-center justify-center w-6 h-6 bg-green-500'>
-              <span class='font-semibold text-lg text-white'>1</span>
+      <div class='flex flex-col bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
+        <div class='flex flex-col md:flex-row border-b' v-for='partner in partners'>
+          <div class='flex flex-col w-full lg:w-4/12 py-4'>
+            <div class='flex flex-row items-center justify-start'>
+              <div class='flex flex-row items-center justify-center w-6 h-6 bg-green-500'>
+                <span class='font-semibold text-lg text-white'>1</span>
+              </div>
+              <div class='flex flex-row items-center pl-2 w-full h-6 bg-green-400 border-l-2 border-white'>
+                <span class='font-semibold text-xs uppercase text-white'>La mejor opcion posible</span>
+              </div>
             </div>
-            <div class='flex flex-row items-center pl-2 w-full h-6 bg-green-400 border-l-2 border-white'>
-              <span class='font-semibold text-xs uppercase text-white'>La mejor opcion posible</span>
+            <div class='flex flex-row items-center justify-center bg-gray-200 w-full h-24 my-2 rounded border text-gray-500'>LOGO</div>
+            <div class='flex flex-row w-full items-center justify-center'>
+              <el-rate
+                class='w-full'
+                :value="partner.rate"
+                disabled
+                show-score
+                text-color="#ff9900"
+                score-template="{value} puntos">
+              </el-rate>
             </div>
           </div>
-          <div class='flex flex-row items-center justify-center bg-gray-200 w-full h-24 my-2 rounded border text-gray-500'>LOGO</div>
-          <div class='flex flex-row w-full items-center justify-center'>
-            <el-rate
-              class='w-full'
-              v-model="rating"
-              disabled
-              show-score
-              text-color="#ff9900"
-              score-template="{value} puntos">
-            </el-rate>
+          <div class='flex flex-col w-full lg:w-5/12 p-4'>
+            <span class='font-semibold uppercase text-sm tracking-wide text-gray-900 mb-4'>{{ spanishLang ? partner.nameES : partner.nameEN }}</span>
+            <ul>
+              <li class='flex flex-row items-center' v-for='blurb in characteristics(partner.characteristicsES, partner.characteristicsEN)' :key='blurb'>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class='w-5 h-5 mr-1 text-green-500'>
+                  <path class="fill-current" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z"/>
+                </svg>
+                <span>{{blurb}}</span>
+              </li>
+            </ul>
           </div>
-        </div>
-        <div class='flex flex-col w-full lg:w-5/12 p-4'>
-          <span class='font-semibold uppercase text-sm tracking-wide text-gray-900 mb-4'>Nombre del proveedor</span>
-          <ul>
-            <li class='flex flex-row items-center' v-for='n in 4' :key='n'>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class='w-5 h-5 mr-1 text-green-500'>
-                <path class="fill-current" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z"/>
-              </svg>
-              <span>Option number {{ n }}</span>
-            </li>
-          </ul>
-        </div>
-        <div class='flex flex-row items-center justify-center w-full lg:w-3/12 p-4'>
-          <span class='w-full py-2 bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm uppercase font-semibold rounded text-center'>GET MY RATE</span>
+          <div class='flex flex-row items-center justify-center w-full lg:w-3/12 p-4'>
+            <span class='w-full py-2 bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm uppercase font-semibold rounded text-center'>GET MY RATE</span>
+          </div>
         </div>
       </div>
     </div>
     <?php $this->load->view('/site/_footer') ?>
   </div>
+  <script>
+    window.site_url = '<?= site_url() ?>'
+    window.cs = '<?= $this->session->token ?>'
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+
   <?php if (isset($scripts)) {
     $lambda = function() use ($scripts) {
         $slash = DIRECTORY_SEPARATOR;
@@ -138,7 +141,6 @@
         }
     };
     $lambda();
-  } ?>
-  <script>ELEMENT.locale(ELEMENT.lang.es)</script>
+  } ?>  
 </body>
 </html>

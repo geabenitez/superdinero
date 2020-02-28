@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8"/>
-    <title>SuperDinero | Ofertas</title>
+    <title>SuperDinero | Cuestionario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
     <script>
@@ -33,8 +33,8 @@
       <span @click='spanishLang = false' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-r text-white text-center' :class='{"bg-green-500": !spanishLang, "text-green-500 border border-green-500": spanishLang}'>English</span>
     </div>
     <div class="flex justify-center container mx-auto px-4 lg:px-0">
-      <div class='flex flex-col justify-center items-center bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
-        <el-progress class='w-full pb-4 border-b' :percentage="questionNumber * 10"></el-progress>
+      <div class='flex flex-col justify-center items-center bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border' v-loading="loading">
+        <el-progress class='w-full pb-4 border-b' :percentage="calculatePorcentage(questionNumber)"></el-progress>
         <div class='flex items-center justify-center w-2/3 my-5'>
           <div class='flex flex-col w-full' v-if="questionNumber == 1">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
@@ -107,6 +107,24 @@
               <el-option label="NO" :value="false"></el-option>
             </el-select>
           </div>
+          <div class='flex flex-col w-full' v-if="questionNumber == 8">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[8].nameES: questions[8].nameEN}}</span>
+            <el-select v-model="responses.earnings" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+              <el-option label="$1,000.00 - $5,000.00" value="1000-5000"></el-option>
+              <el-option label="$5,001.00 - $15,000.00" value="1001-15000"></el-option>
+            </el-select>
+          </div>
+          <div class='flex flex-col w-full' v-if="questionNumber == 9">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[9].nameES: questions[9].nameEN}}</span>
+            <el-select v-model="responses.payform" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+              <el-option
+                v-for="option in paymentOptions"
+                :key="option.nameES"
+                :label="spanishLang ? option.nameES : option.nameEN"
+                :value="option.nameES">
+              </el-option>
+            </el-select>
+          </div>
         </div>
         <div class="w-full flex flex-row justify-between border-t pt-4">
           <button 
@@ -115,8 +133,12 @@
             @click="prev(questionNumber)">Atrás</button>
           <button 
             class='rounded bg-green-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
-            v-if="questionNumber < 10"
+            v-if="questionNumber < totalQuestions"
             @click="next(questionNumber)">Continuar</button>
+          <button 
+            class='rounded bg-blue-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
+            v-if="questionNumber == totalQuestions"
+            @click="uri()">BUSCAR OPCIONES</button>
         </div>
       </div>
     </div>

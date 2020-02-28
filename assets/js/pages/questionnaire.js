@@ -2,6 +2,7 @@ new Vue({
   el: '#app',
   created() {
     const slug = window.location.pathname.split('cuestionario/')[1]
+    this.slug = slug
     const headers = { 'token-crf': cs }
 
     const getCategories = () => {
@@ -44,10 +45,12 @@ new Vue({
           1: this.formatMoney(this.credit.minAmount),
           100: this.formatMoney(this.credit.maxAmount)
         }
+        this.loading = false
       }))
   },
   data: function () {
     return {
+      slug: '',
       questionNumber: 1,
       spanishLang: true,
       credit: {},
@@ -57,6 +60,24 @@ new Vue({
       states: [],
       value: 1,
       marks: {},
+      paymentOptions: [
+        {
+          nameEN: 'Direct deposit',
+          nameES: 'Deposito directo'
+        },
+        {
+          nameEN: 'Check',
+          nameES: 'Cheque'
+        },
+        {
+          nameEN: 'Cash',
+          nameES: 'Efectivo'
+        },
+        {
+          nameEN: "I don't have earnings",
+          nameES: 'No tengo ingresos'
+        }
+      ],
       questions: {
         1: {
           nameES: '¿Qué cantidad necesitas?',
@@ -85,6 +106,14 @@ new Vue({
         7: {
           nameES: '¿Posee casa propia o arrendada?',
           nameEN: 'Do you own or lease a house?'
+        },
+        8: {
+          nameES: '¿Cuanto gana mensualmente?',
+          nameEN: 'how much are your monthly earnings?'
+        },
+        9: {
+          nameES: '¿Como te pagan?',
+          nameEN: 'how do you get paid?'
         }
       },
       responses: {
@@ -94,11 +123,18 @@ new Vue({
         record: '',
         state: '',
         has_car: '',
-        has_house: ''
-      }
+        has_house: '',
+        earnings: '',
+        payform: ''
+      },
+      loading: true,
+      totalQuestions: 9
     }
   },
   methods: {
+    calculatePorcentage(number) {
+      return parseInt(number * (100 / this.totalQuestions))
+    },
     formatTooltip(val) {
       return this.formatMoney(Math.ceil(this.calcValue(val)))
     },
@@ -117,6 +153,11 @@ new Vue({
       if (questionNumber <= 10 && questionNumber > 1) {
         this.questionNumber--
       }
+    }
+  },
+  computed: {
+    uri() {
+      location.href = `${site_url}ofertas/${this.slug}?d=${btoa(JSON.stringify(this.responses))}`
     }
   }
 })
