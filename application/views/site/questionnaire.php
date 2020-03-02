@@ -110,8 +110,28 @@
           <div class='flex flex-col w-full' v-if="questionNumber == 8">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[8].nameES: questions[8].nameEN}}</span>
             <el-select v-model="responses.earnings" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
-              <el-option label="$1,000.00 - $5,000.00" value="1000-5000"></el-option>
-              <el-option label="$5,001.00 - $15,000.00" value="1001-15000"></el-option>
+              <el-option label='$0.00 - $500.00' value='0 - 500'></el-option>
+              <el-option label='$501.00 - $1,000.00' value='501 - 1000'></el-option>
+              <el-option label='$1,001.00 - $1,500.00' value='1001 - 1500'></el-option>
+              <el-option label='$1,501.00 - $2,000.00' value='1501 - 2000'></el-option>
+              <el-option label='$2,001.00 - $2,500.00' value='2001 - 2500'></el-option>
+              <el-option label='$2,501.00 - $3,000.00' value='2501 - 3000'></el-option>
+              <el-option label='$3,001.00 - $3,500.00' value='3001 - 3500'></el-option>
+              <el-option label='$3,501.00 - $4,000.00' value='3501 - 4000'></el-option>
+              <el-option label='$4,001.00 - $4,500.00' value='4001 - 4500'></el-option>
+              <el-option label='$4,501.00 - $5,000.00' value='4501 - 5000'></el-option>
+              <el-option label='$5,001.00 - $6,000.00' value='5001 - 6000'></el-option>
+              <el-option label='$6,001.00 - $7,000.00' value='6001 - 7000'></el-option>
+              <el-option label='$7,001.00 - $8,000.00' value='7001 - 8000'></el-option>
+              <el-option label='$8,001.00 - $9,000.00' value='8001 - 9000'></el-option>
+              <el-option label='$9,001.00 - $10,000.00' value='9001 - 10000'></el-option>
+              <el-option label='$10,001.00 - $15,000.00' value='10001 - 15000'></el-option>
+              <el-option label='$15,001.00 - $20,000.00' value='15001 - 20000'></el-option>
+              <el-option label='$20,001.00 - $25,000.00' value='20001 - 25000'></el-option>
+              <el-option label='$25,001.00 - $30,000.00' value='25001 - 30000'></el-option>
+              <el-option label='$30,001.00 - $40,000.00' value='30001 - 40000'></el-option>
+              <el-option label='$40,001.00 - $50,000.00' value='40001 - 50000'></el-option>
+              <el-option label='$50,000.00 - mas' value='50000 - mas'></el-option>
             </el-select>
           </div>
           <div class='flex flex-col w-full' v-if="questionNumber == 9">
