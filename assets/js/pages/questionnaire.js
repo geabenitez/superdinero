@@ -29,6 +29,8 @@ new Vue({
       .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates()])
       .then(axios.spread((categories, credits, documents, records, states) => {
         this.credit = credits.data.find(d => d.slug == slug)
+        this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1)
+        this.rawCategories = categories.data
         this.categories = this.credit.categories.map(id => {
           const nameEN = categories.data.find(c => c.id === id).nameEN
           const nameES = categories.data.find(c => c.id === id).nameES
@@ -45,6 +47,7 @@ new Vue({
           1: this.formatMoney(this.credit.minAmount),
           100: this.formatMoney(this.credit.maxAmount)
         }
+        console.log(credits.data)
         this.loading = false
       }))
   },
@@ -55,6 +58,7 @@ new Vue({
       spanishLang: true,
       credit: {},
       categories: [],
+      rawCategories: [],
       documents: [],
       records: [],
       states: [],
@@ -116,6 +120,7 @@ new Vue({
           nameEN: 'how do you get paid?'
         }
       },
+      aditionalQuestions: [],
       responses: {
         amount: 0,
         category: '',
@@ -127,8 +132,7 @@ new Vue({
         earnings: '',
         payform: ''
       },
-      loading: true,
-      totalQuestions: 9
+      loading: true
     }
   },
   methods: {
@@ -156,8 +160,22 @@ new Vue({
     }
   },
   computed: {
+    totalQuestions() {
+      return Object.keys(this.questions).length
+    },
     uri() {
       location.href = `${site_url}ofertas/${this.slug}?d=${btoa(JSON.stringify(this.responses))}`
+    },
+    getCategories(credit) {
+      return credit.categories.map(id => {
+        const nameEN = categories.data.find(c => c.id === id).nameEN
+        const nameES = categories.data.find(c => c.id === id).nameES
+        return {
+          id,
+          nameEN,
+          nameES
+        }
+      })
     }
   }
 })
