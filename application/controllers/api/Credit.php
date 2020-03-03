@@ -39,6 +39,9 @@ class Credit extends REST_Controller {
         $tmp['nameES']=$v->nameES;
         $tmp['nameEN']=$v->nameEN;
         $tmp['active']=$v->active;
+        $tmp['askAlways']=$v->questionES;
+        $tmp['questionEN']=$v->askAlways;
+        $tmp['questionES']=$v->questionEN;
         $tmp['maxAmount']=$v->maxAmount;
         $tmp['minAmount']=$v->minAmount;
         $tmp['slug']=$v->slug;
