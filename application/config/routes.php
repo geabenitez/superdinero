@@ -58,6 +58,9 @@ $route['cuestionario/(:any)'] = 'Site/questionnaire/$1';
 $route['ofertas/(:any)'] = 'Site/offers/$1';
 $route['redirect'] = 'Site/redirect';
 
+$route['get_credits'] = 'Site/get_credits';
+
+
 
 // RUTAS PARA ADMIN
 

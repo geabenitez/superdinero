@@ -65,4 +65,8 @@ class Site extends CI_Controller {
 		$this->load->view('site/redirection', $resources);
 	}
 
+	public function get_credits() {
+		echo json_encode(getCredits($this->input->get('id', 0)));
+	}
+
 }

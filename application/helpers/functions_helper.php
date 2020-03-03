@@ -37,4 +37,46 @@ function admin_page($view, $page_title, $page_id, $recursos = null) {
   }
   $CI->load->view('admin/layout/index', $resources);
 }
+
+function getCredits($id){
+  $CI =& get_instance();
+
+  if (!empty($id)) {
+    $data = $CI->db->get_where("credits", ['id' => $id])->result();
+  } else {
+    $data = $CI->db->get("credits")->result();
+  }
+
+  $result=array();
+
+  if (!empty($data)) {
+    foreach ($data as $v) {
+      $tmp = array();
+      $tmp['id']=$v->id;
+      $tmp['nameES']=$v->nameES;
+      $tmp['nameEN']=$v->nameEN;
+      $tmp['active']=$v->active;
+      $tmp['askAlways']=$v->askAlways;
+      $tmp['questionEN']=$v->questionEN;
+      $tmp['questionES']=$v->questionES;
+      $tmp['maxAmount']=$v->maxAmount;
+      $tmp['minAmount']=$v->minAmount;
+      $tmp['slug']=$v->slug;
+      $tmp['created_at']=$v->created_at;
+      $tmp['updated_at']=$v->updated_at;
+      
+      $tmp['categories']=array();
+      $categories = $CI->db->get_where("credits_categories", ['creditId' => $v->id])->result();
+      if (!empty($categories))
+        foreach ($categories as $c) {
+
+          array_push($tmp['categories'],$c->categoryId);
+        }
+        $result[]=$tmp;
+      }
+    }
+
+    return $result;
+  }
+
 ?>
