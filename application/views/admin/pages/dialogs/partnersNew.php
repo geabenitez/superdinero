@@ -203,6 +203,15 @@
             </div>
           </div>
         </el-form-item>
+        <el-form-item label="URL de destino:">
+          <el-input 
+            placeholder="URL de destino" 
+            size='small' 
+            v-model="newAsociateForm.url"
+            maxlength="500"
+            show-word-limit
+            clearable/>
+        </el-form-item>
       </el-col>
       <el-col :span='12'>
         <el-row :gutter='15' class='mb-4'>
@@ -400,6 +409,15 @@
               <el-rate v-model="newAsociateForm.rate" allow-half disabled />
             </div>
           </div>
+        </el-form-item>
+        <el-form-item label="final URL:">
+          <el-input 
+            placeholder="final URL" 
+            size='small' 
+            v-model="newAsociateForm.url"
+            maxlength="500"
+            show-word-limit
+            clearable/>
         </el-form-item>
       </el-col>
     </el-row>

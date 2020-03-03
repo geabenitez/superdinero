@@ -70,7 +70,8 @@ new Vue({
         requiresHouse: false,
         characteristicsES: ["", "", "", ""],
         characteristicsEN: ["", "", "", ""],
-        amounts: []
+        amounts: [],
+        url: ''
       },
       action: 'Nuevo asociado'
     }
@@ -126,7 +127,8 @@ new Vue({
       requiresHouse,
       characteristicsES,
       characteristicsEN,
-      amounts
+      amounts,
+      url
     }) {
       if (
         nameES == '' ||
@@ -170,6 +172,7 @@ new Vue({
               characteristicsES,
               characteristicsEN,
               amounts,
+              url,
               active: 1
             }
             axios(this.createHeader(METHOD, formData, categoryId, true))
