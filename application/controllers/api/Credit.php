@@ -39,9 +39,9 @@ class Credit extends REST_Controller {
         $tmp['nameES']=$v->nameES;
         $tmp['nameEN']=$v->nameEN;
         $tmp['active']=$v->active;
-        $tmp['askAlways']=$v->questionES;
-        $tmp['questionEN']=$v->askAlways;
-        $tmp['questionES']=$v->questionEN;
+        $tmp['askAlways']=$v->askAlways;
+        $tmp['questionEN']=$v->questionEN;
+        $tmp['questionES']=$v->questionES;
         $tmp['maxAmount']=$v->maxAmount;
         $tmp['minAmount']=$v->minAmount;
         $tmp['slug']=$v->slug;
@@ -69,9 +69,9 @@ class Credit extends REST_Controller {
       $credit = array(
         'nameES'=>$input->nameES, 
         'nameEN'=>$input->nameEN, 
-        'askAlways'=>$input->questionES, 
-        'questionEN'=>$input->askAlways, 
-        'questionES'=>$input->questionEN, 
+        'askAlways'=>$input->askAlways, 
+        'questionEN'=>$input->questionEN, 
+        'questionES'=>$input->questionES, 
         'maxAmount'=>$input->maxAmount, 
         'minAmount'=>$input->minAmount, 
         'slug'=>$input->slug, 
