@@ -65,6 +65,18 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item>
+          <el-checkbox v-model="newCreditForm.askAlways" label="Preguntar siempre" border size="small" class='w-full'></el-checkbox>
+        </el-form-item>
+        <el-form-item label="Que pregunta hacer siempre?">
+          <el-input 
+            placeholder="Que pregunta hacer siempre?" 
+            size='small' 
+            v-model="newCreditForm.questionES"
+            maxlength="100"
+            show-word-limit
+            clearable/>
+        </el-form-item>
       </el-col>
       <el-col :span='12'>
         <el-row :gutter='15' class='mb-4'>
@@ -129,6 +141,18 @@
                 :value="category.id">
             </el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-checkbox v-model="newCreditForm.askAlways" label="Always ask" border size="small" class='w-full'></el-checkbox>
+        </el-form-item>
+        <el-form-item label="What to always ask?">
+          <el-input 
+            placeholder="What to always ask?" 
+            size='small' 
+            v-model="newCreditForm.questionEN"
+            maxlength="100"
+            show-word-limit
+            clearable/>
         </el-form-item>
       </el-col>
     </el-row>

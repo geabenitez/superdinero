@@ -32,7 +32,10 @@ new Vue({
         slug: '',
         maxAmount: '',
         minAmount: '',
-        categories: []
+        categories: [],
+        askAlways: false,
+        questionES: '',
+        questionEN: ''
       },
       loading: true
     }
