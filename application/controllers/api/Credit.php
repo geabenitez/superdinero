@@ -25,7 +25,7 @@ class Credit extends REST_Controller {
 
   public function index_get($id = 0){
     if (!empty($id)) {
-      $data = $this->db->get_where("credits", ['id' => $id])->row_array();
+      $data = $this->db->get_where("credits", ['id' => $id])->result();
     } else {
       $data = $this->db->get("credits")->result();
     }
@@ -59,63 +59,69 @@ class Credit extends REST_Controller {
       $this->response($result, REST_Controller::HTTP_OK);
     }
 
-  public function index_post(){
-    $input = json_decode($this->input->raw_input_stream);
+    public function index_post(){
+      $input = json_decode($this->input->raw_input_stream);
 
     //prepare array for credits
-    $credit = array(
-      'nameES'=>$input->nameES, 
-      'nameEN'=>$input->nameEN, 
-      'maxAmount'=>$input->maxAmount, 
-      'minAmount'=>$input->minAmount, 
-      'slug'=>$input->slug, 
-      'active'=>1 
-    );
+      $credit = array(
+        'nameES'=>$input->nameES, 
+        'nameEN'=>$input->nameEN, 
+        'askAlways'=>$input->questionES, 
+        'questionEN'=>$input->askAlways, 
+        'questionES'=>$input->questionEN, 
+        'maxAmount'=>$input->maxAmount, 
+        'minAmount'=>$input->minAmount, 
+        'slug'=>$input->slug, 
+        'active'=>1 
+      );
 
-    $this->db->insert('credits',$credit);
+      $this->db->insert('credits',$credit);
 
     //get the last id inserted
-    $insert_id = $this->db->insert_id();
+      $insert_id = $this->db->insert_id();
 
     //prepared the insert for credits_categories
-    $categories = array();
-    foreach ($input->categories as $value) {
-      array_push($categories, array('creditId'=>$insert_id, 'categoryId'=>$value));
-    }
-
-    $this->db->insert_batch('credits_categories',$categories);
-
-    $response = new stdClass();
-    $response->success = true;
-    $result=array();
-    $data = $this->db->get("credits")->result();
-    if (!empty($data)) {
-      foreach ($data as $v) {
-        $tmp = array();
-        $tmp['id']=$v->id;
-        $tmp['nameES']=$v->nameES;
-        $tmp['nameEN']=$v->nameEN;
-        $tmp['active']=$v->active;
-        $tmp['maxAmount']=$v->maxAmount;
-        $tmp['minAmount']=$v->minAmount;
-        $tmp['created_at']=$v->created_at;
-        $tmp['updated_at']=$v->updated_at;
-
-        $tmp['categories']=array();
-        $categories = $this->db->get_where("credits_categories", ['creditId' => $v->id])->result();
-        if (!empty($categories))
-          foreach ($categories as $c) {
-
-            array_push($tmp['categories'],$c->categoryId);
-          }
-          $result[]=$tmp;
-        }
+      $categories = array();
+      foreach ($input->categories as $value) {
+        array_push($categories, array('creditId'=>$insert_id, 'categoryId'=>$value));
       }
 
-      $response->credits = $result;
-      $response->msj = 'State created successfully.';
-      $this->response($response, REST_Controller::HTTP_OK);
-    } 
+      $this->db->insert_batch('credits_categories',$categories);
+
+      $response = new stdClass();
+      $response->success = true;
+      $result=array();
+      $data = $this->db->get("credits")->result();
+      if (!empty($data)) {
+        foreach ($data as $v) {
+          $tmp = array();
+          $tmp['id']=$v->id;
+          $tmp['nameES']=$v->nameES;
+          $tmp['nameEN']=$v->nameEN;
+          $tmp['active']=$v->active;
+          $tmp['askAlways']=$v->askAlways;
+          $tmp['questionES']=$v->questionES;
+          $tmp['questionEN']=$v->questionEN;
+          $tmp['maxAmount']=$v->maxAmount;
+          $tmp['minAmount']=$v->minAmount;
+          $tmp['created_at']=$v->created_at;
+          $tmp['updated_at']=$v->updated_at;
+
+          $tmp['categories']=array();
+          $categories = $this->db->get_where("credits_categories", ['creditId' => $v->id])->result();
+          if (!empty($categories))
+            foreach ($categories as $c) {
+
+              array_push($tmp['categories'],$c->categoryId);
+            }
+            $result[]=$tmp;
+          }
+        }
+
+        $response->credits = $result;
+        $response->msj = 'State created successfully.';
+        $this->response($response, REST_Controller::HTTP_OK);
+      } 
 
       public function index_put($id) {
         $input = $this->put();
@@ -154,6 +160,9 @@ class Credit extends REST_Controller {
             $tmp['nameES']=$v->nameES;
             $tmp['nameEN']=$v->nameEN;
             $tmp['active']=$v->active;
+            $tmp['askAlways']=$v->askAlways;
+            $tmp['questionES']=$v->questionES;
+            $tmp['questionEN']=$v->questionEN;
             $tmp['maxAmount']=$v->maxAmount;
             $tmp['minAmount']=$v->minAmount;
             $tmp['slug']=$v->slug;
@@ -175,7 +184,7 @@ class Credit extends REST_Controller {
           $response->msj = 'State updated successfully.';
           $this->response($response, REST_Controller::HTTP_OK);
         }
-        
+
 
         public function index_delete($id) {
           if($this->db->get_where("credits_categories", ['creditId' => $id])->result()){
@@ -196,6 +205,9 @@ class Credit extends REST_Controller {
               $tmp['nameES']=$v->nameES;
               $tmp['nameEN']=$v->nameEN;
               $tmp['active']=$v->active;
+              $tmp['askAlways']=$v->askAlways;
+              $tmp['questionES']=$v->questionES;
+              $tmp['questionEN']=$v->questionEN;
               $tmp['maxAmount']=$v->maxAmount;
               $tmp['minAmount']=$v->minAmount;
               $tmp['slug']=$v->slug;
