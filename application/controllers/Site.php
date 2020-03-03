@@ -40,12 +40,18 @@ class Site extends CI_Controller {
 		$this->load->view('site/questionnaire', $resources);
 	}
 
-	public function offers() {
+	public function offers($slug) {
 		// $categories = $this->db->get("categories")->result();
 		// $categories = array_map(function ($var) {
 		// 	# code...
 		// }, $categories)
+
 		
+		$this->db->where('nameES', $slug );
+		$this->db->or_where('nameEN', $slug );
+		$query = $this->db->get('credits')->result();
+		if(empty($query)){header('location:'.site_url('/').'404');}
+
 
 		$resources['styles'] = basic_styles();
 		$resources['scripts'] = basic_scripts();
