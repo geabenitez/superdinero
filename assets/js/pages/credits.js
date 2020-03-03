@@ -66,7 +66,18 @@ new Vue({
         data
       }
     },
-    saveCredit({ nameES, nameEN, categories, maxAmount, minAmount, slug, id }) {
+    saveCredit({
+      nameES,
+      nameEN,
+      categories,
+      maxAmount,
+      minAmount,
+      slug,
+      askAlways,
+      questionES,
+      questionEN,
+      id
+    }) {
       if (nameES == '' || nameEN == '' || categories.length == 0 || parseFloat(maxAmount) <= 0) {
         this.$notify.error({
           title: 'Error',
@@ -87,7 +98,18 @@ new Vue({
             instance.confirmButtonText = 'Processing...';
             const METHOD = id != null ? 'PUT' : 'POST'
             const stateId = id != null ? id : ''
-            axios(this.createHeader(METHOD, { nameES, nameEN, categories, maxAmount, minAmount, slug, active: 1 }, stateId))
+            axios(this.createHeader(METHOD, {
+              nameES,
+              nameEN,
+              categories,
+              maxAmount,
+              minAmount,
+              slug,
+              askAlways: askAlways ? 1 : 0,
+              questionES,
+              questionEN,
+              active: 1
+            }, stateId))
               .then(res => {
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',
