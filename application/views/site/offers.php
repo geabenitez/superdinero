@@ -128,7 +128,7 @@
             </ul>
           </div>
           <div class='flex flex-row items-center justify-center w-full lg:w-3/12 p-4'>
-            <span class='w-full py-2 bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm uppercase font-semibold rounded text-center'>GET MY RATE</span>
+            <a :href='`/redirect?id=${partner.url}&partner=${partner.id}`' class='w-full py-2 bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm uppercase font-semibold rounded text-center'>GET MY RATE</a>
           </div>
         </div>
       </div>
