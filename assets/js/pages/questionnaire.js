@@ -47,7 +47,6 @@ new Vue({
           1: this.formatMoney(this.credit.minAmount),
           100: this.formatMoney(this.credit.maxAmount)
         }
-        console.log(credits.data)
         this.loading = false
       }))
   },
@@ -149,33 +148,34 @@ new Vue({
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
     },
     next(questionNumber) {
-      if (questionNumber >= 1 && questionNumber <= 10) {
+      if (questionNumber >= 1 && questionNumber < this.totalQuestions) {
         this.questionNumber++
       }
     },
     prev(questionNumber) {
-      if (questionNumber <= 10 && questionNumber > 1) {
+      if (questionNumber < this.totalQuestions && questionNumber > 1) {
         this.questionNumber--
       }
-    }
-  },
-  computed: {
-    totalQuestions() {
-      return Object.keys(this.questions).length
-    },
-    uri() {
-      location.href = `${site_url}ofertas/${this.slug}?d=${btoa(JSON.stringify(this.responses))}`
     },
     getCategories(credit) {
+      console.log(credit)
       return credit.categories.map(id => {
-        const nameEN = categories.data.find(c => c.id === id).nameEN
-        const nameES = categories.data.find(c => c.id === id).nameES
+        const nameEN = this.rawCategories.find(c => c.id === id).nameEN
+        const nameES = this.rawCategories.find(c => c.id === id).nameES
         return {
           id,
           nameEN,
           nameES
         }
       })
+    }
+  },
+  computed: {
+    totalQuestions() {
+      return Object.keys(this.questions).length + this.aditionalQuestions.length
+    },
+    uri() {
+      location.href = `${site_url}ofertas/${this.slug}?d=${btoa(JSON.stringify(this.responses))}`
     }
   }
 })
