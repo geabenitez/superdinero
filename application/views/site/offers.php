@@ -128,7 +128,7 @@
   </div>
   <script>
     window.site_url = '<?= site_url() ?>'
-    window.cs = '<?= $this->session->token ?>'
+    window.cs = '$Q5444bbBrRt9Cd8goEObasdlYJbi33dduyfDu92BaviqfWCOw6wlEYBfbkwqpj/K'
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
 
