@@ -28,15 +28,24 @@
 <body class=bg-gray-200>
   <div id='app'>
     <?php $this->load->view('/site/_header') ?>
-    <div class='flex flex-row w-full my-6 items-center justify-end container mx-auto font-semibold text-xs uppercase tracking-wide px-4 lg:px-0'>
-      <span @click='spanishLang = true' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-l text-white text-center' :class='{"bg-green-500": spanishLang, "text-green-500 border border-green-500": !spanishLang}'>Español</span>
-      <span @click='spanishLang = false' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-r text-white text-center' :class='{"bg-green-500": !spanishLang, "text-green-500 border border-green-500": spanishLang}'>English</span>
+    <div class='flex flex-col-reverse lg:flex-row w-full my-6 items-center justify-between container mx-auto font-semibold text-xs uppercase tracking-wide px-4 lg:px-0'>
+      <div class="flex flex-col lg:flex-row items-center tracking-wider">
+        <span class='text-green-800 uppercase text-base mr-2 text-center lg:text-left'>Revisa gratis tu puntaje de credito</span>
+        <div class='flex flex-row'>
+          <button class='bg-green-500 w-42 py-1 px-5 text-white rounded uppercase font-semibold tracking-wider text-center mr-2'>Credit sesame</button>
+          <button class='bg-green-500 w-42 py-1 px-5 text-white rounded uppercase font-semibold tracking-wider text-center'>Credit karma</button>
+        </div>
+      </div>
+      <div class='flex flex-row mb-6 lg:mb-0'>
+        <span @click='spanishLang = true' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-l text-white text-center' :class='{"bg-green-500": spanishLang, "text-green-500 border border-green-500": !spanishLang}'>Español</span>
+        <span @click='spanishLang = false' class='w-1/2 md:w-auto cursor-pointer py-1 px-5 rounded-r text-white text-center' :class='{"bg-green-500": !spanishLang, "text-green-500 border border-green-500": spanishLang}'>English</span>
+      </div>
     </div>
-    <div class="flex flex-col lg:flex-row container mx-auto px-4 lg:px-0"  v-loading='loading'>
+    <div class="flex flex-col lg:flex-row container mx-auto px-4 lg:px-0" v-loading='loading'>
       <div class='lg:hidden w-full'>
         <el-button class='uppercase text-xs tracking-wide w-full' @click='showSettings = !showSettings'>{{showSettings ? 'Ocultar' : 'Mostrar'}} ajustes</el-button>
       </div>
-      <div class='flex flex-col justify-between bg-white w-full lg:w-1/4 mt-2 lg:mt-0 lg:mr-3 p-4 rounded border lg:flex' :class='{hidden: !showSettings, "md:flex": showSettings}'>
+      <div style='height: fit-content' class='lg:sticky lg:top-0 flex flex-col justify-start bg-white w-full max-h-auto lg:w-1/4 mt-2 lg:mt-0 lg:mr-3 p-4 rounded border lg:flex' :class='{hidden: !showSettings, "md:flex": showSettings}'>
         <div class='border-b pb-2'>
           <span class='font-semibold text-xs text-gray-900 uppercase tracking-wide'>Ajustar resultados</span>
         </div>
@@ -85,13 +94,13 @@
         <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide text-right cursor-pointer hover:underline'>Reiniciar filtros</span>
       </div>
       <div class='flex flex-col bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
-        <div class='flex flex-col md:flex-row border-b' v-for='partner in partners'>
+        <div class='flex flex-col md:flex-row border-b' v-for='(partner, k) in partners'>
           <div class='flex flex-col w-full lg:w-4/12 py-4'>
             <div class='flex flex-row items-center justify-start'>
               <div class='flex flex-row items-center justify-center w-6 h-6 bg-green-500'>
-                <span class='font-semibold text-lg text-white'>1</span>
+                <span class='font-semibold text-lg text-white'>{{ k + 1 }}</span>
               </div>
-              <div class='flex flex-row items-center pl-2 w-full h-6 bg-green-400 border-l-2 border-white'>
+              <div class='flex flex-row items-center pl-2 w-full h-6 bg-green-400 border-l-2 border-white' v-if='k == 0'>
                 <span class='font-semibold text-xs uppercase text-white'>La mejor opcion posible</span>
               </div>
             </div>
@@ -103,7 +112,7 @@
                 disabled
                 show-score
                 text-color="#ff9900"
-                score-template="{value} puntos">
+                score-template="{value} estrellas">
               </el-rate>
             </div>
           </div>

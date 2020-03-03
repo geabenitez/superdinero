@@ -145,7 +145,7 @@
               </el-option>
             </el-select>
           </div>
-          <div class='flex flex-col w-full' v-for='(question, k) in aditionalQuestions' v-if="questionNumber == totalQuestions + k + 1">
+          <div class='flex flex-col w-full' v-for='(question, k) in aditionalQuestions' v-if="questionNumber == totalQuestions - k">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? question.questionES: question.questionEN}}</span>
             <el-select v-model="responses['aditional_' + (k+1)]" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
               <el-option
