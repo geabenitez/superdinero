@@ -153,7 +153,7 @@ new Vue({
       }
     },
     prev(questionNumber) {
-      if (questionNumber < this.totalQuestions && questionNumber > 1) {
+      if (questionNumber <= this.totalQuestions && questionNumber > 1) {
         this.questionNumber--
       }
     },
