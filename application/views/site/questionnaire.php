@@ -145,6 +145,17 @@
               </el-option>
             </el-select>
           </div>
+          <div class='flex flex-col w-full' v-for='(question, k) in aditionalQuestions' v-if="questionNumber == totalQuestions + k + 1">
+            <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? question.questionES: question.questionEN}}</span>
+            <el-select v-model="responses['aditional_' + (k+1)]" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+              <el-option
+                v-for="category in getCategories(question)"
+                :key="category.nameES"
+                :label="spanishLang ? category.nameES : category.nameEN"
+                :value="category.nameES">
+              </el-option>
+            </el-select>
+          </div>
         </div>
         <div class="w-full flex flex-row justify-between border-t pt-4">
           <button 
