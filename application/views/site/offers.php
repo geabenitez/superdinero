@@ -131,7 +131,9 @@
             <a :href='`/redirect?redirect=${partner.url}&partner=${partner.id}`' class='w-full py-2 bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm uppercase font-semibold rounded text-center'>GET MY RATE</a>
           </div>
         </div>
-        <button v-if='filteredPartners.length != partners.length' class='rounded py-2 uppercase font-semibold tracking-wider bg-green-500 text-white' @click='loadMore()'>Cargar mas resutlados</button>
+        <div class='flex flex-row my-6 w-full items-center justify-center'>
+        <button v-if='filteredPartners.length != partners.length' class='w-64 rounded py-2 uppercase font-semibold tracking-wider bg-green-500 text-white' @click='loadMore()'>Cargar mas resutlados</button>
+        </div>
       </div>
     </div>
     <?php $this->load->view('/site/_footer') ?>
