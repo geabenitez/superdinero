@@ -80,4 +80,9 @@ class Site extends CI_Controller {
 		echo json_encode(getCredits($this->input->get('id', 0)));
 	}
 
+
+	public function get_categories() {
+		echo json_encode(getCategories($this->input->get('id', 0)));
+	}
+
 }

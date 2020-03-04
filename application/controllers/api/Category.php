@@ -23,13 +23,9 @@ class Category extends REST_Controller {
 
   }
 
+
 	public function index_get($id = 0){
-    if (!empty($id)) {
-      $data = $this->db->get_where("categories", ['id' => $id])->row_array();
-    } else {
-      $data = $this->db->get("categories")->result();
-    }
-    $this->response($data, REST_Controller::HTTP_OK);
+    $this->response(getCategories($id), REST_Controller::HTTP_OK);
   }
 
   public function index_post(){

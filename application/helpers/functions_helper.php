@@ -29,11 +29,11 @@ function admin_page($view, $page_title, $page_id, $recursos = null) {
 
   /*si se enviaron estilos y scripts para cargar la pagina se incluyen a los resources*/
   if ($recursos != null) {
-      foreach ($recursos as $key => $value) {
-        foreach ($value as $k => $resource) {
-          array_push($resources[$key], $resource);  
-        }  
-      }
+    foreach ($recursos as $key => $value) {
+      foreach ($value as $k => $resource) {
+        array_push($resources[$key], $resource);  
+      }  
+    }
   }
   $CI->load->view('admin/layout/index', $resources);
 }
@@ -79,4 +79,32 @@ function getCredits($id){
     return $result;
   }
 
-?>
+
+  function getCategories($id){
+    $CI =& get_instance();
+
+    if (!empty($id)) {
+      $data = $CI->db->get_where("categories", ['id' => $id])->result();
+    } else {
+      $data = $CI->db->get("categories")->result();
+    }
+
+    $result=array();
+
+    if (!empty($data)) {
+      foreach ($data as $v) {
+        $tmp = array();
+        $tmp['id']=$v->id;
+        $tmp['nameES']=$v->nameES;
+        $tmp['nameEN']=$v->nameEN;
+        $tmp['active']=$v->active;
+        $tmp['created_at']=$v->created_at;
+        $tmp['updated_at']=$v->updated_at;
+        $result[]=$tmp;
+      }
+    }
+
+    return $result;
+  }
+
+  ?>
