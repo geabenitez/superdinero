@@ -40,7 +40,7 @@
     </div>
     <span class='font-semibold text-green-900'>Espera un momento por favor...</span>
     <script>
-        setTimeout(function(){window.location.href = "<?=$redirect?>"; }, 3000);
+        setTimeout(function(){window.location.href = "<?=$redirect?>"; }, 5000);
     </script>
 </body>
 </html>
