@@ -60,6 +60,17 @@ class Site extends CI_Controller {
 	}
 
 	public function redirect() {
+		$resources['redirect'] = $_GET['redirect'];
+
+		$partnerData = $this->db->get_where("partners", ['id' => $_GET['partner']])->row_array();
+
+		
+		if (empty($partnerData)) {
+			header('location:'.site_url('/').'404');
+		}
+		$resources['partner'] = $partnerData['nameES'];
+
+
 		$resources['styles'] = basic_styles();
 		$resources['scripts'] = basic_scripts();
 		$this->load->view('site/redirection', $resources);
