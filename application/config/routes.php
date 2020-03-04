@@ -105,3 +105,6 @@ $route['amounts/(:any)'] = 'api/Amount/$1';
 // CREDICTS 
 $route['credits'] = 'api/Credit';
 $route['credits/(:any)'] = 'api/Credit/$1';
+
+$route['users'] = 'api/Users';
+$route['users/(:any)'] = 'api/Users/$1';
