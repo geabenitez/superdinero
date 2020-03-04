@@ -67,44 +67,43 @@ function getCredits($id){
       
       $tmp['categories']=array();
       $categories = $CI->db->get_where("credits_categories", ['creditId' => $v->id])->result();
-      if (!empty($categories))
+      if (!empty($categories)) {
         foreach ($categories as $c) {
-
           array_push($tmp['categories'],$c->categoryId);
         }
-        $result[]=$tmp;
       }
+      $result[]=$tmp;
     }
+  }
+  return $result;
+}
 
-    return $result;
+
+function getCategories($id){
+  $CI =& get_instance();
+
+  if (!empty($id)) {
+    $data = $CI->db->get_where("categories", ['id' => $id])->result();
+  } else {
+    $data = $CI->db->get("categories")->result();
   }
 
+  $result=array();
 
-  function getCategories($id){
-    $CI =& get_instance();
-
-    if (!empty($id)) {
-      $data = $CI->db->get_where("categories", ['id' => $id])->result();
-    } else {
-      $data = $CI->db->get("categories")->result();
+  if (!empty($data)) {
+    foreach ($data as $v) {
+      $tmp = array();
+      $tmp['id']=$v->id;
+      $tmp['nameES']=$v->nameES;
+      $tmp['nameEN']=$v->nameEN;
+      $tmp['active']=$v->active;
+      $tmp['created_at']=$v->created_at;
+      $tmp['updated_at']=$v->updated_at;
+      $result[]=$tmp;
     }
-
-    $result=array();
-
-    if (!empty($data)) {
-      foreach ($data as $v) {
-        $tmp = array();
-        $tmp['id']=$v->id;
-        $tmp['nameES']=$v->nameES;
-        $tmp['nameEN']=$v->nameEN;
-        $tmp['active']=$v->active;
-        $tmp['created_at']=$v->created_at;
-        $tmp['updated_at']=$v->updated_at;
-        $result[]=$tmp;
-      }
-    }
-
-    return $result;
   }
 
-  ?>
+  return $result;
+}
+
+?>
