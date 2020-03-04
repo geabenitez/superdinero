@@ -20,38 +20,7 @@ class Partner extends REST_Controller {
   }
 
   public function index_get($id = 0){
-    if (!empty($id)) {
-      $partners = $this->db->get_where("partners", ['id' => $id])->row_array();
-    } else {
-      $partners = $this->db->get("partners")->result();
-    }
-    foreach ($partners as $key => $value) {
-      $c = "categories";
-      $pc = "partners_categories";
-      $s = "states";
-      $ps = "partners_states";
-      $getCategories = array(
-        $c.'.nameES',
-        $c.'.nameEN'
-      );
-      $getStates = array(
-        $s.'.nameES',
-        $s.'.nameEN',
-      );
-      $value->categories = $this->db
-      ->select($getCategories)
-      ->from($pc)
-      ->where($pc.'.partnerId', $value->id)
-      ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
-      ->get()->result();
-      $value->states = $this->db
-      ->select($getStates)
-      ->from($ps)
-      ->where($ps.'.partnerId', $value->id)
-      ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
-      ->get()->result();
-    }
-    $this->response($partners, REST_Controller::HTTP_OK);
+    $this->response(getPartners($id), REST_Controller::HTTP_OK);
   }
 
   public function index_post(){
@@ -170,7 +139,7 @@ class Partner extends REST_Controller {
       ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
       ->get()->result();
     }
-    
+
     $response = new stdClass();
     $response->partners = $partners;
     $response->msj = 'Partner created successfully.';
@@ -217,7 +186,7 @@ class Partner extends REST_Controller {
       }
       $response->msj = 'Partner updated successfully.';
       $response->success = true;
-      
+
       $this->response($response, REST_Controller::HTTP_OK);
       return;
     }
@@ -341,7 +310,7 @@ class Partner extends REST_Controller {
 
 
 
-    
+
 
     $response = new stdClass();
     $response->partners = $this->db->get("partners")->result();
@@ -373,7 +342,7 @@ class Partner extends REST_Controller {
     }
     $response->msj = 'Partner updated successfully.';
     $response->success = true;
-    
+
     $this->response($response, REST_Controller::HTTP_OK);
   }
 

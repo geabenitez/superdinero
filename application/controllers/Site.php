@@ -85,4 +85,24 @@ class Site extends CI_Controller {
 		echo json_encode(getCategories($this->input->get('id', 0)));
 	}
 
+	public function get_amounts() {
+		echo json_encode(getAmounts($this->input->get('id', 0)));
+	}
+
+	public function get_documents() {
+		echo json_encode(getDocuments($this->input->get('id', 0)));
+	}
+
+	public function get_records() {
+		echo json_encode(getRecords($this->input->get('id', 0)));
+	}
+
+	public function get_states() {
+		echo json_encode(getStates($this->input->get('id', 0)));
+	}
+
+	public function get_partners() {
+		echo json_encode(getPartners($this->input->get('id', 0)));
+	}
+
 }

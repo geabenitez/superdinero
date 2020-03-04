@@ -24,12 +24,7 @@ class Amount extends REST_Controller {
   }
 
 	public function index_get($id = 0){
-    if (!empty($id)) {
-      $data = $this->db->get_where("amounts", ['id' => $id])->row_array();
-    } else {
-      $data = $this->db->get("amounts")->result();
-    }
-    $this->response($data, REST_Controller::HTTP_OK);
+    $this->response(getAmounts($id), REST_Controller::HTTP_OK);
   }
 
   public function index_post(){

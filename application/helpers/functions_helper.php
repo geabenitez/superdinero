@@ -106,4 +106,160 @@ function getCategories($id){
   return $result;
 }
 
+
+function getAmounts($id){
+  $CI =& get_instance();
+
+  if (!empty($id)) {
+    $data = $CI->db->get_where("amounts", ['id' => $id])->result();
+  } else {
+    $data = $CI->db->get("amounts")->result();
+  }
+
+  $result=array();
+
+  if (!empty($data)) {
+    foreach ($data as $v) {
+      $tmp = array();
+      $tmp['id']=$v->id;
+      $tmp['from']=$v->from;
+      $tmp['until']=$v->until;
+      $tmp['active']=$v->active;
+      $tmp['created_at']=$v->created_at;
+      $tmp['updated_at']=$v->updated_at;
+      $result[]=$tmp;
+    }
+  }
+
+  return $result;
+}
+
+
+
+function getDocuments($id){
+  $CI =& get_instance();
+
+  if (!empty($id)) {
+    $data = $CI->db->get_where("documents", ['id' => $id])->result();
+  } else {
+    $data = $CI->db->get("documents")->result();
+  }
+
+  $result=array();
+
+  if (!empty($data)) {
+    foreach ($data as $v) {
+      $tmp = array();
+      $tmp['id']=$v->id;
+      $tmp['nameES']=$v->nameES;
+      $tmp['nameEN']=$v->nameEN;
+      $tmp['active']=$v->active;
+      $tmp['created_at']=$v->created_at;
+      $tmp['updated_at']=$v->updated_at;
+      $result[]=$tmp;
+    }
+  }
+
+  return $result;
+}
+
+
+function getRecords($id){
+  $CI =& get_instance();
+
+  if (!empty($id)) {
+    $data = $CI->db->get_where("records", ['id' => $id])->result();
+  } else {
+    $data = $CI->db->get("records")->result();
+  }
+
+  $result=array();
+
+  if (!empty($data)) {
+    foreach ($data as $v) {
+      $tmp = array();
+      $tmp['id']=$v->id;
+      $tmp['nameES']=$v->nameES;
+      $tmp['nameEN']=$v->nameEN;
+      $tmp['active']=$v->active;
+      $tmp['created_at']=$v->created_at;
+      $tmp['updated_at']=$v->updated_at;
+      $result[]=$tmp;
+    }
+  }
+
+  return $result;
+}
+
+function getStates($id){
+  $CI =& get_instance();
+
+  if (!empty($id)) {
+    $data = $CI->db->get_where("states", ['id' => $id])->result();
+  } else {
+    $data = $CI->db->get("states")->result();
+  }
+
+  $result=array();
+
+  if (!empty($data)) {
+    foreach ($data as $v) {
+      $tmp = array();
+      $tmp['id']=$v->id;
+      $tmp['nameES']=$v->nameES;
+      $tmp['nameEN']=$v->nameEN;
+      $tmp['active']=$v->active;
+      $tmp['created_at']=$v->created_at;
+      $tmp['updated_at']=$v->updated_at;
+      $result[]=$tmp;
+    }
+  }
+
+  return $result;
+}
+
+
+
+function getPartners($id){
+  $CI =& get_instance();
+  if (!empty($id)) {
+      $partners = $CI->db->get_where("partners", ['id' => $id])->row_array();
+    } else {
+      $partners = $CI->db->get("partners")->result();
+    }
+    foreach ($partners as $key => $value) {
+      $c = "categories";
+      $pc = "partners_categories";
+      $s = "states";
+      $ps = "partners_states";
+      $getCategories = array(
+        $c.'.nameES',
+        $c.'.nameEN'
+      );
+      $getStates = array(
+        $s.'.nameES',
+        $s.'.nameEN',
+      );
+      $value->categories = $CI->db
+      ->select($getCategories)
+      ->from($pc)
+      ->where($pc.'.partnerId', $value->id)
+      ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
+      ->get()->result();
+      $value->states = $CI->db
+      ->select($getStates)
+      ->from($ps)
+      ->where($ps.'.partnerId', $value->id)
+      ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
+      ->get()->result();
+    }
+    
+    return $CI->response($partners, REST_Controller::HTTP_OK);
+
+}
+
+
+
+
+
 ?>
