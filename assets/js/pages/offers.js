@@ -49,7 +49,8 @@ new Vue({
       documents: [],
       records: [],
       states: [],
-      partners: []
+      partners: [],
+      showCount: 3
     }
   },
   methods: {
@@ -59,6 +60,18 @@ new Vue({
       } else {
         return EN.split(',')
       }
+    },
+    loadMore() {
+      this.loading = true
+      setTimeout(() => {
+        this.showCount = this.showCount + 3
+        this.loading = false
+      }, 1500);
+    }
+  },
+  computed: {
+    filteredPartners() {
+      return this.partners.slice(0, this.showCount)
     }
   }
 })

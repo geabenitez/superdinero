@@ -94,7 +94,7 @@
         <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide text-right cursor-pointer hover:underline'>Reiniciar filtros</span>
       </div>
       <div class='flex flex-col bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
-        <div class='flex flex-col md:flex-row border-b' v-for='(partner, k) in partners'>
+        <div class='flex flex-col md:flex-row border-b' v-for='(partner, k) in filteredPartners'>
           <div class='flex flex-col w-full lg:w-4/12 py-4'>
             <div class='flex flex-row items-center justify-start'>
               <div class='flex flex-row items-center justify-center w-6 h-6 bg-green-500'>
@@ -131,6 +131,7 @@
             <a :href='`/redirect?redirect=${partner.url}&partner=${partner.id}`' class='w-full py-2 bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm uppercase font-semibold rounded text-center'>GET MY RATE</a>
           </div>
         </div>
+        <button v-if='filteredPartners.length != partners.length' class='rounded py-2 uppercase font-semibold tracking-wider bg-green-500 text-white' @click='loadMore()'>Cargar mas resutlados</button>
       </div>
     </div>
     <?php $this->load->view('/site/_footer') ?>
