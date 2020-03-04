@@ -29,3 +29,7 @@
   height: 178px;
   display: block;
 }
+
+.el-loading-spinner .circular {
+    margin: 0 auto;
+}
