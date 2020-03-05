@@ -29,6 +29,6 @@
         </ul>
     </div>
     <div class='flex flex-row justify-center mb-4'>
-        <a href="javascript:;" class='text-xs font-semibold uppercase tracking-wide text-gray-100 hover:text-green-800'>Cerrar sesion</a>
+        <a href="<?= site_url('logout')?>" class='text-xs font-semibold uppercase tracking-wide text-gray-100 hover:text-green-800'>Cerrar sesion</a>
     </div>
 </div>

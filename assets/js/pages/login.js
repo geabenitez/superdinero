@@ -15,7 +15,7 @@ new Vue({
           if (res.data.result.success) {
             console.log('entre');
             
-            window.location=`${site_url}admin/partners`;
+            window.location=`${site_url}admin/generator`;
           }else{
             console.log('no entre');
           }
