@@ -95,6 +95,10 @@ $route['states/(:any)'] = 'api/State/$1';
 $route['records'] = 'api/Record';
 $route['records/(:any)'] = 'api/Record/$1';
 
+// CODES
+$route['codes'] = 'api/Codes';
+$route['codes/(:any)'] = 'api/Codes/$1';
+
 // DOCUMENTS 
 $route['documents'] = 'api/Document';
 $route['documents/(:any)'] = 'api/Document/$1';

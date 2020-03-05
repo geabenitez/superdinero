@@ -69,6 +69,13 @@ class Admin extends Secure_Controller {
 		admin_page('records', 'Records crediticios', 'records', $resourses);
 	}
 	
+	public function codes() {
+		if (!checkAdmin($this->session->userdata('id'))) {header('location:'.site_url('/').'sin_acceso');}
+		
+		$resourses['scripts'] = ['assets/js/pages/codes.js'];
+		admin_page('codes', 'Codigos', 'codes', $resourses);
+	}
+	
 	public function documents() {
 		if (!checkAdmin($this->session->userdata('id'))) {header('location:'.site_url('/').'sin_acceso');}
 		
