@@ -222,11 +222,12 @@ function getStates($id){
 
 function getPartners($id){
   $CI =& get_instance();
-  if (!empty($id)) {
+  if (!empty($id) || $id != 0) {
       $partners = $CI->db->get_where("partners", ['id' => $id])->row_array();
     } else {
       $partners = $CI->db->get("partners")->result();
     }
+    
     foreach ($partners as $key => $value) {
       $c = "categories";
       $pc = "partners_categories";
@@ -254,7 +255,7 @@ function getPartners($id){
       ->get()->result();
     }
     
-    return $CI->response($partners, REST_Controller::HTTP_OK);
+    return $partners;
 
 }
 

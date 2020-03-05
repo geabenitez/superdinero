@@ -76,33 +76,33 @@ class Site extends CI_Controller {
 		$this->load->view('site/redirection', $resources);
 	}
 
-	public function get_credits() {
-		echo json_encode(getCredits($this->input->get('id', 0)));
+	public function get_credits($id) {
+		return json_encode(getCredits($id));
 	}
 
 
-	public function get_categories() {
-		echo json_encode(getCategories($this->input->get('id', 0)));
+	public function get_categories($id) {
+		return json_encode(getCategories($id));
 	}
 
-	public function get_amounts() {
-		echo json_encode(getAmounts($this->input->get('id', 0)));
+	public function get_amounts($id) {
+		return json_encode(getAmounts($id));
 	}
 
-	public function get_documents() {
-		echo json_encode(getDocuments($this->input->get('id', 0)));
+	public function get_documents($id) {
+		return json_encode(getDocuments($id));
 	}
 
-	public function get_records() {
-		echo json_encode(getRecords($this->input->get('id', 0)));
+	public function get_records($id) {
+		return json_encode(getRecords($id));
 	}
 
-	public function get_states() {
-		echo json_encode(getStates($this->input->get('id', 0)));
+	public function get_states($id) {
+		return json_encode(getStates($id));
 	}
 
-	public function get_partners() {
-		echo json_encode(getPartners($this->input->get('id', 0)));
+	public function get_partners($id) {
+		return json_encode(getPartners($id));
 	}
 
 }
