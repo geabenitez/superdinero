@@ -259,12 +259,41 @@ function getPartners($id){
 
 }
 
+function getCodes($id){
+  $CI =& get_instance();
+
+  if (!empty($id)) {
+    $data = $CI->db->get_where("codes", ['id' => $id])->result();
+  } else {
+    $data = $CI->db->get("codes")->result();
+  }
+
+  $result=array();
+
+  if (!empty($data)) {
+    foreach ($data as $v) {
+      $tmp = array();
+      $tmp['id']=$v->id;
+      $tmp['codigo']=$v->codigo;
+      $tmp['agent']=$v->agent;
+      $tmp['configuracion']=$v->configuracion;
+      $tmp['created_at']=$v->created_at;
+      $tmp['updated_at']=$v->updated_at;
+      $result[]=$tmp;
+    }
+  }
+
+  return $result;
+}
+
 
 
 function checkAdmin($profile)
 {
   if ($profile==1) {return true; }else{return false;}
 }
+
+
 
 
 

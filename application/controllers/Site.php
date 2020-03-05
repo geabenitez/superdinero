@@ -105,4 +105,8 @@ class Site extends CI_Controller {
 		return json_encode(getPartners($id));
 	}
 
+	public function get_codes($id) {
+		return json_encode(getCodes($id));
+	}
+
 }
