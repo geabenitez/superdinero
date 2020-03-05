@@ -70,6 +70,7 @@ $route['logout'] = 'Site/process_logout';
 
 
 $route['admin/login'] = 'Site';
+$route['admin/generator'] = 'Admin/generator';
 $route['admin/partners'] = 'Admin/partners';
 $route['admin/states'] = 'Admin/states';
 $route['admin/categories'] = 'Admin/categories';
