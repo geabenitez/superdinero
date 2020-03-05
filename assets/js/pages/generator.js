@@ -30,18 +30,9 @@ new Vue({
         this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1)
         this.rawCategories = categories.data
         this.credit = { minAmount: 0, maxAmount: 0 }
-        // this.categories = this.credit.categories.map(id => {
-        //   const nameEN = categories.data.find(c => c.id === id).nameEN
-        //   const nameES = categories.data.find(c => c.id === id).nameES
-        //   return {
-        //     id,
-        //     nameEN,
-        //     nameES
-        //   }
-        // })
-        // this.documents = documents.data
-        // this.records = records.data
-        // this.states = states.data
+        this.documents = documents.data
+        this.records = records.data
+        this.states = states.data
         this.loading = false
       }))
   },
@@ -50,32 +41,32 @@ new Vue({
       questionNumber: 0,
       spanishLang: true,
       credits: {},
-      // credit: {},
+      credit: {},
       categories: [],
       rawCategories: [],
-      // documents: [],
-      // records: [],
-      // states: [],
+      documents: [],
+      records: [],
+      states: [],
       // value: 1,
       marks: { 1: 0, 100: 100 },
-      // paymentOptions: [
-      //   {
-      //     nameEN: 'Direct deposit',
-      //     nameES: 'Deposito directo'
-      //   },
-      //   {
-      //     nameEN: 'Check',
-      //     nameES: 'Cheque'
-      //   },
-      //   {
-      //     nameEN: 'Cash',
-      //     nameES: 'Efectivo'
-      //   },
-      //   {
-      //     nameEN: "I don't have earnings",
-      //     nameES: 'No tengo ingresos'
-      //   }
-      // ],
+      paymentOptions: [
+        {
+          nameEN: 'Direct deposit',
+          nameES: 'Deposito directo'
+        },
+        {
+          nameEN: 'Check',
+          nameES: 'Cheque'
+        },
+        {
+          nameEN: 'Cash',
+          nameES: 'Efectivo'
+        },
+        {
+          nameEN: "I don't have earnings",
+          nameES: 'No tengo ingresos'
+        }
+      ],
       questions: {
         0: {
           nameES: '¿Qué tipo de prestamos necesitas?',
@@ -163,20 +154,28 @@ new Vue({
         1: this.formatMoney(credit.minAmount),
         100: this.formatMoney(credit.maxAmount)
       }
+      this.categories = credit.categories.map(id => {
+        const nameEN = this.rawCategories.find(c => c.id === id).nameEN
+        const nameES = this.rawCategories.find(c => c.id === id).nameES
+        return {
+          id,
+          nameEN,
+          nameES
+        }
+      })
       this.credit = credit ? credit : { minAmount: 0, maxAmount: 0 }
+    },
+    getCategories(credit) {
+      return credit.categories.map(id => {
+        const nameEN = this.rawCategories.find(c => c.id === id).nameEN
+        const nameES = this.rawCategories.find(c => c.id === id).nameES
+        return {
+          id,
+          nameEN,
+          nameES
+        }
+      })
     }
-    // getCategories(credit) {
-    //   console.log(credit)
-    //   return credit.categories.map(id => {
-    //     const nameEN = this.rawCategories.find(c => c.id === id).nameEN
-    //     const nameES = this.rawCategories.find(c => c.id === id).nameES
-    //     return {
-    //       id,
-    //       nameEN,
-    //       nameES
-    //     }
-    //   })
-    // }
   },
   computed: {
     totalQuestions() {

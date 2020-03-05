@@ -27,7 +27,7 @@
             </div>
           </div>
         </div>
-        <!-- <div class='flex flex-col w-full' v-if="questionNumber == 2">
+        <div class='flex flex-col w-full' v-if="questionNumber == 2">
           <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[2].nameES: questions[2].nameEN}}</span>
           <el-select v-model="responses.category" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option
@@ -133,7 +133,7 @@
               :value="category.nameES">
             </el-option>
           </el-select>
-        </div> -->
+        </div> 
       </div>
       <div class="w-full flex flex-row justify-between border-t pt-4">
         <button 
