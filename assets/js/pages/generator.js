@@ -27,9 +27,10 @@ new Vue({
       .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates()])
       .then(axios.spread((categories, credits, documents, records, states) => {
         this.credits = credits.data
-        this.credit = credits.data.find(d => d.slug == this.credit)
-        // this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1)
-        // this.rawCategories = categories.data
+        this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1)
+        this.rawCategories = categories.data
+
+        // this.credit = credits.data.find(d => d.slug == this.credit)
         // this.categories = this.credit.categories.map(id => {
         //   const nameEN = categories.data.find(c => c.id === id).nameEN
         //   const nameES = categories.data.find(c => c.id === id).nameES
@@ -39,25 +40,24 @@ new Vue({
         //     nameES
         //   }
         // })
+
+
         // this.documents = documents.data
         // this.records = records.data
         // this.states = states.data
-        // this.marks = {
-        //   1: this.formatMoney(this.credit.minAmount),
-        //   100: this.formatMoney(this.credit.maxAmount)
-        // }
+        this.marks = {
+          1: this.formatMoney(this.credit.minAmount),
+          100: this.formatMoney(this.credit.maxAmount)
+        }
         this.loading = false
       }))
   },
   data: function () {
     return {
-      // slug: '',
       questionNumber: 0,
       spanishLang: true,
       credits: {},
-      credit: {},
-      // categories: [],
-      // rawCategories: [],
+      rawCategories: [],
       // documents: [],
       // records: [],
       // states: [],
@@ -143,15 +143,15 @@ new Vue({
     calculatePorcentage(number) {
       return parseInt(number * (100 / this.totalQuestions))
     },
-    // formatTooltip(val) {
-    //   return this.formatMoney(Math.ceil(this.calcValue(val)))
-    // },
-    // calcValue(val) {
-    //   return val == 1 ? this.credit.minAmount : (val * (this.credit.maxAmount) / 100)
-    // },
-    // formatMoney(amount) {
-    //   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
-    // },
+    formatTooltip(val) {
+      return this.formatMoney(Math.ceil(this.calcValue(val)))
+    },
+    calcValue(val) {
+      return val == 1 ? this.credit.minAmount : (val * (this.credit.maxAmount) / 100)
+    },
+    formatMoney(amount) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
+    },
     next(questionNumber) {
       if (questionNumber >= 0 && questionNumber < this.totalQuestions) {
         this.questionNumber++
@@ -179,6 +179,11 @@ new Vue({
     totalQuestions() {
       return Object.keys(this.questions).length + this.aditionalQuestions.length
     },
+    credit() {
+      const credit = this.credits.find(c => c.id === this.credit)
+      console.log(credit)
+      return credit
+    }
     // uri() {
     //   location.href = `${site_url}ofertas/${this.slug}?d=${btoa(JSON.stringify(this.responses))}`
     // }
