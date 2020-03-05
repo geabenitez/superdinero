@@ -4,6 +4,7 @@
             <img src="<?= site_url('assets/images/logo-white.png') ?>" class=' px-4 w-full' alt="">
         </div>
         <?php $menu = [
+            ['id' => 'generator', 'title' => 'Generador'],
             ['id' => 'partners', 'title' => 'Asociados'],
             ['id' => 'credits', 'title' => 'Tipos de creditos'],
             ['id' => 'categories', 'title' => 'Categorias'],
@@ -11,7 +12,8 @@
             ['id' => 'amounts', 'title' => 'Montos'],
             ['id' => 'documents', 'title' => 'Documentos'],
             ['id' => 'records', 'title' => 'Records crediticios'],
-            ['id' => 'params', 'title' => 'Parametros']
+            ['id' => 'params', 'title' => 'Parametros'],
+            ['id' => 'users', 'title' => 'Usuarios'],
         ] ?>
         <ul class='mt-6 text-gray-100'>
             <?php foreach ($menu as $key => $value) { ?>

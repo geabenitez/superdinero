@@ -13,6 +13,11 @@ class Admin extends Secure_Controller {
 		$this->load->view('admin/pages/login', $resources);
 	}
 
+	public function generator() {
+		$resourses['scripts'] = ['assets/js/pages/generator.js'];
+		admin_page('generator', 'Generador de links', 'generator', $resourses);
+	}
+
 	public function partners() {
 		$resourses['scripts'] = ['assets/js/pages/partners.js'];
 		admin_page('partners', 'Asociados', 'partners', $resourses);
