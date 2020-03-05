@@ -14,7 +14,7 @@
             </el-option>
           </el-select>
         </div>
-        <!-- <div class='flex flex-col w-full' v-if="questionNumber == 1">
+        <div class='flex flex-col w-full' v-if="questionNumber == 1">
           <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
           <el-slider v-model="responses.amount" :min='1' :format-tooltip="formatTooltip" :marks="marks"></el-slider>
           <div class='flex flex-row items-center justify-center w-full mt-6'>
@@ -27,7 +27,7 @@
             </div>
           </div>
         </div>
-        <div class='flex flex-col w-full' v-if="questionNumber == 2">
+        <!-- <div class='flex flex-col w-full' v-if="questionNumber == 2">
           <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[2].nameES: questions[2].nameEN}}</span>
           <el-select v-model="responses.category" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option
