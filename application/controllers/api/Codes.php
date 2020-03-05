@@ -1,7 +1,7 @@
 <?php
 require APPPATH . 'libraries/REST_Controller.php';
 
-class Partner extends REST_Controller {
+class Codes extends REST_Controller {
 
 	public function __construct() {
 		parent::__construct();
