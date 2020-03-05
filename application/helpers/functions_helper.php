@@ -261,6 +261,11 @@ function getPartners($id){
 
 
 
+function checkAdmin($profile)
+{
+  if ($profile==1) {return true; }else{return false;}
+}
+
 
 
 ?>
