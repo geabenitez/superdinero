@@ -46,7 +46,7 @@ new Vue({
       documents: [],
       records: [],
       states: [],
-      generatedCode: null,
+      generatedCode: 'AC-10000',
       marks: { 1: 0, 100: 100 },
       paymentOptions: [
         {
