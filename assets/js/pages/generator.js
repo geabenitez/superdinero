@@ -46,7 +46,7 @@ new Vue({
       documents: [],
       records: [],
       states: [],
-      generatedCode: 'AC-10000',
+      generatedCode: null,
       marks: { 1: 0, 100: 100 },
       paymentOptions: [
         {
@@ -196,7 +196,7 @@ new Vue({
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = 'Processing...';
-            axios(this.createHeader('POST', { agente: 1, configuracion: responses }))
+            axios(this.createHeader('POST', { agent: 1, configuracion: responses }))
               .then(res => {
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',
@@ -213,6 +213,9 @@ new Vue({
           }
         }
       })
+    },
+    reload() {
+      location.reload()
     }
   },
   computed: {

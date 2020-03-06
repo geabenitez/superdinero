@@ -1,6 +1,9 @@
 <div id='app'>
-  <div class="flex justify-center container mx-auto">
-    <div class='flex flex-col justify-center items-center bg-white w-full p-4 rounded border' v-loading="loading">
+  <div class="flex justify-center container mx-auto" v-loading="loading">
+    <div class='flex flex-col justify-center items-center bg-white w-full p-4 rounded border'>
+    Holis
+    </div>
+    <div class='flex flex-col justify-center items-center bg-white w-full p-4 rounded border'>
       <el-progress class='w-full pb-4 border-b' :percentage="calculatePorcentage(questionNumber)"></el-progress>
       <div class='flex items-center justify-center w-2/3 my-5 h-40'>
         <div class='flex flex-col w-full' v-if="questionNumber == 1">
@@ -149,14 +152,17 @@
           v-if="questionNumber == totalQuestions"
           @click="generate(responses)">GENERAR CODIGO</button>
       </div>
-      <div class='w-full flex flex-col items-center justify-center'>
+      <div class='w-full flex flex-col items-center justify-center' v-if="generatedCode != null">
         <div class="flex flex-row w-full items-center justify-center mb-2">
           <span class='font-semibold mr-2 uppercase'>Código generado:</span>
           <span class='bg-green-200 px-4 rounded text-sm font-semibold uppercase'>{{generatedCode}}</span>
         </div>
-        <div class="flex flex-row w-full items-center justify-center" v-if="generatedCode != null">
+        <div class="flex flex-row w-full items-center justify-center">
           <span class='mx-2 text-blue-500 underline' id='link'>{{ `${site_url}check?id=${generatedCode}` }}</span>
         </div>
+        <button 
+          class='mt-4 rounded bg-blue-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
+          @click="reload()">GENERAR CODIGO</button>
       </div>
     </div>
   </div>
