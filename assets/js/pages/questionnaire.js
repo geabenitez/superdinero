@@ -29,7 +29,7 @@ new Vue({
       .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates()])
       .then(axios.spread((categories, credits, documents, records, states) => {
         this.credit = credits.data.find(d => d.slug == slug)
-        this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1)
+        this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1 && d.id !== this.credit.id)
         this.rawCategories = categories.data
         this.categories = this.credit.categories.map(id => {
           const nameEN = categories.data.find(c => c.id === id).nameEN
@@ -158,7 +158,6 @@ new Vue({
       }
     },
     getCategories(credit) {
-      console.log(credit)
       return credit.categories.map(id => {
         const nameEN = this.rawCategories.find(c => c.id === id).nameEN
         const nameES = this.rawCategories.find(c => c.id === id).nameES
@@ -168,14 +167,22 @@ new Vue({
           nameES
         }
       })
+    },
+    generateCode(responses) {
+      this.loading = true
+      axios({
+        method: 'POST',
+        headers: { 'token-crf': cs },
+        url: `${site_url}codes/`,
+        data: { agent: null, configuracion: responses }
+      }).then(res => {
+        location.href = `${site_url}check/?code=${res.data.code}`
+      })
     }
   },
   computed: {
     totalQuestions() {
       return Object.keys(this.questions).length + this.aditionalQuestions.length
-    },
-    uri() {
-      location.href = `${site_url}ofertas/${this.slug}?d=${btoa(JSON.stringify(this.responses))}`
     }
   }
 })
