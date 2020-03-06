@@ -121,7 +121,7 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Estados">
+                <el-form-item label="Estados" v-show='advancedOptions'>
                   <el-select 
                     class='w-full' 
                     v-model="query.state" 
@@ -138,7 +138,7 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Categorias">
+                <el-form-item label="Categorias" v-show='advancedOptions'>
                   <el-select 
                     class='w-full' 
                     v-model="query.category" 
@@ -155,7 +155,7 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Estados">
+                <el-form-item label="Estados" v-show='advancedOptions'>
                   <el-select 
                     class='w-full' 
                     v-model="query.state" 
@@ -172,7 +172,7 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Estados">
+                <el-form-item label="Estados" v-show='advancedOptions'>
                   <el-select 
                     class='w-full' 
                     v-model="query.state" 
@@ -189,7 +189,7 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Categorias">
+                <el-form-item label="Categorias" v-show='advancedOptions'>
                   <el-select 
                     class='w-full' 
                     v-model="query.category" 
@@ -211,7 +211,7 @@
           </el-form>
         </div>  
         <div class='flex flex-row items-center justify-between'>
-          <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline' @click='advancedOptions = advancedOptions'>{{advancedOptions ? 'Menos' : 'Más'}} opciones</span>
+          <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline' @click='advancedOptions = !advancedOptions'>{{advancedOptions ? 'Menos' : 'Más'}} opciones</span>
           <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline'>Reiniciar filtros</span>
         </div>
       </div>
@@ -248,6 +248,7 @@
                 <span>{{blurb}}</span>
               </li>
             </ul>
+          </div>
           <div class='flex flex-row items-center justify-center w-full lg:w-3/12 p-4'>
             <a :href='`/redirect?redirect=${partner.url}&partner=${partner.id}`' class='w-full py-2 bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm uppercase font-semibold rounded text-center'>GET MY RATE</a>
           </div>
