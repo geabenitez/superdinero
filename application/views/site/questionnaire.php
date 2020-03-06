@@ -35,7 +35,7 @@
     <div class="flex justify-center container mx-auto px-4 lg:px-0">
       <div class='flex flex-col justify-center items-center bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border' v-loading="loading">
         <el-progress class='w-full pb-4 border-b' :percentage="calculatePorcentage(questionNumber)"></el-progress>
-        <div class='flex items-center justify-center w-2/3 my-5'>
+        <div class='flex items-center justify-center w-2/3 my-5 h-40'>
           <div class='flex flex-col w-full' v-if="questionNumber == 1">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
             <el-slider v-model="responses.amount" :min='1' :format-tooltip="formatTooltip" :marks="marks"></el-slider>
@@ -169,7 +169,7 @@
           <button 
             class='rounded bg-blue-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
             v-if="questionNumber == totalQuestions"
-            @click="uri()">BUSCAR OPCIONES</button>
+            @click="generateCode(responses)">BUSCAR OPCIONES</button>
         </div>
       </div>
     </div>

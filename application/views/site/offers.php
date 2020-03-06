@@ -32,8 +32,8 @@
       <div class="flex flex-col lg:flex-row items-center tracking-wider">
         <span class='text-green-800 uppercase text-base mr-2 text-center lg:text-left'>Revisa gratis tu puntaje de credito</span>
         <div class='flex flex-row'>
-          <button class='bg-green-500 w-42 py-1 px-5 text-white rounded uppercase font-semibold tracking-wider text-center mr-2'>Credit sesame</button>
-          <button class='bg-green-500 w-42 py-1 px-5 text-white rounded uppercase font-semibold tracking-wider text-center'>Credit karma</button>
+          <a href='https://fxo.co/8kOx' target='_blank' class='bg-green-500 w-42 py-1 px-5 text-white rounded uppercase font-semibold tracking-wider text-center mr-2'>Credit sesame</a>
+          <a href='https://creditkarma.myi4.net/xa7vy' target='_blank' class='bg-green-500 w-42 py-1 px-5 text-white rounded uppercase font-semibold tracking-wider text-center'>Credit karma</a>
         </div>
       </div>
       <div class='flex flex-row mb-6 lg:mb-0'>
@@ -53,6 +53,125 @@
           <el-form label-position="top" label-width="100px" :model="query">
             <el-row :gutter='15'>
               <el-col :span='24'>
+                <el-form-item label="Estados">
+                  <el-select 
+                    class='w-full' 
+                    v-model="query.state" 
+                    placeholder="Seleccionar" 
+                    size='small'
+                    clearable
+                    no-data-text='No hay valores'
+                    filterable >
+                    <el-option
+                        v-for='state in states'
+                        :key="state.id"
+                        :label="state.nameES"
+                        :value="state.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="Estados">
+                  <el-select 
+                    class='w-full' 
+                    v-model="query.state" 
+                    placeholder="Seleccionar" 
+                    size='small'
+                    clearable
+                    no-data-text='No hay valores'
+                    filterable >
+                    <el-option
+                        v-for='state in states'
+                        :key="state.id"
+                        :label="state.nameES"
+                        :value="state.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="Categorias">
+                  <el-select 
+                    class='w-full' 
+                    v-model="query.category" 
+                    placeholder="Seleccionar" 
+                    size='small'
+                    clearable
+                    no-data-text='No hay valores'
+                    filterable >
+                    <el-option
+                        v-for='category in categories'
+                        :key="category.id"
+                        :label="category.nameES"
+                        :value="category.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="Estados">
+                  <el-select 
+                    class='w-full' 
+                    v-model="query.state" 
+                    placeholder="Seleccionar" 
+                    size='small'
+                    clearable
+                    no-data-text='No hay valores'
+                    filterable >
+                    <el-option
+                        v-for='state in states'
+                        :key="state.id"
+                        :label="state.nameES"
+                        :value="state.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="Estados">
+                  <el-select 
+                    class='w-full' 
+                    v-model="query.state" 
+                    placeholder="Seleccionar" 
+                    size='small'
+                    clearable
+                    no-data-text='No hay valores'
+                    filterable >
+                    <el-option
+                        v-for='state in states'
+                        :key="state.id"
+                        :label="state.nameES"
+                        :value="state.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="Categorias">
+                  <el-select 
+                    class='w-full' 
+                    v-model="query.category" 
+                    placeholder="Seleccionar" 
+                    size='small'
+                    clearable
+                    no-data-text='No hay valores'
+                    filterable >
+                    <el-option
+                        v-for='category in categories'
+                        :key="category.id"
+                        :label="category.nameES"
+                        :value="category.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="Estados">
+                  <el-select 
+                    class='w-full' 
+                    v-model="query.state" 
+                    placeholder="Seleccionar" 
+                    size='small'
+                    clearable
+                    no-data-text='No hay valores'
+                    filterable >
+                    <el-option
+                        v-for='state in states'
+                        :key="state.id"
+                        :label="state.nameES"
+                        :value="state.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
                 <el-form-item label="Estados">
                   <el-select 
                     class='w-full' 
@@ -91,9 +210,12 @@
             </el-row>
           </el-form>
         </div>  
-        <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide text-right cursor-pointer hover:underline'>Reiniciar filtros</span>
+        <div class='flex flex-row items-center justify-between'>
+          <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline' @click='advancedOptions = advancedOptions'>{{advancedOptions ? 'Menos' : 'Más'}} opciones</span>
+          <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline'>Reiniciar filtros</span>
+        </div>
       </div>
-      <div class='flex flex-col bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
+      <div style='height: fit-content' class='flex flex-col bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
         <div class='flex flex-col md:flex-row border-b' v-for='(partner, k) in filteredPartners'>
           <div class='flex flex-col w-full lg:w-4/12 py-4'>
             <div class='flex flex-row items-center justify-start'>
@@ -126,7 +248,6 @@
                 <span>{{blurb}}</span>
               </li>
             </ul>
-          </div>
           <div class='flex flex-row items-center justify-center w-full lg:w-3/12 p-4'>
             <a :href='`/redirect?redirect=${partner.url}&partner=${partner.id}`' class='w-full py-2 bg-green-500 hover:bg-green-400 cursor-pointer text-white text-sm uppercase font-semibold rounded text-center'>GET MY RATE</a>
           </div>
