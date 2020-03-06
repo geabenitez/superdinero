@@ -83,7 +83,7 @@ class Site extends CI_Controller {
 			
 			$string = base64_encode($result[0]->configuracion);
 			// site_url('/ofertas/'.$credits[0]['slug'].'?=d='.$string);
-			header('location:'.site_url('/ofertas/'.$credits[0]['slug'].'?=d='.$conf));
+			header('location:'.site_url('/ofertas/'.$credits[0]['slug'].'?=d='.$string));
 	
 
 		
