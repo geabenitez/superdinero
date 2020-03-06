@@ -2,7 +2,7 @@
   <div class="flex justify-center container mx-auto">
     <div class='flex flex-col justify-center items-center bg-white w-full p-4 rounded border' v-loading="loading">
       <el-progress class='w-full pb-4 border-b' :percentage="calculatePorcentage(questionNumber)"></el-progress>
-      <div class='flex items-center justify-center w-2/3 my-5'>
+      <div class='flex items-center justify-center w-2/3 my-5 h-40'>
         <div class='flex flex-col w-full' v-if="questionNumber == 1">
           <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
           <el-select v-model="responses.credit" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2' @change="changeCredit(responses.credit)">
@@ -149,7 +149,15 @@
           v-if="questionNumber == totalQuestions"
           @click="generate(responses)">GENERAR CODIGO</button>
       </div>
-      {{generatedCode}}
+      <div class='w-full flex flex-col items-center justify-center'>
+        <div class="flex flex-row w-full items-center justify-center mb-2">
+          <span class='font-semibold mr-2 uppercase'>Código generado:</span>
+          <span class='bg-green-200 px-4 rounded text-sm font-semibold uppercase'>{{generatedCode}}</span>
+        </div>
+        <div class="flex flex-row w-full items-center justify-center" v-if="generatedCode != null">
+          <span class='mx-2 text-blue-500 underline' id='link'>{{ `${site_url}check?id=${generatedCode}` }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
