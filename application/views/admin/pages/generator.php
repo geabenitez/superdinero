@@ -147,8 +147,9 @@
         <button 
           class='rounded bg-blue-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
           v-if="questionNumber == totalQuestions"
-          @click="generate()">GENERAR CODIGO</button>
+          @click="generate(responses)">GENERAR CODIGO</button>
       </div>
+      {generatedCode}
     </div>
   </div>
 </div>

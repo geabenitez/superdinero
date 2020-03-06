@@ -46,7 +46,7 @@ new Vue({
       documents: [],
       records: [],
       states: [],
-      // value: 1,
+      generatedCode: null,
       marks: { 1: 0, 100: 100 },
       paymentOptions: [
         {
@@ -124,7 +124,15 @@ new Vue({
       loading: true
     }
   },
-  methods: {
+  methods: {,
+    createHeader(METHOD, data, id = '') {
+      return {
+        method: METHOD,
+        headers: { 'token-crf': cs },
+        url: `${site_url}credits/${id}`,
+        data
+      }
+    },
     calculatePorcentage(number) {
       return parseInt(number * (100 / this.totalQuestions))
     },
@@ -176,44 +184,35 @@ new Vue({
         }
       })
     },
-    generate() {
-      const years = {
-        2020: 'A',
-        2021: 'B',
-        2022: 'C',
-        2023: 'D',
-        2024: 'E',
-        2025: 'F',
-        2026: 'G',
-        2027: 'H',
-        2028: 'I',
-        2029: 'J',
-        2030: 'K'
-      }
-
-      const months = {
-        0: 'A',
-        1: 'B',
-        2: 'C',
-        3: 'D',
-        4: 'E',
-        5: 'F',
-        6: 'G',
-        7: 'H',
-        8: 'I',
-        9: 'J',
-        10: 'K',
-        11: 'L'
-      }
-
-      axios({ headers: { 'token-crf': cs }, method: 'GET', url: `${site_url}codes` })
-        .then(res => {
-          console.log(res)
-          const date = new Date()
-          console.log(date)
-          const prefix = `${years[date.getFullYear()]}${months[date.getMonth()]}`
-          console.log(prefix)
-        })
+    generate(responses) {
+      this.$msgbox({
+        type: 'warning',
+        title: 'Confirmation',
+        message: `Are you sure you want to generate a code?`,
+        showCancelButton: true,
+        confirmButtonText: "Yes, please",
+        cancelButtonText: 'Cancel',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = 'Processing...';
+            axios(this.createHeader(POST, responses))
+              .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
+                instance.confirmButtonLoading = false;
+                instance.confirmButtonText = "Yes, please";
+                this.generatedCode = res.data.code
+                done()
+              })
+          } else {
+            done();
+          }
+        }
+      })
     }
   },
   computed: {
