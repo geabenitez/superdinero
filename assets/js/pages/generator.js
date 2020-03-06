@@ -29,26 +29,10 @@ new Vue({
         this.credits = credits.data
         this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1)
         this.rawCategories = categories.data
-
-        // this.credit = credits.data.find(d => d.slug == this.credit)
-        // this.categories = this.credit.categories.map(id => {
-        //   const nameEN = categories.data.find(c => c.id === id).nameEN
-        //   const nameES = categories.data.find(c => c.id === id).nameES
-        //   return {
-        //     id,
-        //     nameEN,
-        //     nameES
-        //   }
-        // })
-
-
-        // this.documents = documents.data
-        // this.records = records.data
-        // this.states = states.data
-        this.marks = {
-          1: this.formatMoney(this.credit.minAmount),
-          100: this.formatMoney(this.credit.maxAmount)
-        }
+        this.credit = { minAmount: 0, maxAmount: 0 }
+        this.documents = documents.data
+        this.records = records.data
+        this.states = states.data
         this.loading = false
       }))
   },
@@ -57,30 +41,32 @@ new Vue({
       questionNumber: 0,
       spanishLang: true,
       credits: {},
+      credit: {},
+      categories: [],
       rawCategories: [],
-      // documents: [],
-      // records: [],
-      // states: [],
+      documents: [],
+      records: [],
+      states: [],
       // value: 1,
-      // marks: {},
-      // paymentOptions: [
-      //   {
-      //     nameEN: 'Direct deposit',
-      //     nameES: 'Deposito directo'
-      //   },
-      //   {
-      //     nameEN: 'Check',
-      //     nameES: 'Cheque'
-      //   },
-      //   {
-      //     nameEN: 'Cash',
-      //     nameES: 'Efectivo'
-      //   },
-      //   {
-      //     nameEN: "I don't have earnings",
-      //     nameES: 'No tengo ingresos'
-      //   }
-      // ],
+      marks: { 1: 0, 100: 100 },
+      paymentOptions: [
+        {
+          nameEN: 'Direct deposit',
+          nameES: 'Deposito directo'
+        },
+        {
+          nameEN: 'Check',
+          nameES: 'Cheque'
+        },
+        {
+          nameEN: 'Cash',
+          nameES: 'Efectivo'
+        },
+        {
+          nameEN: "I don't have earnings",
+          nameES: 'No tengo ingresos'
+        }
+      ],
       questions: {
         0: {
           nameES: '¿Qué tipo de prestamos necesitas?',
@@ -162,28 +148,39 @@ new Vue({
         this.questionNumber--
       }
     },
-    // getCategories(credit) {
-    //   console.log(credit)
-    //   return credit.categories.map(id => {
-    //     const nameEN = this.rawCategories.find(c => c.id === id).nameEN
-    //     const nameES = this.rawCategories.find(c => c.id === id).nameES
-    //     return {
-    //       id,
-    //       nameEN,
-    //       nameES
-    //     }
-    //   })
-    // }
+    changeCredit(id) {
+      const credit = this.credits.find(d => d.id == id)
+      this.marks = {
+        1: this.formatMoney(credit.minAmount),
+        100: this.formatMoney(credit.maxAmount)
+      }
+      this.categories = credit.categories.map(id => {
+        const nameEN = this.rawCategories.find(c => c.id === id).nameEN
+        const nameES = this.rawCategories.find(c => c.id === id).nameES
+        return {
+          id,
+          nameEN,
+          nameES
+        }
+      })
+      this.credit = credit ? credit : { minAmount: 0, maxAmount: 0 }
+    },
+    getCategories(credit) {
+      return credit.categories.map(id => {
+        const nameEN = this.rawCategories.find(c => c.id === id).nameEN
+        const nameES = this.rawCategories.find(c => c.id === id).nameES
+        return {
+          id,
+          nameEN,
+          nameES
+        }
+      })
+    }
   },
   computed: {
     totalQuestions() {
       return Object.keys(this.questions).length + this.aditionalQuestions.length
     },
-    credit() {
-      const credit = this.credits.find(c => c.id === this.credit)
-      console.log(credit)
-      return credit
-    }
     // uri() {
     //   location.href = `${site_url}ofertas/${this.slug}?d=${btoa(JSON.stringify(this.responses))}`
     // }

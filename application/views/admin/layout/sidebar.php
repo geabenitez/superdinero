@@ -4,19 +4,19 @@
             <img src="<?= site_url('assets/images/logo-white.png') ?>" class=' px-4 w-full' alt="">
         </div>
         <?php $menu = [
-            ['id' => 'generator', 'title' => 'Generador'],
-            ['id' => 'partners', 'title' => 'Asociados'],
-            ['id' => 'credits', 'title' => 'Tipos de creditos'],
-            ['id' => 'categories', 'title' => 'Categorias'],
-            ['id' => 'states', 'title' => 'Estados'],
-            ['id' => 'amounts', 'title' => 'Montos'],
-            ['id' => 'documents', 'title' => 'Documentos'],
-            ['id' => 'records', 'title' => 'Records crediticios'],
-            ['id' => 'params', 'title' => 'Parametros'],
-            ['id' => 'users', 'title' => 'Usuarios'],
+            ['profiles' => [1, 2], 'id' => 'generator', 'title' => 'Generador'],
+            ['profiles' => [1], 'id' => 'partners', 'title' => 'Asociados'],
+            ['profiles' => [1], 'id' => 'credits', 'title' => 'Tipos de creditos'],
+            ['profiles' => [1], 'id' => 'categories', 'title' => 'Categorias'],
+            ['profiles' => [1], 'id' => 'states', 'title' => 'Estados'],
+            ['profiles' => [1], 'id' => 'amounts', 'title' => 'Montos'],
+            ['profiles' => [1], 'id' => 'documents', 'title' => 'Documentos'],
+            ['profiles' => [1], 'id' => 'records', 'title' => 'Records crediticios'],
+            ['profiles' => [1], 'id' => 'params', 'title' => 'Parametros'],
+            ['profiles' => [1], 'id' => 'users', 'title' => 'Usuarios'],
         ] ?>
         <ul class='mt-6 text-gray-100'>
-            <?php foreach ($menu as $key => $value) { ?>
+            <?php foreach ($menu as $key => $value) { if(in_array($this->session->userdata['profile'], $value['profiles'])){ ?>
                 <li class='px-4 py-2 cursor-pointer border-b <?= $key == 0 ? 'border-t' : '' ?> border-green-600 hover:bg-green-700 <?= $value['id'] == $page_id ? 'bg-green-700' : '' ?>'>
                     <a href='<?= site_url('admin/' . $value['id']) ?>' class='flex flex-row items-center ml-2'>
                         <?php if ($value['id'] == $page_id){ ?>
@@ -25,7 +25,7 @@
                         <span><?= $value['title'] ?></span>
                     </a>
                 </li>
-            <?php } ?>
+            <?php } } ?>
         </ul>
     </div>
     <div class='flex flex-row justify-center mb-4'>
