@@ -12,7 +12,7 @@ function basic_scripts() {
   return array(
     'assets/js/vue.min.js',
     'assets/js/element.min.js',
-    'assets/js/es.js'
+    'assets/js/es.js',
   );
 }
 

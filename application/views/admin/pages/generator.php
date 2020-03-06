@@ -1,5 +1,5 @@
 <div id='app'>
-  <div class="flex justify-center container mx-auto" v-loading="loading">
+  <div class="flex flex-col items-center container mx-auto" v-loading="loading">
     <div class='flex flex-col justify-center items-center bg-white w-full p-4 rounded border'>
     Holis
     </div>
