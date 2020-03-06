@@ -3,8 +3,8 @@
     <div class='flex flex-col justify-center items-center bg-white w-full p-4 rounded border' v-loading="loading">
       <el-progress class='w-full pb-4 border-b' :percentage="calculatePorcentage(questionNumber)"></el-progress>
       <div class='flex items-center justify-center w-2/3 my-5'>
-        <div class='flex flex-col w-full' v-if="questionNumber == 0">
-          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[0].nameES: questions[0].nameEN}}</span>
+        <div class='flex flex-col w-full' v-if="questionNumber == 1">
+          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
           <el-select v-model="responses.credit" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2' @change="changeCredit(responses.credit)">
             <el-option
               v-for="credit in credits"
@@ -14,8 +14,8 @@
             </el-option>
           </el-select>
         </div>
-        <div class='flex flex-col w-full' v-if="questionNumber == 1">
-          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
+        <div class='flex flex-col w-full' v-if="questionNumber == 2">
+          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[2].nameES: questions[2].nameEN}}</span>
           <el-slider v-model="responses.amount" :min='1' :format-tooltip="formatTooltip" :marks="marks"></el-slider>
           <div class='flex flex-row items-center justify-center w-full mt-6'>
             <div class="w-64">
@@ -27,8 +27,8 @@
             </div>
           </div>
         </div>
-        <div class='flex flex-col w-full' v-if="questionNumber == 2">
-          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[2].nameES: questions[2].nameEN}}</span>
+        <div class='flex flex-col w-full' v-if="questionNumber == 3">
+          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[3].nameES: questions[3].nameEN}}</span>
           <el-select v-model="responses.category" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option
               v-for="category in categories"
@@ -38,8 +38,8 @@
             </el-option>
           </el-select>
         </div>
-        <div class='flex flex-col w-full' v-if="questionNumber == 3">
-          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[3].nameES: questions[3].nameEN}}</span>
+        <div class='flex flex-col w-full' v-if="questionNumber == 4">
+          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[4].nameES: questions[4].nameEN}}</span>
           <el-select v-model="responses.document" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option
               v-for="document in documents"
@@ -49,8 +49,8 @@
             </el-option>
           </el-select>
         </div>
-        <div class='flex flex-col w-full' v-if="questionNumber == 4">
-          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[4].nameES: questions[4].nameEN}}</span>
+        <div class='flex flex-col w-full' v-if="questionNumber == 5">
+          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[5].nameES: questions[5].nameEN}}</span>
           <el-select v-model="responses.record" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option
               v-for="record in records"
@@ -60,8 +60,8 @@
             </el-option>
           </el-select>
         </div>
-        <div class='flex flex-col w-full' v-if="questionNumber == 5">
-          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[5].nameES: questions[5].nameEN}}</span>
+        <div class='flex flex-col w-full' v-if="questionNumber == 6">
+          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[6].nameES: questions[6].nameEN}}</span>
           <el-select v-model="responses.state" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option
               v-for="state in states"
@@ -71,22 +71,22 @@
             </el-option>
           </el-select>
         </div>
-        <div class='flex flex-col w-full' v-if="questionNumber == 6">
-          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[6].nameES: questions[6].nameEN}}</span>
-          <el-select v-model="responses.has_car" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
-            <el-option :label="spanishLang ? 'SI' : 'YES'" :value="true"></el-option>
-            <el-option label="NO" :value="false"></el-option>
-          </el-select>
-        </div>
         <div class='flex flex-col w-full' v-if="questionNumber == 7">
           <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[7].nameES: questions[7].nameEN}}</span>
-          <el-select v-model="responses.has_house" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+          <el-select v-model="responses.has_car" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option :label="spanishLang ? 'SI' : 'YES'" :value="true"></el-option>
             <el-option label="NO" :value="false"></el-option>
           </el-select>
         </div>
         <div class='flex flex-col w-full' v-if="questionNumber == 8">
           <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[8].nameES: questions[8].nameEN}}</span>
+          <el-select v-model="responses.has_house" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
+            <el-option :label="spanishLang ? 'SI' : 'YES'" :value="true"></el-option>
+            <el-option label="NO" :value="false"></el-option>
+          </el-select>
+        </div>
+        <div class='flex flex-col w-full' v-if="questionNumber == 9">
+          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[9].nameES: questions[9].nameEN}}</span>
           <el-select v-model="responses.earnings" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option label='$0.00 - $500.00' value='0 - 500'></el-option>
             <el-option label='$501.00 - $1,000.00' value='501 - 1000'></el-option>
@@ -112,8 +112,8 @@
             <el-option label='$50,000.00 - mas' value='50000 - mas'></el-option>
           </el-select>
         </div>
-        <div class='flex flex-col w-full' v-if="questionNumber == 9">
-          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[9].nameES: questions[9].nameEN}}</span>
+        <div class='flex flex-col w-full' v-if="questionNumber == 10">
+          <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[10].nameES: questions[10].nameEN}}</span>
           <el-select v-model="responses.payform" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option
               v-for="option in paymentOptions"

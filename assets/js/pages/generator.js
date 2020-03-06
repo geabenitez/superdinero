@@ -27,7 +27,6 @@ new Vue({
       .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates()])
       .then(axios.spread((categories, credits, documents, records, states) => {
         this.credits = credits.data
-        this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1)
         this.rawCategories = categories.data
         this.credit = { minAmount: 0, maxAmount: 0 }
         this.documents = documents.data
@@ -38,7 +37,7 @@ new Vue({
   },
   data: function () {
     return {
-      questionNumber: 0,
+      questionNumber: 1,
       spanishLang: true,
       credits: {},
       credit: {},
@@ -68,43 +67,43 @@ new Vue({
         }
       ],
       questions: {
-        0: {
+        1: {
           nameES: '¿Qué tipo de prestamos necesitas?',
           nameEN: 'What kind of credit do you need?'
         },
-        1: {
+        2: {
           nameES: '¿Qué cantidad necesitas?',
           nameEN: 'how much do you need?'
         },
-        2: {
+        3: {
           nameES: '¿Para qué lo necesita?',
           nameEN: 'What do you need it for?'
         },
-        3: {
+        4: {
           nameES: '¿Qué tipo de documento tiene?',
           nameEN: 'What typenumber of document do you have?'
         },
-        4: {
+        5: {
           nameES: 'Aproximado puntaje de crédito',
           nameEN: 'Approximate credit score'
         },
-        5: {
+        6: {
           nameES: '¿En qué estado se encuentra?',
           nameEN: 'What state are you in?'
         },
-        6: {
+        7: {
           nameES: '¿Posee auto propio o arrendado?',
           nameEN: 'Do you own or lease your car?'
         },
-        7: {
+        8: {
           nameES: '¿Posee casa propia o arrendada?',
           nameEN: 'Do you own or lease a house?'
         },
-        8: {
+        9: {
           nameES: '¿Cuanto gana mensualmente?',
           nameEN: 'how much are your monthly earnings?'
         },
-        9: {
+        10: {
           nameES: '¿Como te pagan?',
           nameEN: 'how do you get paid?'
         }
@@ -139,12 +138,12 @@ new Vue({
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
     },
     next(questionNumber) {
-      if (questionNumber >= 0 && questionNumber < this.totalQuestions) {
+      if (questionNumber >= 1 && questionNumber < this.totalQuestions) {
         this.questionNumber++
       }
     },
     prev(questionNumber) {
-      if (questionNumber <= this.totalQuestions && questionNumber > 0) {
+      if (questionNumber <= this.totalQuestions && questionNumber > 1) {
         this.questionNumber--
       }
     },
@@ -163,7 +162,8 @@ new Vue({
           nameES
         }
       })
-      this.credit = credit ? credit : { minAmount: 0, maxAmount: 0 }
+      this.aditionalQuestions = this.credits.filter(d => d.askAlways == 1 && d.id !== id)
+      this.credit = credit
     },
     getCategories(credit) {
       return credit.categories.map(id => {
