@@ -68,17 +68,31 @@ class Site extends CI_Controller {
 				header('location:'.site_url('/').'404');
 			}
 
+			$users_data = $this->db->get_where("users", ['id' => $result[0]->agent])->result(); 
 
+			$code_user = null;
+			if (!empty($users_data)) {
+				$code_user = $users_data[0]->code;
+			}
+			
 			//echo $result[0]->configuracion;
 			
 			$conf = json_decode($result[0]->configuracion);
+			$to_send =  array(
+				'agent' => $code_user,
+				'data' => $result[0]->configuracion,
+				 );
 			
+
 			$credits = getCredits($conf->credit);
 			if (!isset($credits[0]['slug'])) {
 				# code...
 			}
+
+			$string = base64_encode(json_encode($to_send));
 			
-			$string = base64_encode($result[0]->configuracion);
+			
+			//$string = base64_encode($result[0]->configuracion);
 			// site_url('/ofertas/'.$credits[0]['slug'].'?=d='.$string);
 			header('location:'.site_url('/ofertas/'.$credits[0]['slug'].'?d='.$string));
 	
