@@ -40,13 +40,24 @@ class Codes extends REST_Controller {
 		$data =  explode('-',$result[0]->code);
 		$new_code = $vigente."-".($data[1]+1);
 	}
+
 		
 	
 
     $input = json_decode($this->input->raw_input_stream);
-	$input['codigo']=$new_code;
 
-    $this->db->insert('codes',$input);
+	$insert = array(
+		'agent'=>$input->agent,
+		'codigo'=>$new_code,
+		'configuracion'=>json_encode($input->configuracion),
+		'created_at' => date("Y-m-d h:i:s")
+
+	);
+
+
+
+
+    $this->db->insert('codes',$insert);
     $response = new stdClass();
     $response->codes = $this->db->get("codes")->result();
     $response->msj = 'Codes created successfully.';
