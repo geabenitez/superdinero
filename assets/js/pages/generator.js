@@ -175,14 +175,19 @@ new Vue({
           nameES
         }
       })
+    },
+    generate() {
+      axios({ headers: { 'token-crf': cs }, method: 'GET', url: `${site_url}codes` })
+        .then(res => {
+          console.log(res)
+          const { getCode } = require('../utils')
+          console.log(getCode())
+        })
     }
   },
   computed: {
     totalQuestions() {
       return Object.keys(this.questions).length + this.aditionalQuestions.length
-    },
-    // uri() {
-    //   location.href = `${site_url}ofertas/${this.slug}?d=${btoa(JSON.stringify(this.responses))}`
-    // }
+    }
   }
 })
