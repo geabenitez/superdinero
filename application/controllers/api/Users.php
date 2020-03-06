@@ -30,6 +30,9 @@ class Users extends REST_Controller {
 		} else {
 			$data = $this->db->get("users")->result();
 		}
+		if(!empty($data)){
+			foreach ($data as $k => $v) {unset($v->password); }
+		}
 		$this->response($data, REST_Controller::HTTP_OK);
 	}
 

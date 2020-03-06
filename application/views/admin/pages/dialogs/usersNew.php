@@ -1,27 +1,45 @@
-<el-dialog :title="action" :visible.sync="showNewUser" width=500px>
+<el-dialog :title="action" :visible.sync="showNewUser" width=700px>
   <el-form label-position="top" label-width="100px" :model="newUserForm">
     <el-row :gutter='15'>
       <el-col :span='12'>
-        <el-form-item label="Desde:">
+        <el-form-item label="Nombres:">
           <el-input 
-            placeholder="Ingresa monto" 
+            placeholder="Ingresa los nombres" 
             size='small' 
             v-model="newUserForm.names"
-            type='number'
-            min='0.01'
-            step='0.25'
+            type='text'
             clearable/>
         </el-form-item>
       </el-col>
       <el-col :span='12'>
-        <el-form-item label="Hasta:">
+        <el-form-item label="Apellidos">
           <el-input 
-            placeholder="Ingresa monto" 
+            placeholder="Ingresa los apellidos" 
             size='small' 
             v-model="newUserForm.lastnames"
-            type='number'
-            min='0.01'
-            step='0.25'
+            type='text'
+            clearable/>
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-row :gutter='15'>
+      <el-col :span='12'>
+        <el-form-item label="Email:">
+          <el-input 
+            placeholder="Ingrese el email" 
+            size='small' 
+            v-model="newUserForm.email"
+            type='text'
+            clearable/>
+        </el-form-item>
+      </el-col>
+      <el-col :span='12'>
+        <el-form-item label="Password">
+          <el-input 
+            placeholder="Ingresa el password" 
+            size='small' 
+            v-model="newUserForm.password"
+            type='text'
             clearable/>
         </el-form-item>
       </el-col>

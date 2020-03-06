@@ -29,7 +29,22 @@
             <span>{{ scope.row.lastnames }}</span>
           </template>
         </el-table-column>
-        <el-table-column min-width="420"></el-table-column>
+        <el-table-column label="Codigo" min-width="100">
+          <template slot-scope="scope">
+            <span>{{ scope.row.code }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="Email" min-width="200">
+          <template slot-scope="scope">
+            <span>{{ scope.row.email }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="Perfil" min-width="100">
+          <template slot-scope="scope">
+            <span>{{ scope.row.profile }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="220"></el-table-column>
    
         <el-table-column min-width='60'>
           <template slot-scope="scope">
@@ -39,7 +54,7 @@
               </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="editUser(scope.row)">
-                  <i class="el-icon-edit-outline"></i> Editar monto
+                  <i class="el-icon-edit-outline"></i> Editar usuario
                 </el-dropdown-item>
                 <el-dropdown-item @click.native="changeStatus(scope.row.id, scope.row.active)">
                   <span v-if="scope.row.active == '1'">
@@ -48,11 +63,11 @@
                   <span v-else>
                     <i class="el-icon-check"></i> Activar
                   </span>
-                  monto
+                  usuario
                 </el-dropdown-item>
                 <el-dropdown-item divided class='font-semibold' @click.native="deleteUser(scope.row.id)">
                   <span class='text-red-500 tracking-wide'>
-                    <i class="el-icon-delete"></i> Eliminar monto
+                    <i class="el-icon-delete"></i> Eliminar usuario
                   </span>
                 </el-dropdown-item>
               </el-dropdown-menu>
