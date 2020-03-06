@@ -72,11 +72,8 @@ class Site extends CI_Controller {
 			//echo $result[0]->configuracion;
 			
 			$conf = json_decode($result[0]->configuracion);
-
-			//var_dump($conf);
-		
-
-			$credits = getCredits($conf[0]->credit);
+			
+			$credits = getCredits($conf->credit);
 			if (!isset($credits[0]['slug'])) {
 				# code...
 			}
