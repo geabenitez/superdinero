@@ -24,9 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-//$config['base_url'] = 'http://localhost:8001/';
+$config['base_url'] = 'http://localhost:8001/';
 
-$config['base_url'] = 'http://localhost/superdinero/';
+// $config['base_url'] = 'http://localhost/superdinero/';
 //$config['base_url'] = 'http://localhost/SITES/superdinero/';
 
 /*

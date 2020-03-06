@@ -29,6 +29,7 @@ new Vue({
       .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates()])
       .then(axios.spread((categories, credits, documents, records, states) => {
         this.credit = credits.data.find(d => d.slug == slug)
+        this.responses.credit = this.credit.id
         this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1 && d.id !== this.credit.id)
         this.rawCategories = categories.data
         this.categories = this.credit.categories.map(id => {
@@ -121,6 +122,7 @@ new Vue({
       },
       aditionalQuestions: [],
       responses: {
+        credit: '',
         amount: 0,
         category: '',
         document: '',

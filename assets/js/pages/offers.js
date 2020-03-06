@@ -3,9 +3,10 @@ new Vue({
   created() {
     const slug = window.location.pathname.split('ofertas/')[1]
     const query = JSON.parse(atob(location.search.split('?d=')[1]))
+    this.agent = query.agent
     this.slug = slug
-    this.query = query
-    this.originalQuery = query
+    this.query = JSON.parse(query.data)
+    this.originalQuery = JSON.parse(query.data)
     const headers = { 'token-crf': cs }
     const getCategories = () => axios({ headers, method: 'GET', url: `${site_url}categories` })
     const getCredits = () => axios({ headers, method: 'GET', url: `${site_url}credits` })
@@ -37,6 +38,7 @@ new Vue({
   },
   data: function () {
     return {
+      advancedOptions: false,
       slug: '',
       loading: true,
       showSettings: false,
