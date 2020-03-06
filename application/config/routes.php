@@ -69,6 +69,7 @@ $route['process_login'] = 'Site/login_process';
 $route['logout'] = 'Site/process_logout';
 
 
+$route['check'] = 'Site/check';
 $route['admin/login'] = 'Site';
 $route['admin/generator'] = 'Admin/generator';
 $route['admin/partners'] = 'Admin/partners';

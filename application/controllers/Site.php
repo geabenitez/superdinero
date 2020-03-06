@@ -59,6 +59,35 @@ class Site extends CI_Controller {
 		$this->load->view('site/offers', $resources);
 	}
 
+
+		public function check() {
+			$code = $this->input->get("code");
+			$result = $this->db->get_where("codes", ['codigo' => $code])->result();
+
+			if (!$result) {
+				header('location:'.site_url('/').'404');
+			}
+
+			$conf = base64_encode($result[0]->configuracion);
+			echo site_url('/ofertas/negocios?d='.$conf);
+			//header('location:'.site_url('/ofertas/negocios?d='.$conf));
+	
+
+		
+		
+
+		/*$resources['styles'] = basic_styles();
+		$resources['scripts'] = basic_scripts();
+		array_push($resources['scripts'], 'assets/js/pages/offers.js');
+		$this->load->view('site/offers', $resources);*/
+	}
+
+
+
+
+
+
+
 	public function redirect() {
 		$resources['redirect'] = $_GET['redirect'];
 
