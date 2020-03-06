@@ -83,4 +83,11 @@ class Admin extends Secure_Controller {
 		admin_page('documents', 'Documentos', 'documents', $resourses);
 	}
 
+	public function users() {
+		if (!checkAdmin($this->session->userdata('id'))) {header('location:'.site_url('/').'sin_acceso');}
+
+		$resourses['scripts'] = ['assets/js/pages/users.js'];
+		admin_page('users', 'Usuarios', 'users', $resourses);
+	}
+
 }
