@@ -149,7 +149,7 @@
           v-if="questionNumber == totalQuestions"
           @click="generate(responses)">GENERAR CODIGO</button>
       </div>
-      {generatedCode}
+      {{generatedCode}}
     </div>
   </div>
 </div>

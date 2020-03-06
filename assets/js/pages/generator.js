@@ -124,12 +124,12 @@ new Vue({
       loading: true
     }
   },
-  methods: {,
+  methods: {
     createHeader(METHOD, data, id = '') {
       return {
         method: METHOD,
         headers: { 'token-crf': cs },
-        url: `${site_url}credits/${id}`,
+        url: `${site_url}codes/${id}`,
         data
       }
     },
@@ -196,7 +196,7 @@ new Vue({
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = 'Processing...';
-            axios(this.createHeader(POST, responses))
+            axios(this.createHeader('POST', { agente: 1, configuracion: responses }))
               .then(res => {
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',
