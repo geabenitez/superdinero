@@ -68,9 +68,22 @@ class Site extends CI_Controller {
 				header('location:'.site_url('/').'404');
 			}
 
-			$conf = base64_encode($result[0]->configuracion);
-			echo site_url('/ofertas/negocios?d='.$conf);
-			//header('location:'.site_url('/ofertas/negocios?d='.$conf));
+
+			//echo $result[0]->configuracion;
+			
+			$conf = json_decode($result[0]->configuracion);
+
+			//var_dump($conf);
+		
+
+			$credits = getCredits($conf[0]->credit);
+			if (!isset($credits[0]['slug'])) {
+				# code...
+			}
+			
+			$string = base64_encode($result[0]->configuracion);
+			echo site_url('/ofertas/'.$credits[0]['slug'].'?=d='.$string);
+			//header('location:'.site_url('/ofertas/'.$credits[0]['slug'].'?=d='.$conf));
 	
 
 		
