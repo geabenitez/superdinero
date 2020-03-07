@@ -15,6 +15,8 @@ new Vue({
       newUserForm: {
         names: '',
         lastnames: '',
+        password: '',
+        email: '',
       }
     }
   },
@@ -24,6 +26,8 @@ new Vue({
       this.newUserForm = {
         names: '',
         lastnames: '',
+        password: '',
+        email: '',
       }
       this.showNewUser = true
     },
@@ -63,7 +67,7 @@ new Vue({
             instance.confirmButtonText = 'Processing...';
             const METHOD = id != null ? 'PUT' : 'POST'
             const userId = id != null ? id : ''
-            axios(this.createHeader(METHOD, { names, lastnames, active: 1 }, userId))
+            axios(this.createHeader(METHOD, { names, lastnames, email, password, active: 1 }, userId))
               .then(res => {
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',
