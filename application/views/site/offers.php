@@ -49,160 +49,25 @@
         <div class='border-b pb-2'>
           <span class='font-semibold text-xs text-gray-900 uppercase tracking-wide'>Ajustar resultados</span>
         </div>
-        <div class='my-2'>
+        <div class='my-2' v-if='toRender'>
           <el-form label-position="top" label-width="100px" :model="query">
             <el-row :gutter='15'>
               <el-col :span='24'>
-                <el-form-item label="Estados">
+                <el-form-item v-for='q in Object.keys(questions)' :label="spanishLang ? questions[q].nameES: questions[q].nameEN" v-show='questions[q].showDefault || advancedOptions'>
                   <el-select 
+                    v-if="questions[q].listType"
                     class='w-full' 
-                    v-model="query.state" 
+                    v-model="query[questions[q].key]" 
                     placeholder="Seleccionar" 
                     size='small'
                     clearable
                     no-data-text='No hay valores'
                     filterable >
                     <el-option
-                        v-for='state in states'
-                        :key="state.id"
-                        :label="state.nameES"
-                        :value="state.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="Estados">
-                  <el-select 
-                    class='w-full' 
-                    v-model="query.state" 
-                    placeholder="Seleccionar" 
-                    size='small'
-                    clearable
-                    no-data-text='No hay valores'
-                    filterable >
-                    <el-option
-                        v-for='state in states'
-                        :key="state.id"
-                        :label="state.nameES"
-                        :value="state.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="Categorias">
-                  <el-select 
-                    class='w-full' 
-                    v-model="query.category" 
-                    placeholder="Seleccionar" 
-                    size='small'
-                    clearable
-                    no-data-text='No hay valores'
-                    filterable >
-                    <el-option
-                        v-for='category in categories'
-                        :key="category.id"
-                        :label="category.nameES"
-                        :value="category.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="Estados">
-                  <el-select 
-                    class='w-full' 
-                    v-model="query.state" 
-                    placeholder="Seleccionar" 
-                    size='small'
-                    clearable
-                    no-data-text='No hay valores'
-                    filterable >
-                    <el-option
-                        v-for='state in states'
-                        :key="state.id"
-                        :label="state.nameES"
-                        :value="state.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="Estados" v-show='advancedOptions'>
-                  <el-select 
-                    class='w-full' 
-                    v-model="query.state" 
-                    placeholder="Seleccionar" 
-                    size='small'
-                    clearable
-                    no-data-text='No hay valores'
-                    filterable >
-                    <el-option
-                        v-for='state in states'
-                        :key="state.id"
-                        :label="state.nameES"
-                        :value="state.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="Categorias" v-show='advancedOptions'>
-                  <el-select 
-                    class='w-full' 
-                    v-model="query.category" 
-                    placeholder="Seleccionar" 
-                    size='small'
-                    clearable
-                    no-data-text='No hay valores'
-                    filterable >
-                    <el-option
-                        v-for='category in categories'
-                        :key="category.id"
-                        :label="category.nameES"
-                        :value="category.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="Estados" v-show='advancedOptions'>
-                  <el-select 
-                    class='w-full' 
-                    v-model="query.state" 
-                    placeholder="Seleccionar" 
-                    size='small'
-                    clearable
-                    no-data-text='No hay valores'
-                    filterable >
-                    <el-option
-                        v-for='state in states'
-                        :key="state.id"
-                        :label="state.nameES"
-                        :value="state.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="Estados" v-show='advancedOptions'>
-                  <el-select 
-                    class='w-full' 
-                    v-model="query.state" 
-                    placeholder="Seleccionar" 
-                    size='small'
-                    clearable
-                    no-data-text='No hay valores'
-                    filterable >
-                    <el-option
-                        v-for='state in states'
-                        :key="state.id"
-                        :label="state.nameES"
-                        :value="state.id">
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="Categorias" v-show='advancedOptions'>
-                  <el-select 
-                    class='w-full' 
-                    v-model="query.category" 
-                    placeholder="Seleccionar" 
-                    size='small'
-                    clearable
-                    no-data-text='No hay valores'
-                    filterable >
-                    <el-option
-                        v-for='category in categories'
-                        :key="category.id"
-                        :label="category.nameES"
-                        :value="category.id">
+                        v-for='item in questions[q].data()'
+                        :key="item.id"
+                        :label="item.nameES"
+                        :value="item.id">
                     </el-option>
                   </el-select>
                 </el-form-item>
