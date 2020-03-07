@@ -59,6 +59,29 @@ $route['ofertas/(:any)'] = 'Site/offers/$1';
 $route['redirect'] = 'Site/redirect';
 
 $route['get_credits'] = 'Site/get_credits';
+$route['get_credits/(:any)'] = 'Site/get_credits/$1';
+
+$route['get_categories'] = 'Site/get_categories';
+$route['get_categories/(:any)'] = 'Site/get_categories/$1';
+
+$route['get_amounts'] = 'Site/get_amounts';
+$route['get_amounts/(:any)'] = 'Site/get_amounts/$1';
+
+$route['get_documents'] = 'Site/get_documents';
+$route['get_documents/(:any)'] = 'Site/get_documents/$1';
+
+$route['get_records'] = 'Site/get_records';
+$route['get_records/(:any)'] = 'Site/get_records/$1';
+
+$route['get_states'] = 'Site/get_states';
+$route['get_states/(:any)'] = 'Site/get_states/$1';
+
+$route['get_partners'] = 'Site/get_partners';
+$route['get_partners/(:any)'] = 'Site/get_partners/$1';
+
+$route['get_codes'] = 'Site/get_codes';
+$route['get_codes/(:any)'] = 'Site/get_codes/$1';
+
 
 
 
