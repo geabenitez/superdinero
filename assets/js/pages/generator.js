@@ -160,7 +160,7 @@ new Vue({
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
     },
     next(questionNumber) {
-      if (this.responses[this.questions[questionNumber].field] == '') {
+      if (this.responses[this.questions[questionNumber].field] === '') {
         this.$notify.error({
           title: 'Error',
           message: 'Se necesita contestar la pregunta'
@@ -206,6 +206,24 @@ new Vue({
       })
     },
     generate(responses) {
+      // Check last response to be answered
+      if (this.responses[this.questions[Object.keys(this.questions).slice(-1)[0]].field] === '') {
+        this.$notify.error({
+          title: 'Error',
+          message: 'Se necesita contestar la pregunta'
+        });
+        return false
+      }
+
+      // Verifica que l informacion de contacto exista
+      console.log(responses)
+      if (responses.names == '' || responses.lastnames == '' || responses.email == '' || responses.phone == '') {
+        this.$notify.error({
+          title: 'Error',
+          message: 'Debes completar la informacion de contacto primero'
+        });
+        return false
+      }
       this.$msgbox({
         type: 'warning',
         title: 'Confirmation',

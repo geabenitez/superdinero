@@ -1,8 +1,14 @@
 new Vue({
   el: '#app',
   created() {
+    const urlParams = new URLSearchParams(window.location.search)
     const slug = window.location.pathname.split('cuestionario/')[1]
     this.slug = slug
+    this.responses.names = urlParams.get('n')
+    this.responses.lastnames = urlParams.get('l')
+    this.responses.email = urlParams.get('e')
+    this.responses.phone = urlParams.get('p')
+
     const headers = { 'token-crf': cs }
 
     const getCategories = () => {
@@ -131,6 +137,10 @@ new Vue({
       },
       aditionalQuestions: [],
       responses: {
+        names: '',
+        lastnames: '',
+        email: '',
+        phone: '',
         credit: '',
         amount: 0,
         category: '',
@@ -159,7 +169,7 @@ new Vue({
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
     },
     next(questionNumber) {
-      if (this.responses[this.questions[questionNumber].field] == '') {
+      if (this.responses[this.questions[questionNumber].field] === '') {
         this.$notify.error({
           title: 'Error',
           message: 'Se necesita contestar la pregunta'
