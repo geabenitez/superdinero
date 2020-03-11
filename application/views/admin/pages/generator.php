@@ -1,7 +1,22 @@
 <div id='app'>
   <div class="flex flex-col items-center container mx-auto" v-loading="loading">
-    <div class='flex flex-col justify-center items-center bg-white w-full p-4 rounded border'>
-    Holis
+    <div class='text-sm flex flex-row justify-center items-center bg-white w-full p-4 rounded border'>
+      <div class='flex flex-col w-1/4 p-2'>
+        <span class='mb-1'>Nombres</span>
+        <input class='border rounded bg-gray-200 text-gray-800 px-4 py-1' type="text">
+      </div>
+      <div class='flex flex-col w-1/4 p-2'>
+        <span class='mb-1'>Apellidos</span>
+        <input class='border rounded bg-gray-200 text-gray-800 px-4 py-1' type="text">
+      </div>
+      <div class='flex flex-col w-1/4 p-2'>
+        <span class='mb-1'>Correo</span>
+        <input class='border rounded bg-gray-200 text-gray-800 px-4 py-1' type="text">
+      </div>
+      <div class='flex flex-col w-1/4 p-2'>
+        <span class='mb-1'>Telefono</span>
+        <input class='border rounded bg-gray-200 text-gray-800 px-4 py-1' type="text">
+      </div>
     </div>
     <div class='flex flex-col justify-center items-center bg-white w-full p-4 rounded border'>
       <el-progress class='w-full pb-4 border-b' :percentage="calculatePorcentage(questionNumber)"></el-progress>
