@@ -38,12 +38,12 @@
         <div class='flex items-center justify-center w-2/3 my-5 h-40'>
           <div class='flex flex-col w-full' v-if="questionNumber == 1">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[1].nameES: questions[1].nameEN}}</span>
-            <el-slider v-model="responses.amount" :min='1' :format-tooltip="formatTooltip" :marks="marks"></el-slider>
+            <el-slider v-model="amount" :min='1' :format-tooltip="formatTooltip" :marks="marks"></el-slider>
             <div class='flex flex-row items-center justify-center w-full mt-6'>
               <div class="w-64">
                 <input 
                   type="text" 
-                  :value="formatMoney(calcValue(responses.amount))" 
+                  :value="formatMoney(calcValue(amount))" 
                   class='border text-center text-black font-semibold text-xl rounded py-1 bg-green-200' 
                   readonly>
               </div>
