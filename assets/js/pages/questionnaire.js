@@ -84,51 +84,46 @@ new Vue({
       ],
       questions: {
         1: {
-          nameES: '¿Qué tipo de prestamos necesitas?',
-          nameEN: 'What kind of credit do you need?',
-          field: 'credit'
-        },
-        2: {
           nameES: '¿Qué cantidad necesitas?',
           nameEN: 'how much do you need?',
           field: 'amount'
         },
-        3: {
+        2: {
           nameES: '¿Para qué lo necesita?',
           nameEN: 'What do you need it for?',
           field: 'category'
         },
-        4: {
+        3: {
           nameES: '¿Qué tipo de documento tiene?',
           nameEN: 'What typenumber of document do you have?',
           field: 'document'
         },
-        5: {
+        4: {
           nameES: 'Aproximado puntaje de crédito',
           nameEN: 'Approximate credit score',
           field: 'record'
         },
-        6: {
+        5: {
           nameES: '¿En qué estado se encuentra?',
           nameEN: 'What state are you in?',
           field: 'state'
         },
-        7: {
+        6: {
           nameES: '¿Posee auto propio o arrendado?',
           nameEN: 'Do you own or lease your car?',
           field: 'has_car'
         },
-        8: {
+        7: {
           nameES: '¿Posee casa propia o arrendada?',
           nameEN: 'Do you own or lease a house?',
           field: 'has_house'
         },
-        9: {
+        8: {
           nameES: '¿Cuanto gana mensualmente?',
           nameEN: 'how much are your monthly earnings?',
           field: 'earnings'
         },
-        10: {
+        9: {
           nameES: '¿Como te pagan?',
           nameEN: 'how do you get paid?',
           field: 'payform'
