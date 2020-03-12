@@ -12,7 +12,7 @@ services:
       - PASSWORD=${MYSQL_PASSWORD}
       - DATABASE=${MYSQL_DATABASE}
     ports:
-      - "8001:80"
+      - "80:80"
     depends_on:
       - superdinero_db
 
