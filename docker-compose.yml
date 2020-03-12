@@ -5,5 +5,29 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+    restart: always
+    environment:
+      - HOSTNAME=${MYSQL_HOSTNAME}
+      - USER=${MYSQL_USER}
+      - PASSWORD=${MYSQL_PASSWORD}
+      - DATABASE=${MYSQL_DATABASE}
     ports:
       - "8001:80"
+    depends_on:
+      - superdinero_db
+
+  superdinero_db:
+    image: mysql:5.7.29
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - superdinero_myslq:/var/lib/mysql
+
+volumes:
+  superdinero_myslq: {}
