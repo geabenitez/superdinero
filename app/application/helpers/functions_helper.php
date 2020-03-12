@@ -223,77 +223,107 @@ function getStates($id){
 function getPartners($id){
   $CI =& get_instance();
   if (!empty($id) || $id != 0) {
-      $partners = $CI->db->get_where("partners", ['id' => $id])->row_array();
-    } else {
-      $partners = $CI->db->get("partners")->result();
-    }
-    
-    foreach ($partners as $key => $value) {
-      $c = "categories";
-      $pc = "partners_categories";
-      $s = "states";
-      $ps = "partners_states";
-      $cr = "credits";
-      $pcr = "partners_credits";
-      $a = "amounts";
-      $pa = "partners_amounts";
-      $getCategories = array(
-        $c.'.id',
-        $c.'.nameES',
-        $c.'.nameEN'
-      );
-      $getStates = array(
-        $s.'.id',
-        $s.'.nameES',
-        $s.'.nameEN',
-      );
-      $getAmounts = array(
-        $a.'.id',
-        $a.'.from',
-        $a.'.until',
-        $a.'.active',
-      );
-      $getCredits = array(
-        $cr.'.id',
-        $cr.'.nameES',
-        $cr.'.nameEN',
-        $cr.'.slug',
-        $cr.'.active',
-        $cr.'.askAlways',
-        $cr.'.questionEN',
-        $cr.'.questionES',
-      );
+    $partners = $CI->db->get_where("partners", ['id' => $id])->row_array();
+  } else {
+    $partners = $CI->db->get("partners")->result();
+  }
 
-      $value->categories = $CI->db
-      ->select($getCategories)
-      ->from($pc)
-      ->where($pc.'.partnerId', $value->id)
-      ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
-      ->get()->result();
+  foreach ($partners as $key => $value) {
+    $c = "categories";
+    $pc = "partners_categories";
+    $s = "states";
+    $ps = "partners_states";
+    $cr = "credits";
+    $pcr = "partners_credits";
+    $a = "amounts";
+    $pa = "partners_amounts";
+    $d = "documents";
+    $pd = "partners_documents";
+    $r = "records";
+    $pr = "partners_records";
+    $getCategories = array(
+      $c.'.id',
+      $c.'.nameES',
+      $c.'.nameEN'
+    );
+    $getStates = array(
+      $s.'.id',
+      $s.'.nameES',
+      $s.'.nameEN',
+    );
+    $getAmounts = array(
+      $a.'.id',
+      $a.'.from',
+      $a.'.until',
+      $a.'.active',
+    );
+    $getCredits = array(
+      $cr.'.id',
+      $cr.'.nameES',
+      $cr.'.nameEN',
+      $cr.'.slug',
+      $cr.'.active',
+      $cr.'.askAlways',
+      $cr.'.questionEN',
+      $cr.'.questionES',
+    );
+    $getDocuments = array(
+      $d.'.id',
+      $d.'.nameES',
+      $d.'.nameEN',
+      $d.'.active',
+    );
+    $getRecords = array(
+      $r.'.id',
+      $r.'.nameES',
+      $r.'.nameEN',
+      $r.'.active',
+    );
 
-      $value->states = $CI->db
-      ->select($getStates)
-      ->from($ps)
-      ->where($ps.'.partnerId', $value->id)
-      ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
-      ->get()->result();
+    $value->categories = $CI->db
+    ->select($getCategories)
+    ->from($pc)
+    ->where($pc.'.partnerId', $value->id)
+    ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
+    ->get()->result();
 
-      $value->amounts = $CI->db
-      ->select($getAmounts)
-      ->from($pa)
-      ->where($pa.'.partnerId', $value->id)
-      ->join($a, $a.'.id = ' . $pa . '.amountId', 'right')
-      ->get()->result();
+    $value->states = $CI->db
+    ->select($getStates)
+    ->from($ps)
+    ->where($ps.'.partnerId', $value->id)
+    ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
+    ->get()->result();
 
-      $value->credits = $CI->db
-      ->select($getCredits)
-      ->from($pcr)
-      ->where($pcr.'.partnerId', $value->id)
-      ->join($cr, $cr.'.id = ' . $pcr . '.creditsId', 'right')
-      ->get()->result();
-    }
-    
-    return $partners;
+    $value->amounts = $CI->db
+    ->select($getAmounts)
+    ->from($pa)
+    ->where($pa.'.partnerId', $value->id)
+    ->join($a, $a.'.id = ' . $pa . '.amountId', 'right')
+    ->get()->result();
+
+    $value->credits = $CI->db
+    ->select($getCredits)
+    ->from($pcr)
+    ->where($pcr.'.partnerId', $value->id)
+    ->join($cr, $cr.'.id = ' . $pcr . '.creditsId', 'right')
+    ->get()->result();
+
+    $value->documents = $CI->db
+    ->select($getDocuments)
+    ->from($pd)
+    ->where($pd.'.partnerId', $value->id)
+    ->join($d, $d.'.id = ' . $pd . '.documentId', 'right')
+    ->get()->result();
+
+    $value->records = $CI->db
+    ->select($getRecords)
+    ->from($pr)
+    ->where($pr.'.partnerId', $value->id)
+    ->join($r, $r.'.id = ' . $pr . '.recordId', 'right')
+    ->get()->result();
+  }
+
+  return $partners;
 
 }
 
