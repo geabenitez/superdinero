@@ -233,20 +233,35 @@ function getPartners($id){
       $pc = "partners_categories";
       $s = "states";
       $ps = "partners_states";
+      $cr = "credits";
+      $pcr = "partners_credits";
       $a = "amounts";
       $pa = "partners_amounts";
       $getCategories = array(
+        $c.'.id',
         $c.'.nameES',
         $c.'.nameEN'
       );
       $getStates = array(
+        $s.'.id',
         $s.'.nameES',
         $s.'.nameEN',
       );
       $getAmounts = array(
+        $a.'.id',
         $a.'.from',
         $a.'.until',
         $a.'.active',
+      );
+      $getCredits = array(
+        $cr.'.id',
+        $cr.'.nameES',
+        $cr.'.nameEN',
+        $cr.'.slug',
+        $cr.'.active',
+        $cr.'.askAlways',
+        $cr.'.questionEN',
+        $cr.'.questionES',
       );
 
       $value->categories = $CI->db
@@ -270,6 +285,12 @@ function getPartners($id){
       ->join($a, $a.'.id = ' . $pa . '.amountId', 'right')
       ->get()->result();
 
+      $value->credits = $CI->db
+      ->select($getCredits)
+      ->from($pcr)
+      ->where($pcr.'.partnerId', $value->id)
+      ->join($cr, $cr.'.id = ' . $pcr . '.creditsId', 'right')
+      ->get()->result();
     }
     
     return $partners;
