@@ -361,9 +361,12 @@ const app = new Vue({
         }
 
         // Verifica si el proveedor puede proveer la cantidad
+        const moneyAvailable = partner.amounts.find(a => {
+          const amount = this.calcValue(this.query.amount)
+          return amount >= a.from || amount <= a.until
+        }).length > 0
 
-
-        if (display && noCarRequired && noHouseRequired) {
+        if (display && noCarRequired && noHouseRequired && moneyAvailable) {
           return partner
         }
       }).sort((a, b) => {
