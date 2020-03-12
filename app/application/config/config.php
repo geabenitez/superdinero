@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'http://localhost/';
+$config['base_url'] = 'http://' . getenv('APP_NAME') . '/';
 
 //$config['base_url'] = 'http://localhost/superdinero/';
 //$config['base_url'] = 'http://localhost/SITES/superdinero/';
