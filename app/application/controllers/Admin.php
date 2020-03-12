@@ -98,7 +98,8 @@ class Admin extends Secure_Controller {
 		$config['overwrite']          = true;
 		$config['allowed_types']        = 'gif|jpg|png';
 		$config['file_name']        = md5(date('dmYhisu'));
-		
+
+
 		$info=array();
 
 		if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
@@ -110,6 +111,10 @@ class Admin extends Secure_Controller {
 			$this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
 		}else{
 		  //SI SE SUBIO
+			
+			$old_data = $this->db->get_where($input['type'], ['id' => $input['id']])->row_array();
+			if(!empty($old_data)){ if(!empty($old_data['image'])){@unlink($old_data['image']);}  }
+
 		  $info = $this->upload->data();//la informacion del archivo subido
 		  $upload_success=true;
 
