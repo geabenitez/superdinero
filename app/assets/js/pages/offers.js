@@ -337,15 +337,35 @@ const app = new Vue({
     formatMoney(amount) {
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
     },
+    resetFilters() {
+      this.query = this.originalQuery
+    }
   },
   computed: {
     filteredPartners() {
       const partners = this.partners.filter(partner => {
+
+        // Verifica que se pueda mostrar (no solo para agentes)
         const display = partner.onlyAgent == 0
-        const noCarRequired = partner.
-          if(display) {
-            return partner
-          }
+
+        // Verifica si el proveedor require carro
+        let noCarRequired = true
+        if (partner.requiresCar == 1) {
+          noCarRequired = this.query.has_car
+        }
+
+        // Verifica si el proveedor require casa
+        let noHouseRequired = true
+        if (partner.requiresHouse) {
+          noHouseRequired = this.query.has_house
+        }
+
+        // Verifica si el proveedor puede proveer la cantidad
+
+
+        if (display && noCarRequired && noHouseRequired) {
+          return partner
+        }
       }).sort((a, b) => {
         if (b.rate > a.rate) return 1
         if (a.rate > b.rate) return -1
