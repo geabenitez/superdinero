@@ -1,0 +1,9 @@
+version: "3.1"
+
+services:
+  superdinero_app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8001:80"
