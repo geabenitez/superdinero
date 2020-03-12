@@ -135,6 +135,7 @@ new Vue({
           field: 'payform'
         }
       },
+      amount: 0,
       aditionalQuestions: [],
       responses: {
         names: '',
@@ -163,7 +164,9 @@ new Vue({
       return this.formatMoney(Math.ceil(this.calcValue(val)))
     },
     calcValue(val) {
-      return val == 1 ? this.credit.minAmount : (val * (this.credit.maxAmount) / 100)
+      const amount = val == 1 ? this.credit.minAmount : (val * (this.credit.maxAmount) / 100)
+      this.responses.amount = amount
+      return amount
     },
     formatMoney(amount) {
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
