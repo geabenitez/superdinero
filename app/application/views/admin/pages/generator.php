@@ -173,7 +173,7 @@
           <span class='bg-green-200 px-4 rounded text-sm font-semibold uppercase'>{{generatedCode}}</span>
         </div>
         <div class="flex flex-row w-full items-center justify-center">
-          <span class='mx-2 text-blue-500 underline' id='link'>{{ `${site_url}check?id=${generatedCode}` }}</span>
+          <span class='mx-2 text-blue-500 underline' id='link'>{{ `${site_url}check?code=${generatedCode}` }}</span>
         </div>
         <button 
           class='mt-4 rounded bg-blue-500 py-1 px-6 uppercase text-sm text-white font-semibold' 

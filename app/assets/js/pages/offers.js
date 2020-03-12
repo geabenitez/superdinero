@@ -63,7 +63,7 @@ const app = new Vue({
           nameEN: 'how much do you need?',
           listType: false,
           showDefault: true,
-          key: '',
+          key: 'amount',
           data: function () {
             return []
           }
@@ -110,7 +110,7 @@ const app = new Vue({
           nameES: '¿En qué estado se encuentra?',
           nameEN: 'What state are you in?',
           listType: true,
-          showDefault: true,
+          showDefault: false,
           key: 'state',
           data() {
             return app.states
@@ -120,7 +120,7 @@ const app = new Vue({
           nameES: '¿Posee auto propio o arrendado?',
           nameEN: 'Do you own or lease your car?',
           listType: true,
-          showDefault: true,
+          showDefault: false,
           key: 'has_car',
           data() {
             return [
@@ -141,7 +141,7 @@ const app = new Vue({
           nameES: '¿Posee casa propia o arrendada?',
           nameEN: 'Do you own or lease a house?',
           listType: true,
-          showDefault: true,
+          showDefault: false,
           key: 'has_house',
           data() {
             return [
@@ -162,7 +162,7 @@ const app = new Vue({
           nameES: '¿Cuanto gana mensualmente?',
           nameEN: 'how much are your monthly earnings?',
           listType: true,
-          showDefault: true,
+          showDefault: false,
           key: 'earnings',
           data() {
             return [
@@ -283,8 +283,8 @@ const app = new Vue({
           nameES: '¿Como te pagan?',
           nameEN: 'how do you get paid?',
           listType: true,
-          showDefault: true,
-          key: '',
+          showDefault: false,
+          key: 'payform',
           data() {
             return [
               {
@@ -327,7 +327,16 @@ const app = new Vue({
         this.showCount = this.showCount + 3
         this.loading = false
       }, 1500);
-    }
+    },
+    formatTooltip(val) {
+      return this.formatMoney(Math.ceil(this.calcValue(val)))
+    },
+    calcValue(val) {
+      return val == 1 ? this.credit.minAmount : (val * (this.credit.maxAmount) / 100)
+    },
+    formatMoney(amount) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
+    },
   },
   computed: {
     filteredPartners() {

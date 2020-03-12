@@ -70,6 +70,18 @@
                         :value="item.id">
                     </el-option>
                   </el-select>
+                  <div v-else>
+                    <el-slider v-model="query[questions[q].key]" :min='1' :format-tooltip="formatTooltip"></el-slider>
+                    <div class='flex flex-row items-center justify-center w-full'>
+                      <div class="w-full">
+                        <input 
+                          type="text" 
+                          :value="formatMoney(calcValue(query[questions[q].key]))" 
+                          class='border text-center text-black font-semibold text-sm rounded bg-green-200 w-full' 
+                          readonly>
+                      </div>
+                    </div>
+                  </div>
                 </el-form-item>
               </el-col>
             </el-row>
