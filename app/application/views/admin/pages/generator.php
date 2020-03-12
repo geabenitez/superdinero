@@ -177,7 +177,7 @@
         </div>
         <button 
           class='mt-4 rounded bg-blue-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
-          @click="reload()">GENERAR CODIGO</button>
+          @click="reload()">GENERAR NUEVO CODIGO</button>
       </div>
     </div>
   </div>
