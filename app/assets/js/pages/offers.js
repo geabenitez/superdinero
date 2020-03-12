@@ -340,7 +340,20 @@ const app = new Vue({
   },
   computed: {
     filteredPartners() {
-      return this.partners.slice(0, this.showCount)
+      const partners = this.partners.filter(partner => {
+        const display = partner.onlyAgent == 0
+        const noCarRequired = partner.
+          if(display) {
+            return partner
+          }
+      }).sort((a, b) => {
+        if (b.rate > a.rate) return 1
+        if (a.rate > b.rate) return -1
+        return 0
+      })
+
+      console.log(partners)
+      return partners
     }
   }
 })

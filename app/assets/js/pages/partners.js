@@ -34,7 +34,6 @@ new Vue({
     axios
       .all([getPartners(), getDocuments(), getCategories(), getCredits(), getAmounts(), getStates(), getRecords()])
       .then(axios.spread((partners, documents, categories, credits, amounts, states, records) => {
-        console.log('p', partners.data)
         this.partners = partners.data
         this.documents = documents.data
         this.categories = categories.data
