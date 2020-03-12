@@ -11,6 +11,7 @@ services:
       - USER=${MYSQL_USER}
       - PASSWORD=${MYSQL_PASSWORD}
       - DATABASE=${MYSQL_DATABASE}
+      - APP_NAME=${APP_NAME}
     ports:
       - "80:80"
     depends_on:
