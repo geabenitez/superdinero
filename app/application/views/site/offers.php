@@ -89,7 +89,7 @@
         </div>  
         <div class='flex flex-row items-center justify-between'>
           <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline' @click='advancedOptions = !advancedOptions'>{{advancedOptions ? 'Menos' : 'Más'}} opciones</span>
-          <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline'>Reiniciar filtros</span>
+          <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline' @click='resetFilters()'>Reiniciar filtros</span>
         </div>
       </div>
       <div style='height: fit-content' class='flex flex-col bg-white w-full lg:w-3/4 p-4 mt-2 lg:mt-0 rounded border'>
