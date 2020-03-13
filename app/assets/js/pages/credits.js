@@ -1,4 +1,4 @@
-new Vue({
+const app = new Vue({
   el: '#app',
   created() {
     const headers = { 'token-crf': cs }
@@ -21,6 +21,9 @@ new Vue({
   },
   data: function () {
     return {
+      showImageChange: false,
+      image: '#',
+      imageId: null,
       action: 'Nuevo credito',
       credits: [],
       searchValue: '',
@@ -192,6 +195,30 @@ new Vue({
     },
     formatMoney(amount) {
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
+    },
+    openUpdateImage() {
+      this.showImageChange = true
+    },
+    previewImage() {
+      console.log('entra')
+      console.log(app.$refs)
+      if (app.$refs.imgFile.files && app.$refs.imgFile.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          app.image = e.target.result
+          console.log(e.target.result)
+        }
+
+        reader.readAsDataURL(app.$refs.imgFile.files[0]);
+      }
+    },
+    updateImage(image, id) {
+      const fd = new FormData()
+      fd.append('type', 'credit')
+      fd.append('image', image)
+      fd.append('id', id)
+      axios.post(`${site_url}admin/upload_image`, fd).then(console.log)
     }
   },
   computed: {

@@ -102,10 +102,11 @@ class Admin extends Secure_Controller {
 
 		$info=array();
 
+		// die(var_dump($config['upload_path']));
 		if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
 		$this->load->library('upload', $config);
 
-		if ( ! $this->upload->do_upload('image'))
+		if ( ! $this->upload->do_upload($input['image']))
 		{
 		  //NO SE SUBIO
 			$this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);

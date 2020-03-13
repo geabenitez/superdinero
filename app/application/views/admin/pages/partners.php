@@ -1,5 +1,16 @@
 <div id="app">
   <?php $this->load->view('admin/pages/dialogs/partnersNew')  ?>
+  <el-dialog title="Update the image" :visible.sync="showImageChange" width=400px>
+    <input type='file' ref="imgFile" @change='previewImage()' />
+    <div class='flex flex-col items-center justify-center mt-2'>
+      <img class='bg-gray-200 broder rounded w-64 h-24' ref="imgPreview" :src="image" />
+      <span class='text-xs'>Tamaño recomendado 256x96 pixeles</span>
+    </div>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="showImageChange = false" size='small'>Cancelar</el-button>
+      <el-button type="success" @click="updateImage(image, imageId)" size='small'>Actualizar</el-button>
+    </span>
+  </el-dialog>
   <el-row :gutter='15' class='mb-4' type='flex' justify='space-between'>
     <el-col :span='6'>
       <el-input placeholder="Buscar" size='small' v-model="searchValue" prefix-icon='el-icon-search' clearable />
@@ -51,6 +62,9 @@
                 <i class="el-icon-more"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item @click.native="openUpdateImage(scope.row)">
+                  <i class="el-icon-picture"></i> Cambiar imagen
+                </el-dropdown-item>
                 <el-dropdown-item><i class="el-icon-view"></i> Vista previa</el-dropdown-item>
                 <el-dropdown-item><i class="el-icon-edit-outline"></i> Editar asociado</el-dropdown-item>
                 <el-dropdown-item @click.native="changeStatus(scope.row.id, scope.row.active)">
