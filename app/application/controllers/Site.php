@@ -163,4 +163,57 @@ class Site extends CI_Controller {
 		echo json_encode(getCodes($id));
 	}
 
+	public function uploadImage()
+	{
+		$input = $this->input->post();
+		
+
+		$upload_success=false;
+		$config['upload_path']          = './assets/images/'.$input['type'];
+		$config['overwrite']          = true;
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['file_name']        = md5(date('dmYhisu'));
+		$real_path =  str_replace('\\','/',realpath(''));
+		
+
+
+
+		$info=array();
+
+		// die(var_dump($config['upload_path']));
+		if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('image'))
+		{
+		  //NO SE SUBIO
+			$this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
+		}else{
+		  //SI SE SUBIO
+			
+			$old_data = $this->db->get_where($input['type'], ['id' => $input['id']])->row_array();
+			if(!empty($old_data)){ if(!empty($old_data['image'])){@unlink($old_data['image']);}  }
+
+		  $info = $this->upload->data();//la informacion del archivo subido
+		  $upload_success=true;
+
+		  $data = array(
+		  	//'image'=> $info['file_name']
+		  	'image'=> 'assets/images/'.$input['type'].'/'.$info['file_name']
+		  );
+		 
+		  $this->db->update( $input['type'], $data, array( 'id'=>$input['id'] ) );
+		  
+		  $response = new stdClass();
+		  $d = $input['type'];
+		  $response->$d = $this->db->get($input['type'])->result();
+		  $response->msj = $input['type'].' image upload successfully.';
+		  echo json_encode($response);
+
+		}
+
+
+
+	}
+
 }

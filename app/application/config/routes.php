@@ -104,7 +104,7 @@ $route['admin/credits'] = 'Admin/credits';
 $route['admin/params'] = 'Admin/params';
 $route['admin/users'] = 'Admin/users';
 
-$route['admin/upload_image'] = 'Admin/uploadImage';
+$route['admin/upload_image'] = 'Site/uploadImage';
 
 // PARTNERS
 $route['partners'] = 'api/Partner';

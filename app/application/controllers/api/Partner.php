@@ -285,10 +285,6 @@ class Partner extends REST_Controller {
 
 
 
-
-
-
-
     $partner_states = [];
     foreach ($states as $value) {
       array_push($partner_states, array(
