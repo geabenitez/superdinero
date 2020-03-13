@@ -361,24 +361,42 @@ const app = new Vue({
         }
 
         // Verifica si el proveedor puede proveer la cantidad
-        console.log(this.query.amount)
-        console.log(this.calcValue(this.query.amount))
-        console.log(partner.amounts)
-        const moneyAvailable = partner.amounts.find(a => {
+        const moneyAvailable = partner.amounts.filter(a => {
           const amount = this.calcValue(this.query.amount)
-          return amount >= parseFloat(a.from) || amount <= parseFloat(a.until)
+          return amount >= parseFloat(a.from) && amount <= parseFloat(a.until)
         }).length > 0
 
-        if (display && noCarRequired && noHouseRequired && moneyAvailable) {
+        // check that the provider works with the selected state estado
+        const stateAvailable = partner.states.filter(a => a.id == this.query.state).length > 0
+
+        // Checks the credit is duable record
+        const recordAvailable = partner.records.filter(a => a.id == this.query.record).length > 0
+
+        // check if the document is valid document
+        const documentAvailable = partner.documents.filter(a => a.id == this.query.document).length > 0
+
+        // check the category
+        const categoryAvailable = partner.categories.filter(a => a.id == this.query.category).length > 0
+
+        if (
+          display &&
+          noCarRequired &&
+          noHouseRequired &&
+          moneyAvailable &&
+          stateAvailable &&
+          recordAvailable &&
+          documentAvailable &&
+          categoryAvailable
+        ) {
           return partner
         }
+
       }).sort((a, b) => {
         if (b.rate > a.rate) return 1
         if (a.rate > b.rate) return -1
         return 0
       })
 
-      console.log(partners)
       return partners
     }
   }
