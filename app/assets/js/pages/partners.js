@@ -60,6 +60,10 @@ const app = new Vue({
       states: [],
       records: [],
       newAsociateForm: {
+        paramName1: '',
+        paramValues1: [],
+        paramName2: '',
+        paramValues2: [],
         nameES: '',
         nameEN: '',
         documents: [],
@@ -98,6 +102,10 @@ const app = new Vue({
     createPartner() {
       this.action = 'Nuevo asociado'
       this.newAsociateForm = {
+        paramName1: '',
+        paramValues1: [],
+        paramName2: '',
+        paramValues2: [],
         nameES: '',
         nameEN: '',
         documents: [],
@@ -131,7 +139,11 @@ const app = new Vue({
       characteristicsES,
       characteristicsEN,
       amounts,
-      url
+      url,
+      paramName1,
+      paramValues1,
+      paramName2,
+      paramValues2
     }) {
       if (
         nameES == '' ||
@@ -176,6 +188,10 @@ const app = new Vue({
               characteristicsEN,
               amounts,
               url,
+              paramName1,
+              paramValues1: paramValues1.join(','),
+              paramName2,
+              paramValues2: paramValues2.join(','),
               active: 1
             }
             axios(this.createHeader(METHOD, formData, categoryId, true))

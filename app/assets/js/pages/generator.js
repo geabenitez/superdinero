@@ -216,7 +216,6 @@ new Vue({
       }
 
       // Verifica que l informacion de contacto exista
-      console.log(responses)
       if (responses.names == '' || responses.lastnames == '' || responses.email == '' || responses.phone == '') {
         this.$notify.error({
           title: 'Error',
@@ -260,6 +259,13 @@ new Vue({
   computed: {
     totalQuestions() {
       return Object.keys(this.questions).length + this.aditionalQuestions.length
+    },
+    sortedStates() {
+      return this.states.sort((a, b) => {
+        if (a.nameES < b.nameES) return -1
+        if (b.nameES < a.nameES) return 1
+        return 0
+      })
     }
   }
 })

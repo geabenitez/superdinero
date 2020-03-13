@@ -82,7 +82,7 @@
           <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[6].nameES: questions[6].nameEN}}</span>
           <el-select v-model="responses.state" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option
-              v-for="state in states"
+              v-for="state in sortedStates"
               :key="state.id"
               :label="spanishLang ? state.nameES : state.nameEN"
               :value="state.id">

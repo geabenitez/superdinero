@@ -150,7 +150,11 @@ new Vue({
       return this.states.filter(c => (
         c.nameES.toLowerCase().includes(value) ||
         c.nameEN.toLowerCase().includes(value)
-      ))
+      )).sort((a, b) => {
+        if (a.nameES < b.nameES) return -1
+        if (b.nameES < a.nameES) return 1
+        return 0
+      })
     }
   }
 })

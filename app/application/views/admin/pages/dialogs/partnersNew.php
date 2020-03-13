@@ -217,39 +217,53 @@
             <el-col :span='12'>
               <el-input 
                 size='small' 
-                v-model="newAsociateForm.characteristicsES[0]"
-                maxlength="100"
+                v-model="newAsociateForm.paramName1"
+                maxlength="20"
                 show-word-limit
+                placeholder='Primer parametro'
                 clearable/>
               </el-col>
             <el-col :span='12'>
-              <el-input 
-                size='small' 
-                v-model="newAsociateForm.characteristicsES[1]"
-                maxlength="100"
-                show-word-limit
-                clearable/>
-              </el-col>
+              <el-select 
+                class='w-full' 
+                v-model="newAsociateForm.paramValues1" 
+                multiple 
+                placeholder="Seleccionar" 
+                size='small'
+                clearable
+                filterable
+                default-first-option >
+                  <el-option label="Fuente" value="utm_source"></el-option>
+                  <el-option label="Agente" value="agent"></el-option>
+              </el-select>
+            </el-col>
           </el-row>
           <el-row :gutter='15'>
             <el-col :span='12'>
               <el-input 
                 size='small' 
-                v-model="newAsociateForm.characteristicsES[0]"
-                maxlength="100"
+                v-model="newAsociateForm.paramName2"
+                maxlength="20"
                 show-word-limit
+                placeholder='Segundo parametro'
                 clearable/>
               </el-col>
             <el-col :span='12'>
-              <el-input 
-                size='small' 
-                v-model="newAsociateForm.characteristicsES[1]"
-                maxlength="100"
-                show-word-limit
-                clearable/>
-              </el-col>
+              <el-select 
+                class='w-full' 
+                v-model="newAsociateForm.paramValues2" 
+                multiple 
+                placeholder="Seleccionar" 
+                size='small'
+                clearable
+                filterable
+                default-first-option >
+                  <el-option label="Fuente" value="utm_source"></el-option>
+                  <el-option label="Agente" value="agent"></el-option>
+              </el-select>
+            </el-col>
           </el-row>
-       </el-form-item>
+        </el-form-item>
       </el-col>
       <el-col :span='12'>
         <el-row :gutter='15' class='mb-4'>
@@ -456,6 +470,58 @@
             maxlength="500"
             show-word-limit
             clearable/>
+        </el-form-item>
+        <el-form-item label="Params">
+          <el-row :gutter='15'>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.paramName1"
+                maxlength="20"
+                show-word-limit
+                placeholder='First param'
+                clearable/>
+              </el-col>
+            <el-col :span='12'>
+              <el-select 
+                class='w-full' 
+                v-model="newAsociateForm.paramValues1" 
+                multiple 
+                placeholder="Select" 
+                size='small'
+                clearable
+                filterable
+                default-first-option >
+                  <el-option label="Source" value="utm_source"></el-option>
+                  <el-option label="Agent" value="agent"></el-option>
+              </el-select>
+            </el-col>
+          </el-row>
+          <el-row :gutter='15'>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.paramName2"
+                maxlength="20"
+                show-word-limit
+                placeholder='Second param'
+                clearable/>
+              </el-col>
+            <el-col :span='12'>
+              <el-select 
+                class='w-full' 
+                v-model="newAsociateForm.paramValues2" 
+                multiple 
+                placeholder="Select" 
+                size='small'
+                clearable
+                filterable
+                default-first-option >
+                  <el-option label="Source" value="utm_source"></el-option>
+                  <el-option label="Agent" value="agent"></el-option>
+              </el-select>
+            </el-col>
+          </el-row>
         </el-form-item>
       </el-col>
     </el-row>
