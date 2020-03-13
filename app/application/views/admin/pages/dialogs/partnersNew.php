@@ -212,6 +212,44 @@
             show-word-limit
             clearable/>
         </el-form-item>
+        <el-form-item label="Parametros">
+          <el-row :gutter='15'>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsES[0]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsES[1]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+          </el-row>
+          <el-row :gutter='15'>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsES[0]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+            <el-col :span='12'>
+              <el-input 
+                size='small' 
+                v-model="newAsociateForm.characteristicsES[1]"
+                maxlength="100"
+                show-word-limit
+                clearable/>
+              </el-col>
+          </el-row>
+       </el-form-item>
       </el-col>
       <el-col :span='12'>
         <el-row :gutter='15' class='mb-4'>
