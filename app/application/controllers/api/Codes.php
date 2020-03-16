@@ -32,13 +32,14 @@ class Codes extends REST_Controller {
 
 	$vigente = $YEAR[date('Y')].$MONTH[date('n')];
 	$result = $this->db->query("select max(codigo) code from codes where codigo like '%".$vigente."%'")->result();
-	
+
 	$new_code = "";
 	if (empty($result[0]->code)) {
-		$new_code = $vigente."-10000";
+		$new_code = $vigente."10000";
 	}else{
-		$data =  explode('-',$result[0]->code);
-		$new_code = $vigente."-".($data[1]+1);
+		//$data =  explode('-',$result[0]->code);
+		$data =  substr($result[0]->code,2,strlen($result[0]->code));
+		$new_code = $vigente.($data+1);
 	}
 
 		
