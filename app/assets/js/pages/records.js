@@ -4,6 +4,7 @@ new Vue({
     axios(this.createHeader('GET'))
       .then(res => {
         this.records = res.data
+        this.loading = false
       })
   },
   data: function () {
@@ -11,6 +12,7 @@ new Vue({
       action: 'Nuevo record',
       records: [],
       searchValue: '',
+      loading: true,
       showNewRecord: false,
       newRecordForm: {
         nameES: '',
