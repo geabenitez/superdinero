@@ -216,6 +216,14 @@ const app = new Vue({
       }
     },
     updateImage(image, id) {
+      if (app.$refs.imgFile.files[0] == null) {
+        this.$notify({
+          title: 'INFO',
+          message: 'No hay imagen que actualizar.',
+          type: 'warning',
+        });
+        return false
+      }
       this.$msgbox({
         type: 'warning',
         title: 'Confirmation',

@@ -293,6 +293,15 @@ const app = new Vue({
       }
     },
     updateImage(image, id) {
+      if (app.$refs.imgFile.files[0] == null) {
+        this.$notify({
+          title: 'INFO',
+          message: 'No hay imagen que actualizar.',
+          type: 'warning',
+        });
+        return false
+      }
+
       this.$msgbox({
         type: 'warning',
         title: 'Confirmation',
@@ -311,7 +320,6 @@ const app = new Vue({
             axios
               .post(`${site_url}admin/upload_image`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
               .then(res => {
-                console.log(res.data)
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',
                   message: res.data.msj,
