@@ -311,6 +311,7 @@ const app = new Vue({
             axios
               .post(`${site_url}admin/upload_image`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
               .then(res => {
+                console.log(res.data)
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',
                   message: res.data.msj,

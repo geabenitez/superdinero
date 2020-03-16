@@ -182,12 +182,15 @@ class Site extends CI_Controller {
 		if(!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0777, TRUE);
 		$this->load->library('upload', $config);
 
+		$response = new stdClass();
 		if ( ! $this->upload->do_upload('image'))
 		{
 		  //NO SE SUBIO
 			//$this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
 			
-			echo 'No se logro subir la imagen'.($this->upload->display_errors());
+			// echo 'No se logro subir la imagen'.($this->upload->display_errors());
+			$response->msj = "Error al subir la imagen, contacta a tu administrador.";
+		  $response->success = false;
 
 		}else{
 		  //SI SE SUBIO
@@ -205,10 +208,11 @@ class Site extends CI_Controller {
 		 
 		  $this->db->update( $_REQUEST['type'], $data, array( 'id'=>$_REQUEST['id'] ) );
 		  
-		  $response = new stdClass();
+		  
 		  $d = $_REQUEST['type'];
 		  $response->$d = $this->db->get($_REQUEST['type'])->result();
 		  $response->msj = $_REQUEST['type'].' image upload successfully.';
+		  $response->success = true;
 		  echo json_encode($response);
 
 		}
