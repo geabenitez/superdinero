@@ -62,7 +62,7 @@ class Site extends CI_Controller {
 
 		public function check() {
 			$code = $this->input->get("code");
-			$result = $this->db->get_where("codes", ['codigo' => $code])->result();
+			$result = $this->db->get_where("codes", ['codigo' => strtoupper($code)])->result();
 
 			if (!$result) {
 				header('location:'.site_url('/').'404');
@@ -72,7 +72,7 @@ class Site extends CI_Controller {
 
 			$code_user = null;
 			if (!empty($users_data)) {
-				$code_user = $users_data[0]->code;
+				$code_user = strtoupper($users_data[0]->code);
 			}
 			
 			//echo $result[0]->configuracion;
@@ -187,7 +187,8 @@ class Site extends CI_Controller {
 		if ( ! $this->upload->do_upload('image'))
 		{
 		  //NO SE SUBIO
-			$this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
+			//$this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
+			log_message('error', 'No se logro subir la imagen'.var_dump($this->upload->do_upload('image')));
 		}else{
 		  //SI SE SUBIO
 			
