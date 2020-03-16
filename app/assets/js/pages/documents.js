@@ -4,6 +4,7 @@ new Vue({
     axios(this.createHeader('GET'))
       .then(res => {
         this.documents = res.data
+        this.loading = false
       })
   },
   data: function () {
@@ -12,6 +13,7 @@ new Vue({
       documents: [],
       searchValue: '',
       showNewDocument: false,
+      loading: true,
       newDocumentForm: {
         nameES: '',
         nameEN: '',
