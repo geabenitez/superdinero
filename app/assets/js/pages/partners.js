@@ -295,7 +295,7 @@ const app = new Vue({
     updateImage(image, id) {
       const fd = new FormData()
       fd.append('type', 'partners')
-      fd.append('image', image)
+      fd.append('image', app.$refs.imgFile.files[0])
       fd.append('id', id)
       axios.post(
         `${site_url}admin/upload_image`,

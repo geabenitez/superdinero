@@ -176,8 +176,6 @@ class Site extends CI_Controller {
 		$real_path =  str_replace('\\','/',realpath(''));
 		
 
-		var_dump($_FILES);
-
 		$info=array();
 
 		// die(var_dump($config['upload_path']));
