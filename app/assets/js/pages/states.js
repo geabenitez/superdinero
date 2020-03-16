@@ -4,6 +4,7 @@ new Vue({
     axios(this.createHeader('GET'))
       .then(res => {
         this.states = res.data
+        this.loading = false
       })
   },
   data: function () {
@@ -12,6 +13,7 @@ new Vue({
       states: [],
       searchValue: '',
       showNewState: false,
+      loading: true,
       newStateForm: {
         nameES: '',
         nameEN: '',
