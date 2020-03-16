@@ -188,6 +188,7 @@ class Site extends CI_Controller {
 		{
 		  //NO SE SUBIO
 			//$this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
+			var_dump($this->upload->display_errors());
 			log_message('error', 'No se logro subir la imagen'.var_dump($this->upload->do_upload('image')));
 		}else{
 		  //SI SE SUBIO

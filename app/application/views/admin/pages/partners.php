@@ -8,7 +8,7 @@
     </div>
     <span slot="footer" class="dialog-footer">
       <el-button @click="showImageChange = false" size='small'>Cancelar</el-button>
-      <el-button type="success" @click="updateImage(newAsociateForm.image, imageId)" size='small'>Actualizar</el-button>
+      <el-button type="success" @click="updateImage(newAsociateForm.image, newAsociateForm.id)" size='small'>Actualizar</el-button>
     </span>
   </el-dialog>
   <el-row :gutter='15' class='mb-4' type='flex' justify='space-between'>

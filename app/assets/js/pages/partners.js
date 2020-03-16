@@ -47,7 +47,6 @@ const app = new Vue({
   data: function () {
     return {
       showImageChange: false,
-      imageId: null,
       loading: true,
       partners: [],
       searchValue: '',
