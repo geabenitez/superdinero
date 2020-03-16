@@ -3,12 +3,12 @@
   <el-dialog title="Update the image" :visible.sync="showImageChange" width=400px>
     <input type='file' ref="imgFile" @change='previewImage()' />
     <div class='flex flex-col items-center justify-center mt-2'>
-      <img class='bg-gray-200 broder rounded w-64 h-24' ref="imgPreview" :src="image" />
+      <img class='bg-gray-200 broder rounded w-64 h-24' ref="imgPreview" :src="newAsociateForm.image" />
       <span class='text-xs'>Tamaño recomendado 256x96 pixeles</span>
     </div>
     <span slot="footer" class="dialog-footer">
       <el-button @click="showImageChange = false" size='small'>Cancelar</el-button>
-      <el-button type="success" @click="updateImage(image, imageId)" size='small'>Actualizar</el-button>
+      <el-button type="success" @click="updateImage(newAsociateForm.image, imageId)" size='small'>Actualizar</el-button>
     </span>
   </el-dialog>
   <el-row :gutter='15' class='mb-4' type='flex' justify='space-between'>

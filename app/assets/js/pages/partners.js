@@ -47,7 +47,6 @@ const app = new Vue({
   data: function () {
     return {
       showImageChange: false,
-      image: '#',
       imageId: null,
       loading: true,
       partners: [],
@@ -274,7 +273,13 @@ const app = new Vue({
         }
       })
     },
-    openUpdateImage() {
+    openUpdateImage(data) {
+      this.newAsociateForm = {
+        ...data,
+        categories: data.categories.map(c => c.id),
+        credits: data.credits.map(c => c.id),
+        image: `/${data.image}`
+      }
       this.showImageChange = true
     },
     previewImage() {
@@ -282,8 +287,7 @@ const app = new Vue({
         var reader = new FileReader();
 
         reader.onload = function (e) {
-          app.image = e.target.result
-          console.log(e.target.result)
+          app.newAsociateForm.image = e.target.result
         }
 
         reader.readAsDataURL(app.$refs.imgFile.files[0]);
@@ -291,7 +295,7 @@ const app = new Vue({
     },
     updateImage(image, id) {
       const fd = new FormData()
-      fd.append('type', 'credit')
+      fd.append('type', 'partners')
       fd.append('image', image)
       fd.append('id', id)
       axios.post(`${site_url}admin/upload_image`, fd).then(console.log)
@@ -308,7 +312,6 @@ const app = new Vue({
             categories
           }
         })
-      console.log(filtered)
       return filtered
     }
   }
