@@ -293,19 +293,40 @@ const app = new Vue({
       }
     },
     updateImage(image, id) {
-      const fd = new FormData()
-      fd.append('type', 'partners')
-      fd.append('image', app.$refs.imgFile.files[0])
-      fd.append('id', id)
-      axios.post(
-        `${site_url}admin/upload_image`,
-        fd,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data'
+      this.$msgbox({
+        type: 'warning',
+        title: 'Confirmation',
+        message: "Are you sure you want to update the partner's picture?",
+        showCancelButton: true,
+        confirmButtonText: "Yes, please",
+        cancelButtonText: 'Cancel',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = 'Processing...';
+            const fd = new FormData()
+            fd.append('type', 'partners')
+            fd.append('image', app.$refs.imgFile.files[0])
+            fd.append('id', id)
+            axios
+              .post(`${site_url}admin/upload_image`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
+              .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
+                instance.confirmButtonLoading = false;
+                instance.confirmButtonText = "Yes, please";
+                this.showImageChange = false
+                done()
+              })
+          } else {
+            done();
           }
         }
-      ).then(console.log)
+      })
+
     }
   },
   computed: {
