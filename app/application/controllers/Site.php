@@ -176,7 +176,7 @@ class Site extends CI_Controller {
 		$real_path =  str_replace('\\','/',realpath(''));
 		
 
-
+		var_dump($_FILES);
 
 		$info=array();
 
@@ -188,12 +188,13 @@ class Site extends CI_Controller {
 		{
 		  //NO SE SUBIO
 			//$this->response(['Sin permisos de escritura'], REST_Controller::HTTP_BAD_REQUEST);
-			var_dump($this->upload->display_errors());
-			log_message('error', 'No se logro subir la imagen'.var_dump($this->upload->do_upload('image')));
+			
+			echo 'No se logro subir la imagen'.($this->upload->display_errors());
+
 		}else{
 		  //SI SE SUBIO
 			
-			$old_data = $this->db->get_where($input['type'], ['id' => $input['id']])->row_array();
+			$old_data = $this->db->get_where($_REQUEST['type'], ['id' => $_REQUEST['id']])->row_array();
 			if(!empty($old_data)){ if(!empty($old_data['image'])){@unlink($old_data['image']);}  }
 
 		  $info = $this->upload->data();//la informacion del archivo subido
@@ -201,15 +202,15 @@ class Site extends CI_Controller {
 
 		  $data = array(
 		  	//'image'=> $info['file_name']
-		  	'image'=> 'assets/images/'.$input['type'].'/'.$info['file_name']
+		  	'image'=> 'assets/images/'.$_REQUEST['type'].'/'.$info['file_name']
 		  );
 		 
-		  $this->db->update( $input['type'], $data, array( 'id'=>$input['id'] ) );
+		  $this->db->update( $_REQUEST['type'], $data, array( 'id'=>$_REQUEST['id'] ) );
 		  
 		  $response = new stdClass();
-		  $d = $input['type'];
-		  $response->$d = $this->db->get($input['type'])->result();
-		  $response->msj = $input['type'].' image upload successfully.';
+		  $d = $_REQUEST['type'];
+		  $response->$d = $this->db->get($_REQUEST['type'])->result();
+		  $response->msj = $_REQUEST['type'].' image upload successfully.';
 		  echo json_encode($response);
 
 		}
