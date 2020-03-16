@@ -4,6 +4,7 @@ new Vue({
     axios(this.createHeader('GET'))
       .then(res => {
         this.amounts = res.data
+        this.loading = false
       })
   },
   data: function () {
@@ -12,6 +13,7 @@ new Vue({
       amounts: [],
       searchValue: '',
       showNewAmount: false,
+      loading: true,
       newAmountForm: {
         from: '',
         until: '',

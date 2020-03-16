@@ -17,7 +17,7 @@
   </el-row>
   <el-row :gutter='15'>
     <el-col :span='24'>
-      <el-table :data="filteredAmounts" class="w-full" stripe size='mini' empty-text='No hay datos'>
+      <el-table :data="filteredAmounts" class="w-full" stripe size='mini' empty-text='No hay datos' v-loading="loading">
         <el-table-column prop="index" min-width="25"></el-table-column>
         <el-table-column label="Desde" min-width="100">
           <template slot-scope="scope">
