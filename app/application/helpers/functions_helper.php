@@ -62,6 +62,7 @@ function getCredits($id){
       $tmp['maxAmount']=$v->maxAmount;
       $tmp['minAmount']=$v->minAmount;
       $tmp['slug']=$v->slug;
+      $tmp['image']=$v->image;
       $tmp['created_at']=$v->created_at;
       $tmp['updated_at']=$v->updated_at;
       

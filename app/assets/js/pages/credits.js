@@ -196,29 +196,60 @@ const app = new Vue({
     formatMoney(amount) {
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount)
     },
-    openUpdateImage() {
+    openUpdateImage(data) {
+      this.newCreditForm = {
+        ...data,
+        categories: data.categories.map(c => c.id),
+        image: `/${data.image}`
+      }
       this.showImageChange = true
     },
     previewImage() {
-      console.log('entra')
-      console.log(app.$refs)
       if (app.$refs.imgFile.files && app.$refs.imgFile.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-          app.image = e.target.result
-          console.log(e.target.result)
+          app.newCreditForm.image = e.target.result
         }
 
         reader.readAsDataURL(app.$refs.imgFile.files[0]);
       }
     },
     updateImage(image, id) {
-      const fd = new FormData()
-      fd.append('type', 'credit')
-      fd.append('image', image)
-      fd.append('id', id)
-      axios.post(`${site_url}admin/upload_image`, fd).then(console.log)
+      this.$msgbox({
+        type: 'warning',
+        title: 'Confirmation',
+        message: "Are you sure you want to update the credit's picture?",
+        showCancelButton: true,
+        confirmButtonText: "Yes, please",
+        cancelButtonText: 'Cancel',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = 'Processing...';
+            const fd = new FormData()
+            fd.append('type', 'credits')
+            fd.append('image', app.$refs.imgFile.files[0])
+            fd.append('id', id)
+            axios
+              .post(`${site_url}admin/upload_image`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
+              .then(res => {
+                this.$notify({
+                  title: res.data.success ? 'SUCCESS' : 'ERROR',
+                  message: res.data.msj,
+                  type: res.data.success ? 'success' : 'error',
+                });
+                instance.confirmButtonLoading = false;
+                instance.confirmButtonText = "Yes, please";
+                this.showImageChange = false
+                done()
+              })
+          } else {
+            done();
+          }
+        }
+      })
+
     }
   },
   computed: {
