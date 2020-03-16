@@ -297,7 +297,15 @@ const app = new Vue({
       fd.append('type', 'partners')
       fd.append('image', image)
       fd.append('id', id)
-      axios.post(`${site_url}admin/upload_image`, fd).then(console.log)
+      axios.post(
+        `${site_url}admin/upload_image`,
+        fd,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).then(console.log)
     }
   },
   computed: {
