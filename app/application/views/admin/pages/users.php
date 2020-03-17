@@ -41,7 +41,14 @@
         </el-table-column>
         <el-table-column label="Perfil" min-width="100">
           <template slot-scope="scope">
-            <span>{{ scope.row.profile }}</span>
+            <span v-if="scope.row.profile == 1">Administrador</span>
+            <span v-else>Agente</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="Estado" min-width='60'>
+          <template slot-scope='scope'>
+            <span v-if='scope.row.active == 1' class='text-green-500 font-semibold'>Activo</span>
+            <span v-else class='text-gray-500 font-semibold'>Inactivo</span>
           </template>
         </el-table-column>
         <el-table-column min-width="220"></el-table-column>
@@ -65,7 +72,7 @@
                   </span>
                   usuario
                 </el-dropdown-item>
-                <el-dropdown-item divided class='font-semibold' @click.native="deleteUser(scope.row.id)">
+                <el-dropdown-item divided class='font-semibold' @click.native="deleteUser(scope.row.id)" v-if="scope.row.profile != 1">
                   <span class='text-red-500 tracking-wide'>
                     <i class="el-icon-delete"></i> Eliminar usuario
                   </span>

@@ -39,6 +39,7 @@ class Users extends REST_Controller {
 
 	public function index_post(){
 		$input = json_decode($this->input->raw_input_stream);
+		$input->password = password_hash($input->password, PASSWORD_DEFAULT);
 		$this->db->insert('users',$input);
 		
 		$response = new stdClass();

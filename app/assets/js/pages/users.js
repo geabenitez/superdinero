@@ -17,6 +17,8 @@ new Vue({
         lastnames: '',
         password: '',
         email: '',
+        code: '',
+        profile: ''
       }
     }
   },
@@ -46,8 +48,8 @@ new Vue({
         data
       }
     },
-    saveUser({ names, lastnames, id }) {
-      if (names == '' || lastnames == '') {
+    saveUser({ names, lastnames, email, password, code, profile, id }) {
+      if (names == '' || lastnames == '' || email == '' || password == '' || code == '' || profile == '') {
         this.$notify.error({
           title: 'Error',
           message: 'All fields are required.'
@@ -67,7 +69,7 @@ new Vue({
             instance.confirmButtonText = 'Processing...';
             const METHOD = id != null ? 'PUT' : 'POST'
             const userId = id != null ? id : ''
-            axios(this.createHeader(METHOD, { names, lastnames, email, password, active: 1 }, userId))
+            axios(this.createHeader(METHOD, { names, lastnames, email, password, code, profile, active: 1 }, userId))
               .then(res => {
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',
