@@ -8,6 +8,7 @@ new Vue({
     this.responses.lastnames = urlParams.get('l')
     this.responses.email = urlParams.get('e')
     this.responses.phone = urlParams.get('p')
+    this.responses.source = urlParams.get('u')
 
     const headers = { 'token-crf': cs }
 
@@ -137,6 +138,7 @@ new Vue({
       },
       aditionalQuestions: [],
       responses: {
+        source: '',
         names: '',
         lastnames: '',
         email: '',
