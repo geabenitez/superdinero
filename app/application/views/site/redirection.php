@@ -35,12 +35,17 @@
         <path class="fill-current text-green-800" d="M9.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z"/>
       </svg>
       <div class='flex flex-row w-64 p-4 justify-center md:justify-end'>
-        <div class='w-32 h-20 bg-gray-300 border border-gray-400 rounded'></div>
+        <img src='/<?= $image ?>' class='w-64 h-24 bg-gray-300 border border-gray-400 rounded'></div>
       </div>
     </div>
     <span class='font-semibold text-green-900'>Espera un momento por favor...</span>
     <script>
-        setTimeout(function(){window.location.href = "<?=$redirect?>" + "?" + atob("<?= $params ?>"); }, 3000);
+        setTimeout(
+          function(){
+            window.location.href = "<?=$redirect?>" + "?" + atob("<?= $params ?>"); 
+          }, 
+          3500
+        );
     </script>
 </body>
 </html>

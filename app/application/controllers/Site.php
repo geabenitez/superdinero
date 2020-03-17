@@ -123,6 +123,7 @@ class Site extends CI_Controller {
 			header('location:'.site_url('/').'404');
 		}
 		$resources['partner'] = $partnerData['nameES'];
+		$resources['image'] = $partnerData['image'];
 
 
 		$resources['styles'] = basic_styles();
