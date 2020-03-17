@@ -150,10 +150,10 @@ class Partner extends REST_Controller {
   } 
 
   public function index_put($id) {
-    $input = $this->put();
+    $input = json_decode($this->input->raw_input_stream);
 
-    if (isset($input['active'])) {
-      $data = array('active' => $input['active'] );
+    if (isset($input->active)) {
+      $data = array('active' => $input->active);
       $this->db->update('partners', $data, array('id'=>$id));
 
       $response = new stdClass();
@@ -190,7 +190,6 @@ class Partner extends REST_Controller {
       $this->response($response, REST_Controller::HTTP_OK);
       return;
     }
-
 
     $categories = $input->categories;
     $states = $input->states;

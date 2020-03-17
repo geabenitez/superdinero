@@ -121,6 +121,19 @@ const app = new Vue({
       }
       this.showNewPartner = true
     },
+    editPartner(partner) {
+      this.action = 'Editar credito'
+      this.newAsociateForm = {
+        ...partner,
+        documents: partner.documents.map(d => d.id),
+        credits: partner.credits.map(c => c.id),
+        categories: partner.categories.map(c => c.id),
+        records: partner.records.map(r => r.id),
+        states: partner.states.map(s => s.id),
+        amounts: partner.amounts.map(a => a.id)
+      }
+      this.showNewPartner = true
+    },
     savePartner({
       id,
       nameES,

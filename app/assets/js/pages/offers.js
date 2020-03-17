@@ -15,7 +15,6 @@ const app = new Vue({
     const getStates = () => axios({ headers, method: 'GET', url: `${site_url}states` })
     const getPartners = () => axios({ headers, method: 'GET', url: `${site_url}partners` })
 
-
     axios
       .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates(), getPartners()])
       .then(axios.spread((categories, credits, documents, records, states, partners) => {
@@ -339,6 +338,39 @@ const app = new Vue({
     },
     resetFilters() {
       this.query = this.originalQuery
+    },
+    formedURL(partner) {
+      let url = `/redirect?redirect=${partner.url}&partner=${partner.id}`
+      const params = []
+      if (partner.paramName1 != null || partner.paramName1 != '') {
+        params.push(`${partner.paramName1}=${partner.paramValues1.split(',').map(p => {
+          console.log(p)
+          switch (p) {
+            case 'utm_source':
+              return app.query.source
+              break;
+            case 'agent':
+              return app.agent
+              break;
+          }
+        }).join('-')}`)
+      }
+      if (partner.paramName2 != null || partner.paramName2 != '') {
+        params.push(`${partner.paramName2}=${partner.paramValues2.split(',').map(p => {
+          switch (p) {
+            case 'utm_source':
+              return app.query.source
+              break;
+            case 'agent':
+              return app.agent
+              break;
+          }
+        }).join('-')}`)
+      }
+      if (params.length > 0) {
+        url += `&params=${btoa(params.join('&'))}`
+      }
+      return url
     }
   },
   computed: {

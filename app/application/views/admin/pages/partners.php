@@ -65,8 +65,10 @@
                 <el-dropdown-item @click.native="openUpdateImage(scope.row)">
                   <i class="el-icon-picture"></i> Cambiar imagen
                 </el-dropdown-item>
-                <el-dropdown-item><i class="el-icon-view"></i> Vista previa</el-dropdown-item>
-                <el-dropdown-item><i class="el-icon-edit-outline"></i> Editar asociado</el-dropdown-item>
+                <!-- <el-dropdown-item><i class="el-icon-view"></i> Vista previa</el-dropdown-item> -->
+                <el-dropdown-item @click.native="editPartner(scope.row)">
+                  <i class="el-icon-edit-outline"></i> Editar asociado
+                </el-dropdown-item>
                 <el-dropdown-item @click.native="changeStatus(scope.row.id, scope.row.active)">
                   <span v-if="scope.row.active == '1'">
                     <i class="el-icon-close"></i> Desactivar
