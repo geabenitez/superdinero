@@ -4,10 +4,12 @@ new Vue({
     axios(this.createHeader('GET'))
       .then(res => {
         this.users = res.data
+        this.loading = false
       })
   },
   data: function () {
     return {
+      loading: true,
       action: 'Nuevo usuario',
       users: [],
       searchValue: '',

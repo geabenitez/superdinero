@@ -43,7 +43,7 @@
             clearable/>
         </el-form-item>
       </el-col>
-      <el-col :span='8'>
+      <el-col :span='8' v-if='newUserForm.id == null'>
         <el-form-item label="Password">
           <el-input 
             placeholder="Ingresa el password" 

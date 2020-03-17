@@ -44,6 +44,10 @@ class Users extends REST_Controller {
 		
 		$response = new stdClass();
 		$response->success = true;
+		$users = $this->db->get("users")->result();
+		if(!empty($users)){
+			foreach ($users as $k => $v) {unset($v->password); }
+		}
 		$response->users = $this->db->get("users")->result();
 		$response->msj = 'User added';
 		$this->response($response, REST_Controller::HTTP_OK);
@@ -56,6 +60,10 @@ class Users extends REST_Controller {
 		
 		$response = new stdClass();
 		$response->success = true;
+		$users = $this->db->get("users")->result();
+		if(!empty($users)){
+			foreach ($users as $k => $v) {unset($v->password); }
+		}
 		$response->users = $this->db->get("users")->result();
 		$response->msj = 'User updated successfully.';
 		$this->response($response, REST_Controller::HTTP_OK);

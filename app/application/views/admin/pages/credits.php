@@ -4,7 +4,7 @@
     <input type='file' ref="imgFile" @change='previewImage()' />
     <div class='flex flex-col items-center justify-center mt-2'>
       <img class='bg-gray-200 broder rounded w-64 h-64' ref="imgPreview" :src="newCreditForm.image" />
-      <span class='text-xs'>Tamaño recomendado 256x96 pixeles</span>
+      <span class='text-xs'>Tamaño recomendado 256x256 pixeles</span>
     </div>
     <span slot="footer" class="dialog-footer">
       <el-button @click="showImageChange = false" size='small'>Cancelar</el-button>
