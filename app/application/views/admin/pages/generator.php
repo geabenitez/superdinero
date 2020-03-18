@@ -34,7 +34,7 @@
         </div>
         <div class='flex flex-col w-full' v-if="questionNumber == 2">
           <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[2].nameES: questions[2].nameEN}}</span>
-          <el-slider v-model="responses.amount" :min='1' :format-tooltip="formatTooltip" :marks="marks"></el-slider>
+          <el-slider v-model="responses.amount" :min='1' :format-tooltip="formatTooltip" :marks="marks" :step="0.1"></el-slider>
           <div class='flex flex-row items-center justify-center w-full mt-6'>
             <div class="w-64">
               <input 

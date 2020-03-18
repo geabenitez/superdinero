@@ -423,8 +423,8 @@ const app = new Vue({
         }
 
       }).sort((a, b) => {
-        if (b.rate > a.rate) return 1
-        if (a.rate > b.rate) return -1
+        if (parseFloat(b.rate) < parseFloat(a.rate)) return 1
+        if (parseFloat(a.rate) < parseFloat(b.rate)) return -1
         return 0
       })
 
