@@ -38,10 +38,10 @@ class Partner extends REST_Controller {
 
     
     foreach ($input->characteristicsES as $key => $value) {$value="'".$value."'";}
-    $input->characteristicsES = implode(",", $input->characteristicsES);
+    $input->characteristicsES = implode("-&-", $input->characteristicsES);
 
     foreach ($input->characteristicsEN as $key => $value) {$value="'".$value."'";}
-    $input->characteristicsEN = implode(",", $input->characteristicsEN);
+    $input->characteristicsEN = implode("-&-", $input->characteristicsEN);
 
     $this->db->insert('partners',$input);
     $partnerId = $this->db->insert_id();
@@ -144,10 +144,10 @@ class Partner extends REST_Controller {
     unset($input->categories, $input->states, $input->amounts, $input->records, $input->credits, $input->documents);
     
     foreach ($input->characteristicsES as $key => $value) {$value="'".$value."'";}
-    $input->characteristicsES = implode(",", $input->characteristicsES);
+    $input->characteristicsES = implode("-&-", $input->characteristicsES);
 
     foreach ($input->characteristicsEN as $key => $value) {$value="'".$value."'";}
-    $input->characteristicsEN = implode(",", $input->characteristicsEN);
+    $input->characteristicsEN = implode("-&-", $input->characteristicsEN);
 
 
     $input->updated_at = date("Y-m-d h:i:s");
