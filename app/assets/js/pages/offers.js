@@ -315,9 +315,9 @@ const app = new Vue({
   methods: {
     characteristics(ES, EN) {
       if (this.spanishLang) {
-        return ES.split(',')
+        return ES.split('-&-')
       } else {
-        return EN.split(',')
+        return EN.split('-&-')
       }
     },
     loadMore() {
@@ -344,7 +344,6 @@ const app = new Vue({
       const params = []
       if (partner.paramName1 != null || partner.paramName1 != '') {
         params.push(`${partner.paramName1}=${partner.paramValues1.split(',').map(p => {
-          console.log(p)
           switch (p) {
             case 'utm_source':
               return app.query.source

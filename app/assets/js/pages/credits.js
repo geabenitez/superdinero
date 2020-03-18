@@ -57,7 +57,8 @@ const app = new Vue({
     editCredit(state) {
       this.action = 'Editar credito'
       this.newCreditForm = {
-        ...state
+        ...state,
+        askAlways: state.askAlways == 1
       }
       this.showNewCredit = true
     },
