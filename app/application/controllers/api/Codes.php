@@ -45,8 +45,14 @@ class Codes extends REST_Controller {
 		$input = json_decode($this->input->raw_input_stream);
 		$conf = $input->configuracion;
 
+		$code_user = null;
+		$get_code_user = $this->db->query("select max(code) code from users where id = '".$input->agent."'")->result();
+		if (!empty($get_code_user[0]->code)) {
+			$code_user = $get_code_user[0]->code;
+		}
+
 		$insert = array(
-			'agent'=>$input->agent,
+			'agent'=>$code_user,
 			'codigo'=>$new_code,
 			'configuracion'=>json_encode($input->configuracion),
 			'created_at' => date("Y-m-d h:i:s")
@@ -61,7 +67,7 @@ class Codes extends REST_Controller {
 		curl_setopt($ch, CURLOPT_URL,$form_url);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		$post_fields = [
-			"phone_number" => $conf->phone,
+			"phone_number" => "+1"$conf->phone,
 			"email" => $conf->email,
 			"caller_name" => $conf->names." ".$conf->lastnames,
 			"custom_source" => "null",
