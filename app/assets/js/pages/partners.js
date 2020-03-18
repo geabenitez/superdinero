@@ -341,6 +341,8 @@ const app = new Vue({
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Yes, please";
                 this.partners = res.data.partners
+                console.log(res.data.partners)
+                console.log(this.partners)
                 this.showImageChange = false
                 done()
               })
