@@ -211,8 +211,8 @@ class Site extends CI_Controller {
 		  $this->db->update( $_REQUEST['type'], $data, array( 'id'=>$_REQUEST['id'] ) );
 		  
 		  
-		  $d = $_REQUEST['type'];
-		  $response->$d = $this->db->get($_REQUEST['type'])->result();
+			$d = $_REQUEST['type'];
+		  $response->$d = $_REQUEST['type'] == 'partners' ? getPartners(null) : getCredits(null);
 		  $response->msj = $_REQUEST['type'].' image upload successfully.';
 		  $response->success = true;
 		  echo json_encode($response);

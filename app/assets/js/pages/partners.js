@@ -285,7 +285,8 @@ const app = new Vue({
         }
       })
     },
-    openUpdateImage(data) {
+    openUpdateImage({ id }) {
+      const data = this.partners.find(p => p.id == id)
       this.newAsociateForm = {
         ...data,
         categories: data.categories.map(c => c.id),
@@ -341,8 +342,6 @@ const app = new Vue({
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Yes, please";
                 this.partners = res.data.partners
-                console.log(res.data.partners)
-                console.log(this.partners)
                 this.showImageChange = false
                 done()
               })
