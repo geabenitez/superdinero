@@ -87,11 +87,6 @@ class Partner extends REST_Controller {
 
 
 
-
-
-
-
-
     $partner_states = [];
     foreach ($states as $value) {
       array_push($partner_states, array(
@@ -111,34 +106,8 @@ class Partner extends REST_Controller {
     $this->db->insert_batch('partners_amounts', $partner_amounts);
 
 
-    $partners = $this->db->get("partners")->result();
+    $partners = getPartners(0);
 
-    foreach ($partners as $key => $value) {
-      $c = "categories";
-      $pc = "partners_categories";
-      $s = "states";
-      $ps = "partners_states";
-      $getCategories = array(
-        $c.'.nameES',
-        $c.'.nameEN'
-      );
-      $getStates = array(
-        $s.'.nameES',
-        $s.'.nameEN',
-      );
-      $value->categories = $this->db
-      ->select($getCategories)
-      ->from($pc)
-      ->where($pc.'.partnerId', $value->id)
-      ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
-      ->get()->result();
-      $value->states = $this->db
-      ->select($getStates)
-      ->from($ps)
-      ->where($ps.'.partnerId', $value->id)
-      ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
-      ->get()->result();
-    }
 
     $response = new stdClass();
     $response->partners = $partners;
@@ -152,38 +121,12 @@ class Partner extends REST_Controller {
   public function index_put($id) {
     $input = json_decode($this->input->raw_input_stream);
 
-    if (isset($input->active)) {
+    if (!isset($input->nameES)) {
       $data = array('active' => $input->active);
       $this->db->update('partners', $data, array('id'=>$id));
 
       $response = new stdClass();
-      $response->partners = $this->db->get("partners")->result();
-      foreach ($response->partners as $key => $value) {
-        $c = "categories";
-        $pc = "partners_categories";
-        $s = "states";
-        $ps = "partners_states";
-        $getCategories = array(
-          $c.'.nameES',
-          $c.'.nameEN'
-        );
-        $getStates = array(
-          $s.'.nameES',
-          $s.'.nameEN',
-        );
-        $value->categories = $this->db
-        ->select($getCategories)
-        ->from($pc)
-        ->where($pc.'.partnerId', $value->id)
-        ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
-        ->get()->result();
-        $value->states = $this->db
-        ->select($getStates)
-        ->from($ps)
-        ->where($ps.'.partnerId', $value->id)
-        ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
-        ->get()->result();
-      }
+      $response->partners = getPartners(0);
       $response->msj = 'Partner updated successfully.';
       $response->success = true;
 
@@ -308,33 +251,8 @@ class Partner extends REST_Controller {
 
 
     $response = new stdClass();
-    $response->partners = $this->db->get("partners")->result();
-    foreach ($response->partners as $key => $value) {
-      $c = "categories";
-      $pc = "partners_categories";
-      $s = "states";
-      $ps = "partners_states";
-      $getCategories = array(
-        $c.'.nameES',
-        $c.'.nameEN'
-      );
-      $getStates = array(
-        $s.'.nameES',
-        $s.'.nameEN',
-      );
-      $value->categories = $this->db
-      ->select($getCategories)
-      ->from($pc)
-      ->where($pc.'.partnerId', $value->id)
-      ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
-      ->get()->result();
-      $value->states = $this->db
-      ->select($getStates)
-      ->from($ps)
-      ->where($ps.'.partnerId', $value->id)
-      ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
-      ->get()->result();
-    }
+    $response->partners = getPartners(0);
+
     $response->msj = 'Partner updated successfully.';
     $response->success = true;
 
@@ -372,38 +290,10 @@ class Partner extends REST_Controller {
 
 
     $response = new stdClass();
-    $response->partners = $this->db->get("partners")->result();
+    $response->partners = getPartners(0);
 
 
-    $partners = $this->db->get("partners")->result();
-    foreach ($partners as $key => $value) {
-      $c = "categories";
-      $pc = "partners_categories";
-      $s = "states";
-      $ps = "partners_states";
-      $getCategories = array(
-        $c.'.nameES',
-        $c.'.nameEN'
-      );
-      $getStates = array(
-        $s.'.nameES',
-        $s.'.nameEN',
-      );
-      $value->categories = $this->db
-      ->select($getCategories)
-      ->from($pc)
-      ->where($pc.'.partnerId', $value->id)
-      ->join($c, $c.'.id = ' . $pc . '.categoryId', 'right')
-      ->get()->result();
-      $value->states = $this->db
-      ->select($getStates)
-      ->from($ps)
-      ->where($ps.'.partnerId', $value->id)
-      ->join($s, $s.'.id = ' . $ps . '.stateId', 'right')
-      ->get()->result();
-    }
     $response->success = true;
-    $response->partners = $partners;
     $response->msj = 'Partners deleted successfully.';
     $this->response($response, REST_Controller::HTTP_OK);
 
