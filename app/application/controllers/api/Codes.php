@@ -52,7 +52,7 @@ class Codes extends REST_Controller {
 		}
 
 		$insert = array(
-			'agent'=>$code_user,
+			'agent'=>$input->agent,
 			'codigo'=>$new_code,
 			'configuracion'=>json_encode($input->configuracion),
 			'created_at' => date("Y-m-d h:i:s")
@@ -70,8 +70,8 @@ class Codes extends REST_Controller {
 			"phone_number" => "+1".$conf->phone,
 			"email" => $conf->email,
 			"caller_name" => $conf->names." ".$conf->lastnames,
-			"custom_source" => "null",
-			"custom_agent" => $input->agent
+			"custom_source" => ( (isset($conf->source))?$conf->source:"null" ),
+			"custom_agent" => $code_user
 		];
 
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
