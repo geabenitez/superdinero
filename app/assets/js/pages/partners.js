@@ -340,6 +340,7 @@ const app = new Vue({
                 });
                 instance.confirmButtonLoading = false;
                 instance.confirmButtonText = "Yes, please";
+                this.partners = res.data.partners
                 this.showImageChange = false
                 done()
               })
