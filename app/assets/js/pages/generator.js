@@ -143,7 +143,7 @@ new Vue({
       return {
         method: METHOD,
         headers: { 'token-crf': cs },
-        url: `${site_url}codes/${id}`,
+        url: `${site_url}codes/${id}?fr=nodial`,
         data
       }
     },

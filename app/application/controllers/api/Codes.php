@@ -61,8 +61,16 @@ class Codes extends REST_Controller {
 
 		
 
-	//********************** Inicio de proceso de consumo de API *************************************************
-		$form_url = "https://api.calltrackingmetrics.com/api/v1/formreactor/FRT472ABB2C5B9B141A0B4FB298C41D61940F328C0FD82EDFB20D301E6E28830BD9";
+		//********************** Inicio de proceso de consumo de API *************************************************
+		switch ($this->input->get('fr')) {
+			case 'nodial':
+				$form_reactor = 'FRT472ABB2C5B9B141A0B4FB298C41D61943D860A99F83007EB3F76B9A96179A70E';
+				break;
+			default:
+			$form_reactor = 'FRT472ABB2C5B9B141A0B4FB298C41D61940F328C0FD82EDFB20D301E6E28830BD9';
+				break;
+		}
+		$form_url = "https://api.calltrackingmetrics.com/api/v1/formreactor/" . $form_reactor;
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL,$form_url);
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -86,7 +94,7 @@ class Codes extends REST_Controller {
 
 		curl_close ($ch);
 
-	//********************** FIN de proceso de consumo de API *************************************************
+		//********************** FIN de proceso de consumo de API *************************************************
 
 
 		$this->db->insert('codes',$insert);
