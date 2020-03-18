@@ -71,7 +71,7 @@
                     </el-option>
                   </el-select>
                   <div v-else>
-                    <el-slider v-model="query[questions[q].key]" :min='1' :format-tooltip="formatTooltip" :step="0.1></el-slider>
+                    <el-slider v-model="query[questions[q].key]" :min='1' :format-tooltip="formatTooltip" :step="0.1"></el-slider>
                     <div class='flex flex-row items-center justify-center w-full'>
                       <div class="w-full">
                         <input 
