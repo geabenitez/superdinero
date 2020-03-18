@@ -67,7 +67,7 @@ class Codes extends REST_Controller {
 		curl_setopt($ch, CURLOPT_URL,$form_url);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		$post_fields = [
-			"phone_number" => "+1"$conf->phone,
+			"phone_number" => "+1".$conf->phone,
 			"email" => $conf->email,
 			"caller_name" => $conf->names." ".$conf->lastnames,
 			"custom_source" => "null",
