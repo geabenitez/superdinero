@@ -387,7 +387,7 @@ const app = new Vue({
 
         // Verifica si el proveedor require casa
         let noHouseRequired = true
-        if (partner.requiresHouse) {
+        if (partner.requiresHouse == 1) {
           noHouseRequired = this.query.has_house
         }
 
