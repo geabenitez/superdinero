@@ -103,7 +103,7 @@
                 <span class='font-semibold text-xs uppercase text-white'>La mejor opcion posible</span>
               </div>
             </div>
-            <img style="width: 307px; height: 115px;" :src='`/${partner.image}`' class='flex flex-row items-center justify-center bg-gray-200 my-2 rounded border text-gray-500'/>
+            <img style="width: 307px; height: 115px;" :src='`/${partner.image}`' class='flex flex-row items-center justify-center my-2'/>
             <div class='flex flex-row w-full items-center justify-center'>
               <el-rate
                 class='w-full'
