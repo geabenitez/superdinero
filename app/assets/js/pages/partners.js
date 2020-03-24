@@ -31,9 +31,13 @@ const app = new Vue({
       return axios({ headers, method: 'GET', url: `${site_url}records` })
     }
 
+    const getMethods = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}methods` })
+    }
+
     axios
-      .all([getPartners(), getDocuments(), getCategories(), getCredits(), getAmounts(), getStates(), getRecords()])
-      .then(axios.spread((partners, documents, categories, credits, amounts, states, records) => {
+      .all([getPartners(), getDocuments(), getCategories(), getCredits(), getAmounts(), getStates(), getRecords(), getMethods()])
+      .then(axios.spread((partners, documents, categories, credits, amounts, states, records, methods) => {
         this.partners = partners.data
         this.documents = documents.data
         this.categories = categories.data
@@ -41,6 +45,7 @@ const app = new Vue({
         this.amounts = amounts.data
         this.states = states.data
         this.records = records.data
+        this.methods = methods.data
         this.loading = false
       }))
   },
@@ -57,6 +62,7 @@ const app = new Vue({
       documents: [],
       states: [],
       records: [],
+      methods: [],
       newAsociateForm: {
         paramName1: '',
         paramValues1: [],
@@ -149,6 +155,7 @@ const app = new Vue({
       credits,
       categories,
       records,
+      methods,
       rate,
       states,
       onlyAgent,
@@ -197,6 +204,7 @@ const app = new Vue({
               credits,
               categories,
               records,
+              methods,
               rate,
               states,
               onlyAgent,

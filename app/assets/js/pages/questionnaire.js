@@ -28,13 +28,17 @@ new Vue({
       return axios({ headers, method: 'GET', url: `${site_url}records` })
     }
 
+    const getMethods = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}methods` })
+    }
+
     const getStates = () => {
       return axios({ headers, method: 'GET', url: `${site_url}states` })
     }
 
     axios
-      .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates()])
-      .then(axios.spread((categories, credits, documents, records, states) => {
+      .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates(), getMethods()])
+      .then(axios.spread((categories, credits, documents, records, states, paymentOptions) => {
         this.credit = credits.data.find(d => d.slug == slug)
         this.responses.credit = this.credit.id
         this.aditionalQuestions = credits.data.filter(d => d.askAlways == 1 && d.id !== this.credit.id)
@@ -50,6 +54,7 @@ new Vue({
         })
         this.documents = documents.data
         this.records = records.data
+        this.paymentOptions = paymentOptions.data
         this.states = states.data
         this.marks = {
           1: this.formatMoney(this.credit.minAmount),
@@ -71,24 +76,7 @@ new Vue({
       states: [],
       value: 1,
       marks: {},
-      paymentOptions: [
-        {
-          nameEN: 'Direct deposit',
-          nameES: 'Deposito directo'
-        },
-        {
-          nameEN: 'Check',
-          nameES: 'Cheque'
-        },
-        {
-          nameEN: 'Cash',
-          nameES: 'Efectivo'
-        },
-        {
-          nameEN: "I don't have earnings",
-          nameES: 'No tengo ingresos'
-        }
-      ],
+      paymentOptions: [],
       questions: {
         1: {
           nameES: '¿Qué cantidad necesitas?',

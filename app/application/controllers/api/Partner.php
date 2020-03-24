@@ -65,6 +65,15 @@ class Partner extends REST_Controller {
     }
     $this->db->insert_batch('partners_records', $partner_records);
 
+    $partner_methods = [];
+    foreach ($methods as $value) {
+      array_push($partner_methods, array(
+        'partnerId' => $partnerId,
+        'methodId' => $value
+      ));
+    }
+    $this->db->insert_batch('partners_methods', $partner_methods);
+
 
     $partner_credits = [];
     foreach ($credits as $value) {
@@ -138,10 +147,11 @@ class Partner extends REST_Controller {
     $states = $input->states;
     $amounts = $input->amounts;
     $records = $input->records;
+    $methods = $input->methods;
     $credits = $input->credits;
     $documents = $input->documents;
 
-    unset($input->categories, $input->states, $input->amounts, $input->records, $input->credits, $input->documents);
+    unset($input->categories, $input->states, $input->amounts, $input->records, $input->methods, $input->credits, $input->documents);
     
     foreach ($input->characteristicsES as $key => $value) {$value="'".$value."'";}
     $input->characteristicsES = implode("-&-", $input->characteristicsES);
@@ -170,6 +180,10 @@ class Partner extends REST_Controller {
 
     if($this->db->get_where("partners_records", ['partnerId' => $id])->result()){
       $this->db->delete('partners_records', array('partnerId'=>$id));
+    }
+
+    if($this->db->get_where("partners_methods", ['partnerId' => $id])->result()){
+      $this->db->delete('partners_methods', array('partnerId'=>$id));
     }
 
     if($this->db->get_where("partners_credits", ['partnerId' => $id])->result()){
@@ -203,6 +217,15 @@ class Partner extends REST_Controller {
       ));
     }
     $this->db->insert_batch('partners_records', $partner_records);
+
+    $partner_methods = [];
+    foreach ($methods as $value) {
+      array_push($partner_methods, array(
+        'partnerId' => $partnerId,
+        'methodId' => $value
+      ));
+    }
+    $this->db->insert_batch('partners_methods', $partner_methods);
 
 
     $partner_credits = [];

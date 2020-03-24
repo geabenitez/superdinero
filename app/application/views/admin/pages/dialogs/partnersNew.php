@@ -187,6 +187,24 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="Metodos de pago">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.methods" 
+            multiple 
+            placeholder="Seleccionar" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='method in methods'
+                :key="method.id"
+                :label="method.nameES"
+                :value="method.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label='Calificación'>
           <div class="flex flex-row items-center ">
             <div class='w-1/4 mr-5'>
@@ -443,6 +461,24 @@
                 :key="amount.id"
                 :label="`${formatMoney(amount.from)} - ${formatMoney(amount.until)}`"
                 :value="amount.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Payment methods">
+          <el-select 
+            class='w-full' 
+            v-model="newAsociateForm.methods" 
+            multiple 
+            placeholder="Select" 
+            size='small'
+            clearable
+            filterable
+            default-first-option >
+            <el-option
+                v-for='method in methods'
+                :key="method.id"
+                :label="method.nameEN"
+                :value="method.id">
             </el-option>
           </el-select>
         </el-form-item>
