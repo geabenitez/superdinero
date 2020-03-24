@@ -192,6 +192,33 @@ function getRecords($id){
   return $result;
 }
 
+function getMethods($id){
+  $CI =& get_instance();
+
+  if (!empty($id)) {
+    $data = $CI->db->get_where("methods", ['id' => $id])->result();
+  } else {
+    $data = $CI->db->get("methods")->result();
+  }
+
+  $result=array();
+
+  if (!empty($data)) {
+    foreach ($data as $v) {
+      $tmp = array();
+      $tmp['id']=$v->id;
+      $tmp['nameES']=$v->nameES;
+      $tmp['nameEN']=$v->nameEN;
+      $tmp['active']=$v->active;
+      $tmp['created_at']=$v->created_at;
+      $tmp['updated_at']=$v->updated_at;
+      $result[]=$tmp;
+    }
+  }
+
+  return $result;
+}
+
 function getStates($id){
   $CI =& get_instance();
 

@@ -100,6 +100,8 @@ $route['admin/states'] = 'Admin/states';
 $route['admin/categories'] = 'Admin/categories';
 
 $route['admin/amounts'] = 'Admin/amounts';
+$route['admin/records'] = 'Admin/records';
+$route['admin/methods'] = 'Admin/methods';
 $route['admin/credits'] = 'Admin/credits';
 $route['admin/users'] = 'Admin/users';
 
@@ -136,6 +138,10 @@ $route['amounts/(:any)'] = 'api/Amount/$1';
 // CREDICTS 
 $route['credits'] = 'api/Credit';
 $route['credits/(:any)'] = 'api/Credit/$1';
+
+// METHODS 
+$route['methods'] = 'api/Methods';
+$route['methods/(:any)'] = 'api/Methods/$1';
 
 $route['users'] = 'api/Users';
 $route['users/(:any)'] = 'api/Users/$1';

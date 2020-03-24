@@ -12,6 +12,7 @@
             ['profiles' => [1], 'id' => 'amounts', 'title' => 'Montos'],
             ['profiles' => [1], 'id' => 'documents', 'title' => 'Documentos'],
             ['profiles' => [1], 'id' => 'records', 'title' => 'Records crediticios'],
+            ['profiles' => [1], 'id' => 'methods', 'title' => 'Metodos de pago'],
             ['profiles' => [1], 'id' => 'users', 'title' => 'Usuarios'],
         ] ?>
         <ul class='mt-6 text-gray-100'>
