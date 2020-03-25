@@ -269,6 +269,7 @@ function getPartners($id){
     $pd = "partners_documents";
     $r = "records";
     $pr = "partners_records";
+    $pm = "partners_methods";
     $getCategories = array(
       $c.'.id',
       $c.'.nameES',
@@ -302,6 +303,12 @@ function getPartners($id){
       $d.'.active',
     );
     $getRecords = array(
+      $r.'.id',
+      $r.'.nameES',
+      $r.'.nameEN',
+      $r.'.active',
+    );
+    $getMethods = array(
       $r.'.id',
       $r.'.nameES',
       $r.'.nameEN',
@@ -348,6 +355,13 @@ function getPartners($id){
     ->from($pr)
     ->where($pr.'.partnerId', $value->id)
     ->join($r, $r.'.id = ' . $pr . '.recordId', 'right')
+    ->get()->result();
+
+    $value->methods = $CI->db
+    ->select($getMethods)
+    ->from($pm)
+    ->where($pm.'.partnerId', $value->id)
+    ->join($r, $r.'.id = ' . $pm . '.methodId', 'right')
     ->get()->result();
   }
 
