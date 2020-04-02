@@ -1,6 +1,6 @@
 <?php
 
- if(isset($_SESSION['logged'])){header('location: '.site_url('admin/partners'));} ?>
+ if(isset($_SESSION['logged'])){header('location: '.site_url('admin/generator'));} ?>
 <!DOCTYPE html>
 <html lang="es">
 
