@@ -18,8 +18,8 @@ services:
     depends_on:
       - superdinero_db
     volumes:
-      - superdinero_credits:./assets/images/credits
-      - superdinero_partners:./assets/images/partners
+      - superdinero_credits:/var/www/html/assets/images/credits
+      - superdinero_partners:/var/www/html/assets/images/partners
 
   superdinero_db:
     image: mysql:5.7.29
