@@ -17,6 +17,9 @@ services:
       - "443:443"
     depends_on:
       - superdinero_db
+    volumes:
+      - superdinero_credits:./assets/images/credits
+      - superdinero_partners:./assets/images/partners
 
   superdinero_db:
     image: mysql:5.7.29
@@ -33,3 +36,5 @@ services:
 
 volumes:
   superdinero_myslq: {}
+  superdinero_credits: {}
+  superdinero_partners: {}
