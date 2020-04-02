@@ -32,6 +32,7 @@ class Partner extends REST_Controller {
     $amounts = $input->amounts;
     $records = $input->records;
     $credits = $input->credits;
+    $methods = $input->methods;
     $documents = $input->documents;
 
     unset($input->categories, $input->states, $input->amounts, $input->records, $input->credits, $input->documents);
