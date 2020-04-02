@@ -14,10 +14,11 @@ const app = new Vue({
     const getRecords = () => axios({ headers, method: 'GET', url: `${site_url}records` })
     const getStates = () => axios({ headers, method: 'GET', url: `${site_url}states` })
     const getPartners = () => axios({ headers, method: 'GET', url: `${site_url}partners` })
+    const getMethods = () => axios({ headers, method: 'GET', url: `${site_url}methods` })
 
     axios
-      .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates(), getPartners()])
-      .then(axios.spread((categories, credits, documents, records, states, partners) => {
+      .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates(), getPartners(), getMethods()])
+      .then(axios.spread((categories, credits, documents, records, states, partners, methods) => {
         this.credit = credits.data.find(d => d.slug == slug)
         this.categories = this.credit.categories.map(id => {
           const nameEN = categories.data.find(c => c.id === id).nameEN
@@ -31,6 +32,7 @@ const app = new Vue({
         this.documents = documents.data
         this.records = records.data
         this.states = states.data
+        this.methods = methods.data
         this.partners = partners.data
         setTimeout(() => {
           this.toRender = true
@@ -54,6 +56,7 @@ const app = new Vue({
       documents: [],
       records: [],
       states: [],
+      methods: [],
       partners: [],
       showCount: 3,
       questions: {
@@ -285,28 +288,7 @@ const app = new Vue({
           showDefault: false,
           key: 'payform',
           data() {
-            return [
-              {
-                nameEN: 'Direct deposit',
-                nameES: 'Deposito directo',
-                id: 'Deposito directo'
-              },
-              {
-                nameEN: 'Check',
-                nameES: 'Cheque',
-                id: 'Cheque'
-              },
-              {
-                nameEN: 'Cash',
-                nameES: 'Efectivo',
-                id: 'Efectivo'
-              },
-              {
-                nameEN: "I don't have earnings",
-                nameES: 'No tengo ingresos',
-                id: 'No tengo ingresos'
-              }
-            ]
+            return app.methods
           }
         }
       }
@@ -409,6 +391,9 @@ const app = new Vue({
         // check the category
         const categoryAvailable = partner.categories.filter(a => a.id == this.query.category).length > 0
 
+        // check the method
+        const methodAvailable = partner.methods.filter(a => a.id == this.query.payform).length > 0
+
         if (
           display &&
           noCarRequired &&
@@ -417,14 +402,15 @@ const app = new Vue({
           stateAvailable &&
           recordAvailable &&
           documentAvailable &&
-          categoryAvailable
+          categoryAvailable &&
+          methodAvailable
         ) {
           return partner
         }
 
       }).sort((a, b) => {
-        if (parseFloat(b.rate) < parseFloat(a.rate)) return 1
-        if (parseFloat(a.rate) < parseFloat(b.rate)) return -1
+        if (parseFloat(a.rate) < parseFloat(b.rate)) return 1
+        if (parseFloat(a.rate) > parseFloat(b.rate)) return -1
         return 0
       })
 

@@ -19,19 +19,24 @@ new Vue({
       return axios({ headers, method: 'GET', url: `${site_url}records` })
     }
 
+    const getMethods = () => {
+      return axios({ headers, method: 'GET', url: `${site_url}methods` })
+    }
+
     const getStates = () => {
       return axios({ headers, method: 'GET', url: `${site_url}states` })
     }
 
     axios
-      .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates()])
-      .then(axios.spread((categories, credits, documents, records, states) => {
+      .all([getCategories(), getCredits(), getDocuments(), getRecords(), getStates(), getMethods()])
+      .then(axios.spread((categories, credits, documents, records, states, paymentOptions) => {
         this.credits = credits.data
         this.rawCategories = categories.data
         this.credit = { minAmount: 0, maxAmount: 0 }
         this.documents = documents.data
         this.records = records.data
         this.states = states.data
+        this.paymentOptions = paymentOptions.data
         this.loading = false
       }))
   },
@@ -48,24 +53,7 @@ new Vue({
       states: [],
       generatedCode: null,
       marks: { 1: 0, 100: 100 },
-      paymentOptions: [
-        {
-          nameEN: 'Direct deposit',
-          nameES: 'Deposito directo'
-        },
-        {
-          nameEN: 'Check',
-          nameES: 'Cheque'
-        },
-        {
-          nameEN: 'Cash',
-          nameES: 'Efectivo'
-        },
-        {
-          nameEN: "I don't have earnings",
-          nameES: 'No tengo ingresos'
-        }
-      ],
+      paymentOptions: [],
       questions: {
         1: {
           nameES: '¿Qué tipo de prestamos necesitas?',

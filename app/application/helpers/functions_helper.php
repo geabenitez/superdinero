@@ -192,6 +192,33 @@ function getRecords($id){
   return $result;
 }
 
+function getMethods($id){
+  $CI =& get_instance();
+
+  if (!empty($id)) {
+    $data = $CI->db->get_where("methods", ['id' => $id])->result();
+  } else {
+    $data = $CI->db->get("methods")->result();
+  }
+
+  $result=array();
+
+  if (!empty($data)) {
+    foreach ($data as $v) {
+      $tmp = array();
+      $tmp['id']=$v->id;
+      $tmp['nameES']=$v->nameES;
+      $tmp['nameEN']=$v->nameEN;
+      $tmp['active']=$v->active;
+      $tmp['created_at']=$v->created_at;
+      $tmp['updated_at']=$v->updated_at;
+      $result[]=$tmp;
+    }
+  }
+
+  return $result;
+}
+
 function getStates($id){
   $CI =& get_instance();
 
@@ -241,7 +268,9 @@ function getPartners($id){
     $d = "documents";
     $pd = "partners_documents";
     $r = "records";
+    $m = "methods";
     $pr = "partners_records";
+    $pm = "partners_methods";
     $getCategories = array(
       $c.'.id',
       $c.'.nameES',
@@ -279,6 +308,12 @@ function getPartners($id){
       $r.'.nameES',
       $r.'.nameEN',
       $r.'.active',
+    );
+    $getMethods = array(
+      $m.'.id',
+      $m.'.nameES',
+      $m.'.nameEN',
+      $m.'.active',
     );
 
     $value->categories = $CI->db
@@ -321,6 +356,13 @@ function getPartners($id){
     ->from($pr)
     ->where($pr.'.partnerId', $value->id)
     ->join($r, $r.'.id = ' . $pr . '.recordId', 'right')
+    ->get()->result();
+
+    $value->methods = $CI->db
+    ->select($getMethods)
+    ->from($pm)
+    ->where($pm.'.partnerId', $value->id)
+    ->join($m, $m.'.id = ' . $pm . '.methodId', 'right')
     ->get()->result();
   }
 

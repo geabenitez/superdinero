@@ -135,9 +135,9 @@
           <el-select v-model="responses.payform" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
             <el-option
               v-for="option in paymentOptions"
-              :key="option.nameES"
+              :key="option.id"
               :label="spanishLang ? option.nameES : option.nameEN"
-              :value="option.nameES">
+              :value="option.id">
             </el-option>
           </el-select>
         </div>
