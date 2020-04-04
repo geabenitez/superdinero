@@ -46,7 +46,7 @@ class Codes extends REST_Controller {
 		$conf = $input->configuracion;
 
 		$code_user = null;
-		$get_code_user = $this->db->query("select max(code) code from users where id = '".$input->agent."'")->result();
+		$get_code_user = $this->db->query("select max(code) code from users where id = '".$this->session->userdata('id')."'")->result();
 		if (!empty($get_code_user[0]->code)) {
 			$code_user = $get_code_user[0]->code;
 		}
