@@ -325,19 +325,24 @@ const app = new Vue({
       let url = `/redirect?redirect=${partner.url}&partner=${partner.id}`
       const params = []
       if (partner.paramName1 != null || partner.paramName1 != '') {
-        params.push(`${partner.paramName1}=${partner.paramValues1.split(',').map(p => {
-          switch (p) {
-            case 'utm_source':
-              return app.query.source
-              break;
-            case 'agent':
-              return app.agent
-              break;
-          }
-        }).join('-')}`)
+        const values = partner.paramValues1
+          .split(',')
+          .map(p => {
+            switch (p) {
+              case 'utm_source':
+                return app.query.source
+                break;
+              case 'agent':
+                return app.agent
+                break;
+            }
+          })
+        params.push(
+          `${partner.paramName1}=${values.length > 1 ? values.join('-') : values[0]}`
+        )
       }
       if (partner.paramName2 != null || partner.paramName2 != '') {
-        params.push(`${partner.paramName2}=${partner.paramValues2.split(',').map(p => {
+        const values = partner.paramValues2.split(',').map(p => {
           switch (p) {
             case 'utm_source':
               return app.query.source
@@ -346,7 +351,10 @@ const app = new Vue({
               return app.agent
               break;
           }
-        }).join('-')}`)
+        })
+        params.push(
+          `${partner.paramName2}=${values.length > 1 ? values.join('-') : values[0]}`
+        )
       }
       if (params.length > 0) {
         url += `&params=${btoa(params.join('&'))}`
