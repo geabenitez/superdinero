@@ -222,7 +222,7 @@ new Vue({
           if (action === 'confirm') {
             instance.confirmButtonLoading = true;
             instance.confirmButtonText = 'Processing...';
-            axios(this.createHeader('POST', { agent: 1, configuracion: responses }))
+            axios(this.createHeader('POST', { configuracion: responses }))
               .then(res => {
                 this.$notify({
                   title: res.data.success ? 'SUCCESS' : 'ERROR',

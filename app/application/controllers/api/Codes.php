@@ -52,7 +52,7 @@ class Codes extends REST_Controller {
 		}
 
 		$insert = array(
-			'agent'=>$input->agent,
+			'agent'=>$this->session->userdata('id'),
 			'codigo'=>$new_code,
 			'configuracion'=>json_encode($input->configuracion),
 			'created_at' => date("Y-m-d h:i:s")
