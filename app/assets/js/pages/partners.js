@@ -129,6 +129,7 @@ const app = new Vue({
       this.showNewPartner = true
     },
     editPartner(partner) {
+      console.log(partner)
       this.action = 'Editar asociado'
       this.newAsociateForm = {
         ...partner,
@@ -141,8 +142,8 @@ const app = new Vue({
         amounts: partner.amounts.map(a => a.id),
         characteristicsES: partner.characteristicsES == null ? [] : partner.characteristicsES.split('-&-'),
         characteristicsEN: partner.characteristicsEN == null ? [] : partner.characteristicsEN.split('-&-'),
-        paramValues1: partner.paramValues1 == null ? [] : partner.paramValues1.split(','),
-        paramValues2: partner.paramValues2 == null ? [] : partner.paramValues2.split(','),
+        paramValues1: partner.paramValues1 == "" ? [] : partner.paramValues1.split(','),
+        paramValues2: partner.paramValues2 == "" ? [] : partner.paramValues2.split(','),
         requiresCar: partner.requiresCar == 1,
         requiresHouse: partner.requiresHouse == 1,
         onlyAgent: partner.onlyAgent == 1
