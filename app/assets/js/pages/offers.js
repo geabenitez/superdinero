@@ -368,6 +368,28 @@ const app = new Vue({
         url += `&params=${btoa(params.join('&'))}`
       }
       return url
+    },
+    sesameLink(link) {
+      let url = link
+      if (this.query.source != null) {
+        url += `?aff_sub=${this.query.source}`
+      }
+      if (this.agent != null) {
+        url += `?aff_sub2=${this.agent}`
+      }
+      console.log(url)
+      return url
+    },
+    karmaLink(link) {
+      let url = link
+      if (this.query.source != null) {
+        url += `?subId1=${this.query.source}`
+      }
+      if (this.agent != null) {
+        url += `?subId2=${this.agent}`
+      }
+      console.log(url)
+      return url
     }
   },
   computed: {
