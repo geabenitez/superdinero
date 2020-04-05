@@ -129,7 +129,6 @@ const app = new Vue({
       this.showNewPartner = true
     },
     editPartner(partner) {
-      console.log(partner)
       this.action = 'Editar asociado'
       this.newAsociateForm = {
         ...partner,
