@@ -372,21 +372,23 @@ const app = new Vue({
     sesameLink(link) {
       let url = link
       if (this.query.source != null) {
-        url += `?aff_sub=${this.query.source}`
+        url += `&aff_sub=${this.query.source}`
       }
       if (this.agent != null) {
-        url += `?aff_sub2=${this.agent}`
+        url += `&aff_sub2=${this.agent}`
       }
       console.log(url)
       return url
     },
     karmaLink(link) {
       let url = link
+      let source = false
       if (this.query.source != null) {
         url += `?subId1=${this.query.source}`
+        source = true
       }
       if (this.agent != null) {
-        url += `?subId2=${this.agent}`
+        url += `${source ? '&' : '?'}subId2=${this.agent}`
       }
       console.log(url)
       return url

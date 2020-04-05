@@ -32,7 +32,7 @@
       <div class="flex flex-col lg:flex-row items-center tracking-wider">
         <span class='text-green-800 uppercase text-base mr-2 text-center lg:text-left'>Revisa gratis tu puntaje de credito</span>
         <div class='flex flex-row'>
-          <a :href="sesameLink('https://fxo.co/8kOx')" target='_blank' class='bg-green-500 w-42 py-1 px-5 text-white rounded uppercase font-semibold tracking-wider text-center mr-2'>Credit sesame</a>
+          <a :href="sesameLink('https://creditsesame.go2cloud.org/aff_c?offer_id=32&aff_id=1111')" target='_blank' class='bg-green-500 w-42 py-1 px-5 text-white rounded uppercase font-semibold tracking-wider text-center mr-2'>Credit sesame</a>
           <a :href="karmaLink('https://creditkarma.myi4.net/xa7vy')" target='_blank' class='bg-green-500 w-42 py-1 px-5 text-white rounded uppercase font-semibold tracking-wider text-center'>Credit karma</a>
         </div>
       </div>
