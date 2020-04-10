@@ -114,7 +114,7 @@ class Site extends CI_Controller {
 
 	public function redirect() {
 		$resources['redirect'] = $_GET['redirect'];
-		$resources['params'] = $_GET['params'];
+		$resources['params'] = (isset($_GET['params']))?$_GET['params']:array();
 
 		$partnerData = $this->db->get_where("partners", ['id' => $_GET['partner']])->row_array();
 
