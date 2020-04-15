@@ -322,7 +322,7 @@ const app = new Vue({
       this.query = this.originalQuery
     },
     formedURL(partner) {
-      let url = `/redirect?redirect=${partner.url}&partner=${partner.id}`
+      let url = `/redirect?redirect=${btoa(partner.url)}&partner=${partner.id}`
       const params = []
       if (partner.paramName1 != null && partner.paramName1 != '') {
         const values = partner.paramValues1

@@ -42,8 +42,8 @@
     <script>
         setTimeout(
           function(){
-            const questionMark = "<?=$redirect?>".includes("?") ? '&': '?'
-            window.location.href = "<?=$redirect?>"<?= (!empty($params))?'+ questionMark + atob("'.$params.'")':'' ?>; 
+            const questionMark = atob("<?=$redirect?>").includes("?") ? '&': '?'
+            window.location.href = atob("<?=$redirect?>")<?= (!empty($params))?'+ questionMark + atob("'.$params.'")':'' ?>; 
           }, 
           3500
         );
