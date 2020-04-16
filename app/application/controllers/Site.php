@@ -64,10 +64,10 @@ class Site extends CI_Controller {
 			$code = $this->input->get("code");
 			$result = $this->db->get_where("codes", ['codigo' => strtoupper($code)])->result();
 
+			if (!$result) {
 			var_dump($result);
 
 			die();
-			if (!$result) {
 				header('location:'.site_url('/').'404');
 			}
 
