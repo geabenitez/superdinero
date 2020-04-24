@@ -46,9 +46,8 @@ class Site extends CI_Controller {
 		// 	# code...
 		// }, $categories)
 
-		
-		$this->db->where('nameES', $slug );
-		$this->db->or_where('nameEN', $slug );
+		$this->db->where('slug', $slug );
+		$this->db->or_where('slug', $slug );
 		$query = $this->db->get('credits')->result();
 		if(empty($query)){header('location:'.site_url('/').'404');}
 

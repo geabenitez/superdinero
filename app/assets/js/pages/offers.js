@@ -398,6 +398,9 @@ const app = new Vue({
     filteredPartners() {
       const partners = this.partners.filter(partner => {
 
+        // Verifica que este habilitado
+        const active = partner.active == 1
+
         // Verifica que se pueda mostrar (no solo para agentes)
         const display = partner.onlyAgent == 0
 
@@ -436,6 +439,7 @@ const app = new Vue({
 
         if (
           display &&
+          active &&
           noCarRequired &&
           noHouseRequired &&
           moneyAvailable &&

@@ -32,3 +32,24 @@
         <a href="<?= site_url('logout')?>" class='text-xs font-semibold uppercase tracking-wide text-gray-100 hover:text-green-800'>Cerrar sesion</a>
     </div>
 </div>
+<script>
+    const inactivityTime = function () {
+        let time;
+        window.onload = resetTimer;
+        document.onmousemove = resetTimer;
+        document.onkeypress = resetTimer;
+
+        function logout() {
+            location.href = '/logout'
+        }
+
+        function resetTimer() {
+            clearTimeout(time);
+            time = setTimeout(logout, 1000*60*90)
+        }
+    };
+
+    window.onload = function() {
+        inactivityTime(); 
+    }
+</script>
