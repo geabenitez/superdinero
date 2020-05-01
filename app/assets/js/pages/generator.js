@@ -234,6 +234,16 @@ new Vue({
                 this.generatedCode = res.data.code
                 done()
               })
+              .catch(err => {
+                this.$notify({
+                  title: 'ERROR',
+                  message: 'Your session has expired.',
+                  type: 'error',
+                });
+                setTimeout(() => {
+                  location.reload()
+                }, 1000);
+              })
           } else {
             done();
           }

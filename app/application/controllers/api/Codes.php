@@ -26,6 +26,11 @@ class Codes extends REST_Controller {
 
 	public function index_post(){
 
+		if(is_null($this->session->userdata('id'))){
+			$this->response(['Sin autorización'], REST_Controller::HTTP_UNAUTHORIZED);
+			die();
+		}
+
 		$YEAR = array("2020"=>"A", "2021"=>"B", "2022"=>"C", "2023"=>"D", "2024"=>"F", "2025"=>"G", "2026"=>"H", "2027"=>"I", "2028"=>"J", "2029"=>"K", "2030"=>"L", "2031"=>"M", "2032"=>"N", "2033"=>"O", "2034"=>"P", "2035"=>"Q", "2036"=>"R", "2037"=>"S", "2038"=>"T", "2039"=>"U", "2040"=>"V", "2041"=>"W", "2042"=>"X", "2043"=>"Y", "2044"=>"Z");
 
 		$MONTH = array("1"=>"A", "2"=>"B", "3"=>"C", "4"=>"D", "5"=>"F", "6"=>"G", "7"=>"H", "8"=>"I", "9"=>"J", "10"=>"K", "11"=>"L", "12"=>"M");
