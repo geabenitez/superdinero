@@ -5,6 +5,7 @@
         </div>
         <?php $menu = [
             ['profiles' => [1, 2], 'id' => 'generator', 'title' => 'Generador'],
+            ['profiles' => [1], 'id' => 'logs', 'title' => 'Log de códigos'],
             ['profiles' => [1], 'id' => 'partners', 'title' => 'Asociados'],
             ['profiles' => [1], 'id' => 'credits', 'title' => 'Tipos de creditos'],
             ['profiles' => [1], 'id' => 'categories', 'title' => 'Categorias'],

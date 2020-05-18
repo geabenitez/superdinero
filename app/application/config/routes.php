@@ -95,6 +95,7 @@ $route['logout'] = 'Site/process_logout';
 $route['check'] = 'Site/check';
 $route['admin/login'] = 'Site';
 $route['admin/generator'] = 'Admin/generator';
+$route['admin/logs'] = 'Admin/logs';
 $route['admin/partners'] = 'Admin/partners';
 $route['admin/states'] = 'Admin/states';
 $route['admin/categories'] = 'Admin/categories';

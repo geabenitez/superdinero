@@ -18,6 +18,11 @@ class Admin extends Secure_Controller {
 		admin_page('generator', 'Generador de links', 'generator', $resourses);
 	}
 
+	public function logs() {
+		// $resourses['scripts'] = ['assets/js/pages/logs.js'];
+		admin_page('logs', 'Log de codigos', 'logs', $resourses);
+	}
+
 	public function partners() {
 		if (!checkAdmin($this->session->userdata('id'))) {header('location:'.site_url('/').'sin_acceso');}
 
