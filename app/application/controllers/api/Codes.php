@@ -67,37 +67,65 @@ class Codes extends REST_Controller {
 		
 
 		//********************** Inicio de proceso de consumo de API *************************************************
-		switch ($this->input->get('fr')) {
-			case 'nodial':
-				$form_reactor = 'FRT472ABB2C5B9B141A0B4FB298C41D61943D860A99F83007EB3F76B9A96179A70E';
-				break;
-			default:
-			$form_reactor = 'FRT472ABB2C5B9B141A0B4FB298C41D61940F328C0FD82EDFB20D301E6E28830BD9';
-				break;
-		}
-		$form_url = "https://api.calltrackingmetrics.com/api/v1/formreactor/" . $form_reactor;
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL,$form_url);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		$post_fields = [
-			"phone_number" => "+1".$conf->phone,
-			"email" => $conf->email,
-			"caller_name" => $conf->names." ".$conf->lastnames,
-			"custom_source" => ( (isset($conf->source))?$conf->source:"null" ),
-			"custom_agent" => $code_user
-		];
+		// switch ($this->input->get('fr')) {
+		// 	case 'nodial':
+		// 		$form_reactor = 'FRT472ABB2C5B9B141A0B4FB298C41D61943D860A99F83007EB3F76B9A96179A70E';
+		// 		break;
+		// 	default:
+		// 	$form_reactor = 'FRT472ABB2C5B9B141A0B4FB298C41D61940F328C0FD82EDFB20D301E6E28830BD9';
+		// 		break;
+		// }
+		// $form_url = "https://api.calltrackingmetrics.com/api/v1/formreactor/" . $form_reactor;
 
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$curl = curl_init();
 
-		$headers = array(
-			'Authorization: Basic YTIxMjAwNGQ0MDZlZWRiNTU0YjNkOWIzYWZjN2IxYjZiY2Q2Y2ViNDphZjIxYjNjMGY5MTI4MDI1MmIwY2IyNGMyNGFiZjZjYmYwYjY='
-		);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => "https://app.calltools.com/api/contacts/",
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => "",
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => "POST",
+				CURLOPT_POSTFIELDS => array(
+					"phone_number" => "1".$conf->phone,
+					"email_address" => $conf->email,
+					"first_name" => $conf->names,
+					"last_name" => $conf->lastnames,
+					"custom1" => ( (isset($conf->source))?$conf->source:"null" ),
+					"custom2" => $code_user,
+					"file" => "756822"
+				),
+				CURLOPT_HTTPHEADER => array(
+					"Authorization: Token 3924c585adc3984c10f613dd2de7f36d79e668e9"
+				),
+			));
 
-		$server_output = curl_exec ($ch);
+			$response = curl_exec($curl);
 
-		curl_close ($ch);
+			curl_close($curl);
+			// echo $response;
+
+		// $form_url = "https://app.calltools.com/api/contacts/";
+		// $ch = curl_init();
+		// curl_setopt($ch, CURLOPT_URL,$form_url);
+		// curl_setopt($ch, CURLOPT_POST, 1);
+		// $post_fields = [
+			
+		// ];
+
+		// curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
+		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		// $headers = array(
+		// 	'Authorization: Token 3924c585adc3984c10f613dd2de7f36d79e668e9'
+		// );
+		// curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+		// $server_output = curl_exec ($ch);
+
+		// curl_close ($ch);
 
 		//********************** FIN de proceso de consumo de API *************************************************
 
