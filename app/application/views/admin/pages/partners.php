@@ -89,4 +89,5 @@
         </el-table-column>
       </el-table>
     </el-col>
+  </el-row>
 </div>

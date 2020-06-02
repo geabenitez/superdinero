@@ -376,7 +376,7 @@ function getCodes($id){
   if (!empty($id)) {
     $data = $CI->db->get_where("codes", ['id' => $id])->result();
   } else {
-    $data = $CI->db->get("codes")->result();
+    $data = $CI->db->select('*')->from("codes")->order_by('created_at', 'DESC')->get()->result();
   }
 
   $result=array();

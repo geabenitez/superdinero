@@ -146,3 +146,5 @@ $route['methods/(:any)'] = 'api/Methods/$1';
 
 $route['users'] = 'api/Users';
 $route['users/(:any)'] = 'api/Users/$1';
+
+$route['codes'] = 'api/Codes';

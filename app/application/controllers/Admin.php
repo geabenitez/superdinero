@@ -19,7 +19,7 @@ class Admin extends Secure_Controller {
 	}
 
 	public function logs() {
-		// $resourses['scripts'] = ['assets/js/pages/logs.js'];
+		$resourses['scripts'] = ['assets/js/pages/logs.js'];
 		admin_page('logs', 'Log de codigos', 'logs', $resourses);
 	}
 
