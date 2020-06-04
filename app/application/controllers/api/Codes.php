@@ -95,7 +95,8 @@ class Codes extends REST_Controller {
 					"last_name" => $conf->lastnames,
 					"custom1" => ( (isset($conf->source))?$conf->source:"null" ),
 					"custom2" => $code_user,
-					"file" => "756822"
+					"file" => "756822",
+					"dial_duplicate" => "1",
 				),
 				CURLOPT_HTTPHEADER => array(
 					"Authorization: Token 3924c585adc3984c10f613dd2de7f36d79e668e9"
