@@ -1,30 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="utf-8"/>
-    <title>SuperDinero | Cuestionario</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
-    <script>
-        WebFont.load({
-            google: {"families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]},
-            active: function () {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
-    <?php if (isset($styles)) {
-        $lambda = function() use ($styles) {
-            $slash = DIRECTORY_SEPARATOR;
-            foreach ($styles as $each) {
-              $version = filemtime(str_replace("system".$slash,"",BASEPATH) . str_replace("\\",$slash, $each));
-              echo '<link rel="stylesheet" href="' . site_url($each) . '?v=' . $version . '" type="text/css" /> ' . "\n";
-            }
-        };
-        $lambda();
-    } ?>
-    <link rel="shortcut icon" href="<?= site_url('assets/ico.png') ?>"/>
+  <meta charset="utf-8" />
+  <title>SuperDinero | Cuestionario</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
+      },
+      active: function() {
+        sessionStorage.fonts = true;
+      }
+    });
+  </script>
+  <?php if (isset($styles)) {
+    $lambda = function () use ($styles) {
+      $slash = DIRECTORY_SEPARATOR;
+      foreach ($styles as $each) {
+        $version = filemtime(str_replace("system" . $slash, "", BASEPATH) . str_replace("\\", $slash, $each));
+        echo '<link rel="stylesheet" href="' . site_url($each) . '?v=' . $version . '" type="text/css" /> ' . "\n";
+      }
+    };
+    $lambda();
+  } ?>
+  <link rel="shortcut icon" href="<?= site_url('assets/ico.png') ?>" />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-K238W6J');
+  </script>
+  <!-- End Google Tag Manager -->
 </head>
+
 <body class=bg-gray-200>
   <div id='app'>
     <?php $this->load->view('/site/_header') ?>
@@ -41,55 +64,35 @@
             <el-slider v-model="responses.amount" :min='1' :format-tooltip="formatTooltip" :marks="marks" :step="0.1"></el-slider>
             <div class='flex flex-row items-center justify-center w-full mt-6'>
               <div class="w-64">
-                <input 
-                  type="text" 
-                  :value="formatMoney(calcValue(responses.amount))" 
-                  class='border text-center text-black font-semibold text-xl rounded py-1 bg-green-200' 
-                  readonly>
+                <input type="text" :value="formatMoney(calcValue(responses.amount))" class='border text-center text-black font-semibold text-xl rounded py-1 bg-green-200' readonly>
               </div>
             </div>
           </div>
           <div class='flex flex-col w-full' v-if="questionNumber == 2">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[2].nameES: questions[2].nameEN}}</span>
             <el-select v-model="responses.category" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
-              <el-option
-                v-for="category in categories"
-                :key="category.id"
-                :label="spanishLang ? category.nameES : category.nameEN"
-                :value="category.id">
+              <el-option v-for="category in categories" :key="category.id" :label="spanishLang ? category.nameES : category.nameEN" :value="category.id">
               </el-option>
             </el-select>
           </div>
           <div class='flex flex-col w-full' v-if="questionNumber == 3">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[3].nameES: questions[3].nameEN}}</span>
             <el-select v-model="responses.document" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
-              <el-option
-                v-for="document in documents"
-                :key="document.id"
-                :label="spanishLang ? document.nameES : document.nameEN"
-                :value="document.id">
+              <el-option v-for="document in documents" :key="document.id" :label="spanishLang ? document.nameES : document.nameEN" :value="document.id">
               </el-option>
             </el-select>
           </div>
           <div class='flex flex-col w-full' v-if="questionNumber == 4">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[4].nameES: questions[4].nameEN}}</span>
             <el-select v-model="responses.record" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
-              <el-option
-                v-for="record in records"
-                :key="record.id"
-                :label="spanishLang ? record.nameES : record.nameEN"
-                :value="record.id">
+              <el-option v-for="record in records" :key="record.id" :label="spanishLang ? record.nameES : record.nameEN" :value="record.id">
               </el-option>
             </el-select>
           </div>
           <div class='flex flex-col w-full' v-if="questionNumber == 5">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[5].nameES: questions[5].nameEN}}</span>
             <el-select v-model="responses.state" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
-              <el-option
-                v-for="state in sortedStates"
-                :key="state.id"
-                :label="spanishLang ? state.nameES : state.nameEN"
-                :value="state.id">
+              <el-option v-for="state in sortedStates" :key="state.id" :label="spanishLang ? state.nameES : state.nameEN" :value="state.id">
               </el-option>
             </el-select>
           </div>
@@ -137,44 +140,31 @@
           <div class='flex flex-col w-full' v-if="questionNumber == 9">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? questions[9].nameES: questions[9].nameEN}}</span>
             <el-select v-model="responses.payform" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
-              <el-option
-                v-for="option in paymentOptions"
-                :key="option.id"
-                :label="spanishLang ? option.nameES : option.nameEN"
-                :value="option.id">
+              <el-option v-for="option in paymentOptions" :key="option.id" :label="spanishLang ? option.nameES : option.nameEN" :value="option.id">
               </el-option>
             </el-select>
           </div>
           <div class='flex flex-col w-full' v-for='(question, k) in aditionalQuestions' v-if="questionNumber == totalQuestions - k">
             <span class='uppercase font-semibold text-lg tracking-wider text-black text-center'>{{spanishLang ? question.questionES: question.questionEN}}</span>
             <el-select v-model="responses['aditional_' + (k+1)]" filterable :placeholder="spanishLang ? 'Seleccionar opcion' : 'Select option'" class='mt-2'>
-              <el-option
-                v-for="category in getCategories(question)"
-                :key="category.nameES"
-                :label="spanishLang ? category.nameES : category.nameEN"
-                :value="category.nameES">
+              <el-option v-for="category in getCategories(question)" :key="category.nameES" :label="spanishLang ? category.nameES : category.nameEN" :value="category.nameES">
               </el-option>
             </el-select>
           </div>
         </div>
         <div class="w-full flex flex-row justify-between border-t pt-4">
-          <button 
-            class='rounded bg-gray-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
-            v-if="questionNumber > 1"
-            @click="prev(questionNumber)">Atrás</button>
-          <button 
-            class='rounded bg-green-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
-            v-if="questionNumber < totalQuestions"
-            @click="next(questionNumber)">Continuar</button>
-          <button 
-            class='rounded bg-blue-500 py-1 px-6 uppercase text-sm text-white font-semibold' 
-            v-if="questionNumber == totalQuestions"
-            @click="generateCode(responses)">BUSCAR OPCIONES</button>
+          <button class='rounded bg-gray-500 py-1 px-6 uppercase text-sm text-white font-semibold' v-if="questionNumber > 1" @click="prev(questionNumber)">Atrás</button>
+          <button class='rounded bg-green-500 py-1 px-6 uppercase text-sm text-white font-semibold' v-if="questionNumber < totalQuestions" @click="next(questionNumber)">Continuar</button>
+          <button class='rounded bg-blue-500 py-1 px-6 uppercase text-sm text-white font-semibold' v-if="questionNumber == totalQuestions" @click="generateCode(responses)">BUSCAR OPCIONES</button>
         </div>
       </div>
     </div>
     <?php $this->load->view('/site/_footer') ?>
   </div>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K238W6J" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <script>
     window.site_url = '<?= site_url() ?>'
     window.cs = '$Q5444bbBrRt9Cd8goEObasdlYJbi33dduyfDu92BaviqfWCOw6wlEYBfbkwqpj/K'
@@ -182,14 +172,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
 
   <?php if (isset($scripts)) {
-    $lambda = function() use ($scripts) {
-        $slash = DIRECTORY_SEPARATOR;
-        foreach ($scripts as $each) {
-          $version = filemtime(str_replace("system".$slash,"",BASEPATH) . str_replace("\\",$slash, $each));
-          echo '<script type="text/javascript" src="' . site_url($each) . '?v=' . $version . '"></script>' . "\n";
-        }
+    $lambda = function () use ($scripts) {
+      $slash = DIRECTORY_SEPARATOR;
+      foreach ($scripts as $each) {
+        $version = filemtime(str_replace("system" . $slash, "", BASEPATH) . str_replace("\\", $slash, $each));
+        echo '<script type="text/javascript" src="' . site_url($each) . '?v=' . $version . '"></script>' . "\n";
+      }
     };
     $lambda();
-  } ?>  
+  } ?>
 </body>
+
 </html>
