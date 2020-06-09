@@ -377,7 +377,6 @@ const app = new Vue({
       if (this.agent != null) {
         url += `&aff_sub2=${this.agent}`
       }
-      console.log(url)
       return url
     },
     karmaLink(link) {
@@ -390,7 +389,6 @@ const app = new Vue({
       if (this.agent != null) {
         url += `${source ? '&' : '?'}subId2=${this.agent}`
       }
-      console.log(url)
       return url
     }
   },
