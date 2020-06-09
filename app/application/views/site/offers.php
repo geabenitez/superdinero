@@ -1,30 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="utf-8"/>
-    <title>SuperDinero | Ofertas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
-    <script>
-        WebFont.load({
-            google: {"families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]},
-            active: function () {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
-    <?php if (isset($styles)) {
-        $lambda = function() use ($styles) {
-            $slash = DIRECTORY_SEPARATOR;
-            foreach ($styles as $each) {
-              $version = filemtime(str_replace("system".$slash,"",BASEPATH) . str_replace("\\",$slash, $each));
-              echo '<link rel="stylesheet" href="' . site_url($each) . '?v=' . $version . '" type="text/css" /> ' . "\n";
-            }
-        };
-        $lambda();
-    } ?>
-    <link rel="shortcut icon" href="<?= site_url('assets/ico.png') ?>"/>
+  <meta charset="utf-8" />
+  <title>SuperDinero | Ofertas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
+      },
+      active: function() {
+        sessionStorage.fonts = true;
+      }
+    });
+  </script>
+  <?php if (isset($styles)) {
+    $lambda = function () use ($styles) {
+      $slash = DIRECTORY_SEPARATOR;
+      foreach ($styles as $each) {
+        $version = filemtime(str_replace("system" . $slash, "", BASEPATH) . str_replace("\\", $slash, $each));
+        echo '<link rel="stylesheet" href="' . site_url($each) . '?v=' . $version . '" type="text/css" /> ' . "\n";
+      }
+    };
+    $lambda();
+  } ?>
+  <link rel="shortcut icon" href="<?= site_url('assets/ico.png') ?>" />
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-K238W6J');
+  </script>
+  <!-- End Google Tag Manager -->
 </head>
+
 <body class=bg-gray-200>
   <div id='app'>
     <?php $this->load->view('/site/_header') ?>
@@ -54,31 +76,15 @@
             <el-row :gutter='15'>
               <el-col :span='24'>
                 <el-form-item v-for='q in Object.keys(questions)' :label="spanishLang ? questions[q].nameES: questions[q].nameEN" v-show='questions[q].showDefault || advancedOptions'>
-                  <el-select 
-                    v-if="questions[q].listType"
-                    class='w-full' 
-                    v-model="query[questions[q].key]" 
-                    placeholder="Seleccionar" 
-                    size='small'
-                    clearable
-                    no-data-text='No hay valores'
-                    filterable >
-                    <el-option
-                        v-for='item in questions[q].data()'
-                        :key="item.id"
-                        :label="item.nameES"
-                        :value="item.id">
+                  <el-select v-if="questions[q].listType" class='w-full' v-model="query[questions[q].key]" placeholder="Seleccionar" size='small' clearable no-data-text='No hay valores' filterable>
+                    <el-option v-for='item in questions[q].data()' :key="item.id" :label="item.nameES" :value="item.id">
                     </el-option>
                   </el-select>
                   <div v-else>
                     <el-slider v-model="query[questions[q].key]" :min='1' :format-tooltip="formatTooltip" :step="0.1"></el-slider>
                     <div class='flex flex-row items-center justify-center w-full'>
                       <div class="w-full">
-                        <input 
-                          type="text" 
-                          :value="formatMoney(calcValue(query[questions[q].key]))" 
-                          class='border text-center text-black font-semibold text-sm rounded bg-green-200 w-full' 
-                          readonly>
+                        <input type="text" :value="formatMoney(calcValue(query[questions[q].key]))" class='border text-center text-black font-semibold text-sm rounded bg-green-200 w-full' readonly>
                       </div>
                     </div>
                   </div>
@@ -86,7 +92,7 @@
               </el-col>
             </el-row>
           </el-form>
-        </div>  
+        </div>
         <div class='flex flex-row items-center justify-between'>
           <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline' @click='advancedOptions = !advancedOptions'>{{advancedOptions ? 'Menos' : 'Más'}} opciones</span>
           <span class='font-semibold text-xs text-gray-600 uppercase tracking-wide cursor-pointer hover:underline' @click='resetFilters()'>Reiniciar filtros</span>
@@ -103,15 +109,9 @@
                 <span class='font-semibold text-xs uppercase text-white'>La mejor opcion posible</span>
               </div>
             </div>
-            <img style="width: 307px; height: 115px;" :src='`/${partner.image}`' class='flex flex-row items-center justify-center my-2'/>
+            <img style="width: 307px; height: 115px;" :src='`/${partner.image}`' class='flex flex-row items-center justify-center my-2' />
             <div class='flex flex-row w-full items-center justify-center'>
-              <el-rate
-                class='w-full'
-                :value="partner.rate"
-                disabled
-                show-score
-                text-color="#ff9900"
-                score-template="{value} estrellas">
+              <el-rate class='w-full' :value="partner.rate" disabled show-score text-color="#ff9900" score-template="{value} estrellas">
               </el-rate>
             </div>
           </div>
@@ -120,7 +120,7 @@
             <ul>
               <li class='flex flex-row items-center' v-for='blurb in characteristics(partner.characteristicsES, partner.characteristicsEN)' :key='blurb'>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class='w-5 h-5 mr-1 text-green-500'>
-                  <path class="fill-current" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z"/>
+                  <path class="fill-current" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" />
                 </svg>
                 <span>{{blurb}}</span>
               </li>
@@ -131,12 +131,17 @@
           </div>
         </div>
         <div class='flex flex-row my-6 w-full items-center justify-center'>
-        <button v-if='filteredPartners.length != partners.length' class='w-64 rounded py-2 uppercase font-semibold tracking-wider bg-green-500 text-white' @click='loadMore()'>Cargar mas resutlados</button>
+          <button v-if='filteredPartners.length != partners.length' class='w-64 rounded py-2 uppercase font-semibold tracking-wider bg-green-500 text-white' @click='loadMore()'>Cargar mas resutlados</button>
         </div>
       </div>
     </div>
     <?php $this->load->view('/site/_footer') ?>
   </div>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K238W6J" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <script>
     window.site_url = '<?= site_url() ?>'
     window.cs = '$Q5444bbBrRt9Cd8goEObasdlYJbi33dduyfDu92BaviqfWCOw6wlEYBfbkwqpj/K'
@@ -144,14 +149,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
 
   <?php if (isset($scripts)) {
-    $lambda = function() use ($scripts) {
-        $slash = DIRECTORY_SEPARATOR;
-        foreach ($scripts as $each) {
-          $version = filemtime(str_replace("system".$slash,"",BASEPATH) . str_replace("\\",$slash, $each));
-          echo '<script type="text/javascript" src="' . site_url($each) . '?v=' . $version . '"></script>' . "\n";
-        }
+    $lambda = function () use ($scripts) {
+      $slash = DIRECTORY_SEPARATOR;
+      foreach ($scripts as $each) {
+        $version = filemtime(str_replace("system" . $slash, "", BASEPATH) . str_replace("\\", $slash, $each));
+        echo '<script type="text/javascript" src="' . site_url($each) . '?v=' . $version . '"></script>' . "\n";
+      }
     };
     $lambda();
-  } ?>  
+  } ?>
 </body>
+
 </html>
