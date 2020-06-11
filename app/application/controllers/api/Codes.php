@@ -90,8 +90,9 @@ class Codes extends REST_Controller
 				"last_name" => $conf->lastnames,
 				"custom1" => ((isset($conf->source)) ? $conf->source : "null"),
 				"custom2" => $code_user,
-				"file" => "756822",
-				"dial_duplicate" => "1",
+				"file" => $this->input->get('fr') == 'nodial' ? "756822" : "757229",
+				"dial_duplicate" => 1,
+				"company_name" => 'https://app.superdinero.org/check?code=' . $new_code
 			),
 			CURLOPT_HTTPHEADER => array(
 				"Authorization: Token 3924c585adc3984c10f613dd2de7f36d79e668e9"
@@ -99,6 +100,7 @@ class Codes extends REST_Controller
 		));
 
 		$response = curl_exec($curl);
+		var_dump($response);
 
 		curl_close($curl);
 		//********************** FIN de proceso de consumo de API *************************************************
